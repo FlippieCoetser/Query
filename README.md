@@ -1,2 +1,2 @@
-# Query
-R Package used to write SQL statements
+
+> note: Github workflows use Github Secrets to set environment variables 

@@ -1,0 +1,23 @@
+Package: Query
+Title: Write SQL Statements with ease
+Version: 0.0.0.9000
+Authors@R:
+    person(
+        given = "Philippus",
+        family = "Coetser",
+        role = c("aut", "cre"),
+        email = "flippie.coetser@gmail.com",
+        comment = c(ORCID = "0000-0003-0549-9245")
+    )
+Description: This package provides a set of utility functions to efficiently write SQL Statements.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Maintainer: Philippus Coetser <flippie.coetser@gmail.com>
+Imports: 
+    stats
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
