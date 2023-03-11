@@ -186,3 +186,42 @@ test_that("from |> broker[['WHERE']](field, value) Inject where field equals val
     broker[['WHERE']](field, value) |>
       expect_equal(expected) 
 })
+
+# INSERT
+test_that('broker instance has INSERT operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['INSERT']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("table |> broker[['INSERT']](fields) append collapsed list for fields to Insert into table SQL Statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  broker <- SQL.Broker()
+
+  table <- 'User'
+  fields <- c(
+    'Id'             |> broker[['INCLOSE']](),
+    'Username'       |> broker[['INCLOSE']](),
+    'HashedPassword' |> broker[['INCLOSE']](),
+    'Salt'           |> broker[['INCLOSE']]())
+
+  expected <- 
+    fields |> 
+      paste(collapse = ', ') |> 
+      utilities[['Prepend']]('] (') |> 
+      utilities[['Append']](')') |>
+      utilities[['Prepend']](table) |>
+      utilities[['Prepend']]('INSERT INTO [dbo].[')
+
+  # WHEN
+  table |>
+    broker[['INSERT']](fields) |>
+      expect_equal(expected)
+})
