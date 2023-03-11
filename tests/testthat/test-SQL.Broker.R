@@ -19,6 +19,7 @@ test_that('broker instance has INCLOSE operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
+
 test_that("field |> broker[['INCLOSE']]() Inclose field with square brackets",{
   # Given
   utilities <-
@@ -30,7 +31,7 @@ test_that("field |> broker[['INCLOSE']]() Inclose field with square brackets",{
   field  <- 'field'
 
   # When
-  expected <- field |> utilities[['Prepend']]('[') |> utilities[['Prepend']](']')
+  expected <- field |> utilities[['Prepend']]('[') |> utilities[['Append']](']')
 
   # Then
   field |>

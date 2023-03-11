@@ -7,7 +7,10 @@ SQL.Broker <- \(...){
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Prepend']]('[') |> 
-      utilities[['Prepend']](']')
+      utilities[['Append']](']')
+  }
+  operations[['LOWER']] <- \(field) {
+    
   }
   return(operations)
 }
