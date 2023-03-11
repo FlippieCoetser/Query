@@ -19,7 +19,6 @@ test_that('broker instance has INCLOSE operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-
 test_that("field |> broker[['INCLOSE']]() Inclose field with square brackets",{
   # Given
   utilities <-
