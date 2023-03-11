@@ -70,3 +70,36 @@ test_that("field |> broker[['LOWER']]() Inject field into lower() as alias SQL S
     broker[['LOWER']](alias) |>
       expect_equal(expected) 
 })
+
+# SELECT
+test_that('broker instance has SELECT operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['SELECT']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapsed list of fields",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  broker <- SQL.Broker()
+
+  fields <- c(
+    'Id'             |> Inclose() |> LOWER('Id'),
+    'Username'       |> Inclose(),
+    'HashedPassword' |> Inclose(),
+    'Salt'           |> Inclose() |> LOWER('Salt'))
+
+  # When
+  expected <- fields |> paste(collapse = ', ') |> utilities[['Prepend']]('SELECT ')
+
+  # Then
+  fields |>
+    broker[['SELECT']]() |>
+      expect_equal(expected) 
+})
