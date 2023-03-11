@@ -15,5 +15,10 @@ SQL.Broker <- \(...){
       utilities[['Append']](') as ')   |> 
       utilities[['Append']](alias)
   }
+  operations[['SELECT']] <- \(fields) {
+    fields |> 
+      paste(collapse = ', ') |> 
+      utilities[['Prepend']]('SELECT ')
+  }
   return(operations)
 }
