@@ -140,3 +140,49 @@ test_that("table |> broker[['FROM']]() Append table after FROM statement",{
     broker[['FROM']](table) |>
       expect_equal(expected) 
 })
+
+# WHERE
+test_that('broker instance has WHERE operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['WHERE']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("from |> broker[['WHERE']](field, value) Inject where field equals value SQL Statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  broker <- SQL.Broker()
+
+  fields <- c(
+    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
+    'Username'       |> broker[['INCLOSE']](),
+    'HashedPassword' |> broker[['INCLOSE']](),
+    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
+
+  select <- fields |> broker[['SELECT']]()
+  table  <- 'User'
+  from   <- select |> broker[['FROM']](table)
+  field  <- 'Id'
+  value  <- 'b2970410-bd60-478d-baf6-46cbc14e10fc'
+
+  # When
+  expected <- 
+    field |> 
+      broker[['INCLOSE']]()             |>
+      utilities[['Prepend']](' WHERE')  |> 
+      utilities[['Append']](" = '")     |>
+      utilities[['Append']](value)      |>
+      utilities[['Append']]("'")        |>
+      utilities[['Prepend']](from)
+
+  # Then
+  from |>
+    broker[['WHERE']](field, value) |>
+      expect_equal(expected) 
+})
