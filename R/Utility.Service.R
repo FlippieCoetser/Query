@@ -14,5 +14,17 @@ Utility.Service <- \(broker) {
     field |> 
       broker[['Prepend']](string)
   }
+  services[['Append']]  <- \(field, string) {
+    field |>
+      validate[['Exist']]() |>
+      validate[['IsCharacter']]()
+
+    string |>
+      validate[['Exist']]() |>
+      validate[['IsCharacter']]()
+
+    field |> 
+      broker[['Append']](string)
+  }
   return(services)
 }
