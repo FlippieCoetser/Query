@@ -37,3 +37,32 @@ test_that("TRUE |> exception[['NullException']]() throw NULL exception",{
     exception[['NullException']]() |>
       expect_error('argument is NULL')
 })
+
+# Character Exception
+test_that("exception instance has character exception",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  exception[['CharacterException']]  |>
+    is.null()              |>
+      expect_equal(FALSE)
+})
+test_that("FALSE |> exception[['CharacterException']]() throw no exception",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  FALSE |>
+    exception[['CharacterException']]() |>
+      expect_no_error()
+})
+test_that("TRUE |> exception[['CharacterException']]() throw numeric exception",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  TRUE |>
+    exception[['CharacterException']]() |>
+      expect_error('argument is not of type character')
+})
