@@ -1,11 +1,11 @@
 test_that('Utility.Service exist',{
-  Utility.Service   |>
-    is.null() |>
+  Utility.Service |>
+    is.null()     |>
       expect_equal(FALSE)
 })
 test_that('Utility.Service() return list of services',{
   Utility.Service() |>
-    is.list() |>
+    is.list()       |>
       expect_equal(TRUE)
 })
 
@@ -16,7 +16,7 @@ test_that('service instance has Prepend service',{
 
   # Then
   service[['Prepend']] |>
-    is.null()         |>
+    is.null()          |>
       expect_equal(FALSE)
 })
 test_that("field |> service[['Prepend']](string) Prepends string to field",{
@@ -34,5 +34,33 @@ test_that("field |> service[['Prepend']](string) Prepends string to field",{
   # Then
   field |>
     service[['Prepend']](string) |>
+      expect_equal(expected) 
+})
+
+# Append
+test_that('service instance has Append service',{
+  # Given
+  service <- Utility.Service()
+
+  # Then
+  service[['Append']] |>
+    is.null()          |>
+      expect_equal(FALSE)
+})
+test_that("field |> service[['Append']](string) Append string to field",{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  field  <- 'field'
+  string <- 'string'
+
+  # When
+  expected <- field |> paste(string, sep = '')
+
+  # Then
+  field |>
+    service[['Append']](string) |>
       expect_equal(expected) 
 })
