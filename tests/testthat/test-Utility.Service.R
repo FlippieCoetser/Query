@@ -44,7 +44,7 @@ test_that('service instance has Append service',{
 
   # Then
   service[['Append']] |>
-    is.null()          |>
+    is.null()         |>
       expect_equal(FALSE)
 })
 test_that("field |> service[['Append']](string) Append string to field",{
