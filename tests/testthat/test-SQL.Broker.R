@@ -56,14 +56,11 @@ test_that("field |> broker[['LOWER']]() Inject field into lower() as alias SQL S
 
   broker <- SQL.Broker()
 
-  field  <- 'field'
+  field  <- '[field]'
   alias <- 'alias'
 
   # When
-  expected <- field |> 
-    utilities[['Prepend']]('LOWER(') |> 
-    utilities[['Append']](') as ')   |> 
-    utilities[['Append']](alias)
+  expected <- 'LOWER([field]) as alias'
 
   # Then
   field |>
@@ -90,10 +87,10 @@ test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapse
   broker <- SQL.Broker()
 
   fields <- c(
-    'Id'             |> Inclose() |> LOWER('Id'),
-    'Username'       |> Inclose(),
-    'HashedPassword' |> Inclose(),
-    'Salt'           |> Inclose() |> LOWER('Salt'))
+    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
+    'Username'       |> broker[['INCLOSE']](),
+    'HashedPassword' |> broker[['INCLOSE']](),
+    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
 
   # When
   expected <- fields |> paste(collapse = ', ') |> utilities[['Prepend']]('SELECT ')
@@ -101,5 +98,45 @@ test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapse
   # Then
   fields |>
     broker[['SELECT']]() |>
+      expect_equal(expected) 
+})
+
+# FROM
+test_that('broker instance has FROM operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['FROM']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("table |> broker[['FROM']]() Append table after FROM statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  broker <- SQL.Broker()
+
+  fields <- c(
+    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
+    'Username'       |> broker[['INCLOSE']](),
+    'HashedPassword' |> broker[['INCLOSE']](),
+    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
+
+  select <- fields |> broker[['SELECT']]()
+  table  <- 'table'
+
+  # When
+  expected <- 
+    table |> 
+      broker[['INCLOSE']]() |>
+      utilities[['Prepend']](' FROM [dbo].') |> 
+      utilities[['Prepend']](select)
+
+  # Then
+  select |>
+    broker[['FROM']](table) |>
       expect_equal(expected) 
 })
