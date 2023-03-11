@@ -26,5 +26,14 @@ SQL.Broker <- \(...){
       utilities[['Prepend']](' FROM [dbo].') |> 
       utilities[['Prepend']](select)
   }
+  operations[['WHERE']] <- \(from, field, value) {
+    field |> 
+      operations[['INCLOSE']]()         |>
+      utilities[['Prepend']](' WHERE')  |> 
+      utilities[['Append']](" = '")     |>
+      utilities[['Append']](value)      |>
+      utilities[['Append']]("'")        |>
+      utilities[['Prepend']](from)
+  }
   return(operations)
 }
