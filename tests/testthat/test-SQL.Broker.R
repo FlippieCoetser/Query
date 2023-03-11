@@ -225,3 +225,43 @@ test_that("table |> broker[['INSERT']](fields) append collapsed list for fields 
     broker[['INSERT']](fields) |>
       expect_equal(expected)
 })
+
+# VALUES
+test_that('broker instance has VALUES operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['VALUES']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("insert |> broker[['VALUES']](values) append collapsed list for fields to Insert into table SQL Statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  broker <- SQL.Broker()
+
+  values <- list(
+    '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    'test@gmail.com',
+    '2d2ee7bee3ae4795ba886ceffa3f03d0b1eeaf75fc9c19c4b22c06956e2d6d54a5a6b798a70758f6aae5918bbc42d91b44cd1ea2f6a445669cc3a5acc852f255',
+    '53dfd42f-5394-46d7-a917-11b7da15816d')
+  insert <- 'insert'
+
+  expected <- 
+    "'" |>
+      paste(values, sep = '') |>
+      paste("'", sep = '')    |>
+      paste(collapse = ', ')  |>
+      utilities[['Prepend']](' VALUES (') |>
+      utilities[['Append']](')') |>
+      utilities[['Prepend']](insert) 
+
+  # Then
+  insert |>
+    broker[['VALUES']](values) |>
+      expect_equal(expected)
+})
