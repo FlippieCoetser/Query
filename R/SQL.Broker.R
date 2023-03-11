@@ -43,5 +43,14 @@ SQL.Broker <- \(...){
       utilities[['Prepend']](table) |>
       utilities[['Prepend']]('INSERT INTO [dbo].[')  
   }
+  operations[['VALUES']] <- \(insert, values) {
+    "'" |>
+      paste(values, sep = '') |>
+      paste("'", sep = '')    |>
+      paste(collapse = ', ')  |>
+      utilities[['Prepend']](' VALUES (') |>
+      utilities[['Append']](')') |>
+      utilities[['Prepend']](insert) 
+  }
   return(operations)
 }
