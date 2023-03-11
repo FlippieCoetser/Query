@@ -28,3 +28,23 @@ test_that("data |> validator[['Exist']]() should throw error when data is null",
     validator[['Exist']]() |>
       expect_error()
 })
+
+# Is Character Validator
+test_that("validator instance has IsCharacter validator",{
+  # Given
+  validator <- Utility.Validation()
+
+  # Then
+  validator[["IsCharacter"]]  |>
+    is.null()               |>
+      expect_equal(FALSE)
+})
+test_that("data |> validator[['IsCharacter']]() should throw error when data is not character",{
+  # Given
+  validator <- Utility.Validation()
+
+  # Then
+  1 |>
+    validator[['IsCharacter']]() |>
+      expect_error()
+})
