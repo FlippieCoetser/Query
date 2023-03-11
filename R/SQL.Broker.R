@@ -9,8 +9,11 @@ SQL.Broker <- \(...){
       utilities[['Prepend']]('[') |> 
       utilities[['Append']](']')
   }
-  operations[['LOWER']] <- \(field) {
-    
+  operations[['LOWER']] <- \(field, alias) {
+    field |> 
+      utilities[['Prepend']]('LOWER(') |> 
+      utilities[['Append']](') as ')   |> 
+      utilities[['Append']](alias)
   }
   return(operations)
 }
