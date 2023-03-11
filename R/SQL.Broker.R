@@ -20,5 +20,11 @@ SQL.Broker <- \(...){
       paste(collapse = ', ') |> 
       utilities[['Prepend']]('SELECT ')
   }
+  operations[['FROM']] <- \(select, table) {
+    table |> 
+      operations[['INCLOSE']]() |>
+      utilities[['Prepend']](' FROM [dbo].') |> 
+      utilities[['Prepend']](select)
+  }
   return(operations)
 }
