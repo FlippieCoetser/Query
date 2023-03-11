@@ -34,3 +34,29 @@ test_that("field |> broker[['Prepend']](string) Prepends string to field",{
     broker[['Prepend']](string) |>
       expect_equal(expected) 
 })
+
+# Append
+test_that('broker instance has Append operation',{
+  # Given
+  broker <- Utility.Broker()
+
+  # Then
+  broker[['Append']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("field |> broker[['Append']](string) Append string to field",{
+  # Given
+  broker <- Utility.Broker()
+
+  field  <- 'field'
+  string <- 'string'
+
+  # When
+  expected <- field |> paste(string, sep = '')
+
+  # Then
+  field |>
+    broker[['Append']](string) |>
+      expect_equal(expected) 
+})
