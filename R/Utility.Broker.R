@@ -11,5 +11,10 @@ Utility.Broker <- \() {
       operations[['Prepend']]('[') |> 
       operations[['Append']](']')
   }
+  operations[['IncloseInRoundBrackets']] <- \(field) {
+    field |> 
+      operations[['Prepend']]('(') |> 
+      operations[['Append']](')')
+  }
   return(operations)
 }
