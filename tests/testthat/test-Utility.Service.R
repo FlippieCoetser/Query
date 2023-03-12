@@ -66,7 +66,7 @@ test_that("field |> service[['Append']](string) Append string to field",{
 })
 
 # IncloseInSquareBrackets
-test_that('broker instance has IncloseInSquareBrackets service',{
+test_that('service instance has IncloseInSquareBrackets service',{
   # Given
   service <- 
     Utility.Broker()  |>
@@ -95,7 +95,7 @@ test_that("field |> service[['IncloseInSquareBrackets']]() inclose field in squa
 })
 
 # IncloseInRoundBrackets
-test_that('broker instance has IncloseInRoundBrackets operation',{
+test_that('service instance has IncloseInRoundBrackets service',{
   # Given
   service <- 
     Utility.Broker()  |>
@@ -124,7 +124,7 @@ test_that("field |> service[['IncloseInRoundBrackets']]() inclose field in round
 })
 
 # IncloseInQuotes
-test_that('broker instance has IncloseInQuotes service',{
+test_that('service instance has IncloseInQuotes service',{
   # Given
   service <- 
     Utility.Broker()  |>
