@@ -26,5 +26,9 @@ Utility.Service <- \(broker) {
     field |> 
       broker[['Append']](string)
   }
+  services[['IncloseInSquareBrackets']] <- \(field) {
+    field |>
+      broker[['IncloseInSquareBrackets']]()
+  }
   return(services)
 }
