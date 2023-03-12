@@ -1,12 +1,13 @@
 SQL.Broker <- \(...){
   utilities <-
     Utility.Broker() |> 
-    Utility.Service()
+    Utility.Service()|>
+    Utility.Processing()
 
   operations <- list()
   operations[['INCLOSE']] <- \(field) {
     field |> 
-      utilities[['IncloseInSquareBrackets']]()
+      utilities[['Inclose']]()
   }
   operations[['LOWER']] <- \(field, alias) {
     field |> 
@@ -21,13 +22,13 @@ SQL.Broker <- \(...){
   }
   operations[['FROM']] <- \(statement, table) {
     table |> 
-      utilities[['IncloseInSquareBrackets']]() |>
+      utilities[['Inclose']]() |>
       utilities[['Prepend']](' FROM [dbo].') |> 
       utilities[['Prepend']](statement)
   }
   operations[['WHERE']] <- \(from, field, value) {
     field |> 
-      utilities[['IncloseInSquareBrackets']]()         |>
+      utilities[['Inclose']]()         |>
       utilities[['Prepend']](' WHERE')  |> 
       utilities[['Append']](" = '")     |>
       utilities[['Append']](value)      |>
