@@ -6,5 +6,13 @@ Utility.Processing <- \(service) {
   processors[['Append']] <- \(field, string) {
     field |> service[['Append']](string)
   }
+  processors[['Inclose']] <- \(field, type = 'Square') {
+    types <- list()
+    types[['Square']] <- service[['IncloseInSquareBrackets']]
+    types[['Round']]  <- service[['IncloseInRoundBrackets']]
+    types[['Quotes']] <- service[['IncloseInQuotes']]
+    
+    field |> types[[type]]()
+  }
   return(processors)
 }
