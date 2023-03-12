@@ -122,3 +122,32 @@ test_that("field |> service[['IncloseInRoundBrackets']]() inclose field in round
     service[['IncloseInRoundBrackets']]() |>
       expect_equal(expected) 
 })
+
+# IncloseInQuotes
+test_that('broker instance has IncloseInQuotes service',{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  # Then
+  service[['IncloseInQuotes']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("field |> service[['IncloseInQuotes']]() inclose field in quotes",{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  field  <- 'field'
+
+  # When
+  expected <- "'field'"
+
+  # Then
+  field |>
+    service[['IncloseInQuotes']]() |>
+      expect_equal(expected) 
+})
