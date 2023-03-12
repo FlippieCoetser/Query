@@ -1,4 +1,7 @@
 Utility.Processing <- \(service) {
-  list <- list()
-  return(list)
+  processors <- list()
+  processors[['Prepend']] <- \(field, string) {
+    field |> service[['Prepend']](string)
+  }
+  return(processors)
 }
