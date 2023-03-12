@@ -110,3 +110,28 @@ test_that("field |> broker[['IncloseInRoundBrackets']](string) in close field in
     broker[['IncloseInRoundBrackets']]() |>
       expect_equal(expected) 
 })
+
+# IncloseInQuotes
+test_that('broker instance has IncloseInQuotes operation',{
+  # Given
+  broker <- Utility.Broker()
+
+  # Then
+  broker[['IncloseInQuotes']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("field |> broker[['IncloseInQuotes']](string) in close field in quotes",{
+  # Given
+  broker <- Utility.Broker()
+
+  field  <- 'field'
+
+  # When
+  expected <- "'field'"
+
+  # Then
+  field |>
+    broker[['IncloseInQuotes']]() |>
+      expect_equal(expected) 
+})
