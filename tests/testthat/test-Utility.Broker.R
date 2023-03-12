@@ -71,7 +71,7 @@ test_that('broker instance has IncloseInSquareBrackets operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("field |> broker[['IncloseInSquareBrackets']](string) in close field in square brackets",{
+test_that("field |> broker[['IncloseInSquareBrackets']]() inclose field in square brackets",{
   # Given
   broker <- Utility.Broker()
 
@@ -96,7 +96,7 @@ test_that('broker instance has IncloseInRoundBrackets operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("field |> broker[['IncloseInRoundBrackets']](string) in close field in round brackets",{
+test_that("field |> broker[['IncloseInRoundBrackets']]() inclose field in round brackets",{
   # Given
   broker <- Utility.Broker()
 
@@ -121,7 +121,7 @@ test_that('broker instance has IncloseInQuotes operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("field |> broker[['IncloseInQuotes']](string) in close field in quotes",{
+test_that("field |> broker[['IncloseInQuotes']]() inclose field in quotes",{
   # Given
   broker <- Utility.Broker()
 
