@@ -16,5 +16,10 @@ Utility.Broker <- \() {
       operations[['Prepend']]('(') |> 
       operations[['Append']](')')
   }
+  operations[['IncloseInQuotes']] <- \(field) {
+    field |> 
+      operations[['Prepend']]("'") |> 
+      operations[['Append']]("'")
+  }
   return(operations)
 }
