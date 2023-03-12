@@ -40,3 +40,35 @@ test_that("field |> processor[['Prepend']](string) Prepends string to field",{
     processor[['Prepend']](string) |>
       expect_equal(expected) 
 })
+
+# Append
+test_that('processor instance has Append processor',{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  # Then
+  processor[['Append']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("field |> processor[['Append']](string) Append string to field",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 'field'
+  string <- 'string'
+
+  # When
+  expected <- field |> paste(string, sep = '')
+
+  # Then
+  field |>
+    processor[['Append']](string) |>
+      expect_equal(expected) 
+})
