@@ -72,3 +72,68 @@ test_that("field |> processor[['Append']](string) Append string to field",{
     processor[['Append']](string) |>
       expect_equal(expected) 
 })
+
+# Inclose
+test_that('processor instance has Inclose processor',{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  # Then
+  processor[['Inclose']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("field |> processor[['Inclose']]() inclose field in square brackets",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 'field'
+
+  # When
+  expected <- '[field]'
+
+  # Then
+  field |>
+    processor[['Inclose']]() |>
+      expect_equal(expected) 
+})
+test_that("field |> processor[['Inclose']]('Round') inclose field in round brackets",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 'field'
+
+  # When
+  expected <- '(field)'
+
+  # Then
+  field |>
+    processor[['Inclose']]('Round') |>
+      expect_equal(expected) 
+})
+test_that("field |> processor[['Inclose']]('Quotes') inclose field in quotes",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 'field'
+
+  # When
+  expected <- "'field'"
+
+  # Then
+  field |>
+    processor[['Inclose']]('Quotes') |>
+      expect_equal(expected) 
+})
