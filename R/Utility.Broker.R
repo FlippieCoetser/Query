@@ -6,5 +6,10 @@ Utility.Broker <- \() {
   operations[['Append']] <- \(field, string) {
     field |> paste(string, sep = '')
   }
+  operations[['IncloseInSquareBrackets']] <- \(field) {
+    field |> 
+      operations[['Prepend']]('[') |> 
+      operations[['Append']](']')
+  }
   return(operations)
 }
