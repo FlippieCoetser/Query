@@ -34,5 +34,9 @@ Utility.Service <- \(broker) {
     field |>
       broker[['IncloseInRoundBrackets']]()
   }
+  services[['IncloseInQuotes']] <- \(field) {
+    field |>
+      broker[['IncloseInQuotes']]()
+  }
   return(services)
 }
