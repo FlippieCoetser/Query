@@ -6,16 +6,37 @@ SQL.Broker <- \(...){
 
   operations <- list()
   operations[['UTILITIES']] <- list()
-  operations[['UTILITIES']][['SCHEMA']] <- \(input, table) {
+  operations[['UTILITIES']][['SCHEMA']]  <- \(input, table) {
     table |>
       utilities[['Inclose']]() |>
       utilities[['Prepend']]('[dbo].') |>
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
-  operations[['UTILITIES']][['INCLOSE']] <- \(field) {
+  operations[['UTILITIES']][['COLUMNS']] <- \(input, columns) {
+    columns |>
+      utilities[['Collapse']]()  |>
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
+  }
+  operations[['UTILITIES']][['KEYVALUE']] <- \(input, key, value) {
+    key |>
+      utilities[['Inclose']]()     |>
+      utilities[['Append']](' = ') |>
+      utilities[['Append']](value) |>
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
+  }
+  operations[['UTILITIES']][['INCLOSELIST']] <- \(input, items) {
+    items |>
+      utilities[['Collapse']]()  |>
+      utilities[['Inclose']]('Round')  |>
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
+  }
+  operations[['UTILITIES']][['INCLOSE']] <- \(field, type = 'Square') {
     field |> 
-      utilities[['Inclose']]()
+      utilities[['Inclose']](type)
   }
   operations[['FUNCTIONS']] <- list()
   operations[['FUNCTIONS']][['LOWER']] <- \(field, alias) {
@@ -25,24 +46,29 @@ SQL.Broker <- \(...){
       utilities[['Append']](alias)
   }
   operations[['KEYWORDS']] <- list()
-  operations[['KEYWORDS']][['SELECT']] <- \(input) {
+  operations[['KEYWORDS']][['SELECT']] <- \(input = '') {
     input |>
       utilities[['Append']]('SELECT') |>
       utilities[['Append']](' ')
   }
-  operations[['KEYWORDS']][['FROM']] <- \(input) {
+  operations[['KEYWORDS']][['FROM']]   <- \(input) {
     input |>
       utilities[['Append']]('FROM') |>
       utilities[['Append']](' ')
   }
-  operations[['KEYWORDS']][['WHERE']] <- \(input) {
+  operations[['KEYWORDS']][['WHERE']]  <- \(input) {
     input |>
       utilities[['Append']]('WHERE') |>
       utilities[['Append']](' ')
   }
-  operations[['KEYWORDS']][['INSERT']] <- \(input) {
+  operations[['KEYWORDS']][['INSERT']] <- \(input = '') {
     input |>
       utilities[['Append']]('INSERT') |>
+      utilities[['Append']](' ')
+  }
+  operations[['KEYWORDS']][['INTO']] <- \(input) {
+    input |>
+      utilities[['Append']]('INTO') |>
       utilities[['Append']](' ')
   }
   operations[['KEYWORDS']][['VALUES']] <- \(input) {
@@ -55,64 +81,35 @@ SQL.Broker <- \(...){
       utilities[['Append']]('UPDATE') |>
       utilities[['Append']](' ')
   }
-  operations[['INCLOSE']] <- \(field) {
-    field |> 
-      utilities[['Inclose']]()
-  }
-  operations[['LOWER']] <- \(field, alias) {
-    field |> 
-      utilities[['Prepend']]('LOWER(') |> 
-      utilities[['Append']](') as ')   |> 
-      utilities[['Append']](alias)
-  }
-  operations[['SELECT']] <- \(fields) {
-    fields |> 
-      utilities[['Collapse']]()         |> 
-      utilities[['Prepend']]('SELECT ') |>
+  operations[['KEYWORDS']][['SET']] <- \(input) {
+    input |>
+      utilities[['Append']]('SET') |>
       utilities[['Append']](' ')
   }
-  operations[['FROM']] <- \(statement, table) {
-    table |> 
-      utilities[['Inclose']]()          |>
-      utilities[['Prepend']]('[dbo].')  |>
-      utilities[['Prepend']]('FROM ')   |> 
-      utilities[['Prepend']](statement) |>
-      utilities[['Append']](' ')
+  operations[['SELECT']] <- \(columns) {
+    operations[['KEYWORDS']][['SELECT']]() |>
+    operations[['UTILITIES']][['COLUMNS']](columns)
   }
-  operations[['WHERE']] <- \(from, field, value) {
-    field |> 
-      utilities[['Inclose']]()          |>
-      utilities[['Prepend']]('WHERE ')  |> 
-      utilities[['Append']](" = ")      |>
-      utilities[['Append']](value)      |>
-      utilities[['Prepend']](from)      |>
-      utilities[['Append']](' ')
+  operations[['FROM']] <- \(input, table) {
+    input |>
+      operations[['KEYWORDS']][['FROM']]() |>
+      operations[['UTILITIES']][['SCHEMA']](table)
   }
-  operations[['INSERT']] <- \(table, fields) {
-    fields |> 
-      utilities[['Collapse']]()              |> 
-      utilities[['Inclose']]('Round')        |> 
-      utilities[['Prepend']]('] ')           |>
-      utilities[['Prepend']](table)          |>
-      utilities[['Prepend']]('[')            |>
-      utilities[['Prepend']]('[dbo].')       |>
-      utilities[['Prepend']]('INSERT INTO ') |>
-      utilities[['Append']](' ') 
+  operations[['WHERE']] <- \(input, key, value) {
+    input |>
+      operations[['KEYWORDS']][['WHERE']]() |>
+      operations[['UTILITIES']][['KEYVALUE']](key, value)
   }
-  operations[['VALUES']] <- \(insert, values) {
-    values |>
-      utilities[['Collapse']]()         |>
-      utilities[['Inclose']]('Round')   |>
-      utilities[['Prepend']]('VALUES ') |>
-      utilities[['Prepend']](insert)    |>
-      utilities[['Append']](' ')
+  operations[['INSERT']] <- \(table, columns) {
+    operations[['KEYWORDS']][['INSERT']]()       |>
+    operations[['KEYWORDS']][['INTO']]()         |>
+    operations[['UTILITIES']][['SCHEMA']](table) |>
+    operations[['UTILITIES']][['INCLOSELIST']](columns)
   }
-  operations[['UPDATE']] <- \(table) {
-    table |>
-      utilities[['Inclose']]()          |>
-      utilities[['Prepend']]('[dbo].')  |>
-      utilities[['Prepend']]('UPDATE ') |>
-      utilities[['Append']](' ')
+  operations[['VALUES']] <- \(input, values) {
+    input |>
+      operations[['KEYWORDS']][['VALUES']]() |>
+      operations[['UTILITIES']][['INCLOSELIST']](values)
   }
   return(operations)
 }

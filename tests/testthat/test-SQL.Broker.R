@@ -9,65 +9,6 @@ test_that("SQL.Broker() returns list of operations",{
       expect_equal(TRUE)
 })
 
-# INCLOSE
-test_that('broker instance has INCLOSE operation',{
-  # Given
-  broker <- SQL.Broker()
-
-  # Then
-  broker[['INCLOSE']] |>
-    is.null()         |>
-      expect_equal(FALSE)
-})
-test_that("field |> broker[['INCLOSE']]() Inclose field with square brackets",{
-  # Given
-  utilities <-
-    Utility.Broker() |> 
-    Utility.Service()
-
-  broker <- SQL.Broker()
-
-  field  <- 'field'
-
-  # When
-  expected <- field |> utilities[['Prepend']]('[') |> utilities[['Append']](']')
-
-  # Then
-  field |>
-    broker[['INCLOSE']]() |>
-      expect_equal(expected) 
-})
-
-# LOWER
-test_that('broker instance has LOWER operation',{
-  # Given
-  broker <- SQL.Broker()
-
-  # Then
-  broker[['LOWER']] |>
-    is.null()         |>
-      expect_equal(FALSE)
-})
-test_that("field |> broker[['LOWER']]() Inject field into lower() as alias SQL Statement",{
-  # Given
-  utilities <-
-    Utility.Broker() |> 
-    Utility.Service()
-
-  broker <- SQL.Broker()
-
-  field  <- '[field]'
-  alias <- 'alias'
-
-  # When
-  expected <- 'LOWER([field]) as alias'
-
-  # Then
-  field |>
-    broker[['LOWER']](alias) |>
-      expect_equal(expected) 
-})
-
 # SELECT
 test_that('broker instance has SELECT operation',{
   # Given
@@ -78,27 +19,28 @@ test_that('broker instance has SELECT operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapsed list of fields",{
+test_that("columns |> broker[['SELECT']]() inject SELECT SQL statement with columns",{
   # Given
   utilities <-
     Utility.Broker() |> 
-    Utility.Service()
+    Utility.Service() |>
+    Utility.Processing()
 
   broker <- SQL.Broker()
 
-  fields <- list(
-    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
-    'Username'       |> broker[['INCLOSE']](),
-    'HashedPassword' |> broker[['INCLOSE']](),
-    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
+  columns <- list(
+    'Id'             |> utilities[['Inclose']]() |> broker[['FUNCTIONS']][['LOWER']]('Id'),
+    'Username'       |> utilities[['Inclose']](),
+    'HashedPassword' |> utilities[['Inclose']](),
+    'Salt'           |> utilities[['Inclose']]() |> broker[['FUNCTIONS']][['LOWER']]('Salt'))
 
   # When
-  expected <- fields |> paste(collapse = ', ') |> utilities[['Prepend']]('SELECT ') |> utilities[['Append']](' ')
+  output <- 'SELECT LOWER([Id]) as Id, [Username], [HashedPassword], LOWER([Salt]) as Salt '
 
   # Then
-  fields |>
+  columns |>
     broker[['SELECT']]() |>
-      expect_equal(expected) 
+      expect_equal(output)
 })
 
 # FROM
@@ -112,34 +54,21 @@ test_that('broker instance has FROM operation',{
       expect_equal(FALSE)
 })
 test_that("table |> broker[['FROM']]() Append table after FROM statement",{
-  # Given
+    # Given
   utilities <-
     Utility.Broker() |> 
     Utility.Service()
 
   broker <- SQL.Broker()
 
-  fields <- list(
-    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
-    'Username'       |> broker[['INCLOSE']](),
-    'HashedPassword' |> broker[['INCLOSE']](),
-    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
-
-  select <- fields |> broker[['SELECT']]()
-  table  <- 'table'
-
-  # When
-  expected <- 
-    table |> 
-      broker[['INCLOSE']]() |>
-      utilities[['Prepend']]('FROM [dbo].') |> 
-      utilities[['Prepend']](select)  |>
-      utilities[['Append']](' ')
+  input  <- ''
+  table  <- 'User'
+  output <- 'FROM [dbo].[User] '
 
   # Then
-  select |>
+  input |>
     broker[['FROM']](table) |>
-      expect_equal(expected) 
+      expect_equal(output)
 })
 
 # WHERE
@@ -152,7 +81,7 @@ test_that('broker instance has WHERE operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("from |> broker[['WHERE']](field, value) Inject where field equals value SQL Statement",{
+test_that("input |> broker[['WHERE']](key, value) Inject where field equals value SQL Statement",{
   # Given
   utilities <-
     Utility.Broker() |> 
@@ -161,35 +90,15 @@ test_that("from |> broker[['WHERE']](field, value) Inject where field equals val
 
   broker <- SQL.Broker()
 
-  fields <- list(
-    'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
-    'Username'       |> broker[['INCLOSE']](),
-    'HashedPassword' |> broker[['INCLOSE']](),
-    'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
-
-  from   <- 
-    fields |> 
-    broker[['SELECT']]() |> 
-    broker[['FROM']]('User')
-
-  field  <- 'Id'
-
-  value  <- 'b2970410-bd60-478d-baf6-46cbc14e10fc' |> utilities[['Inclose']]('Quotes')
-
-  # When
-  expected <- 
-    field |> 
-      utilities[['Inclose']]()          |>
-      utilities[['Prepend']]('WHERE ')  |> 
-      utilities[['Append']](" = ")      |>
-      utilities[['Append']](value)      |>
-      utilities[['Prepend']](from)      |>
-      utilities[['Append']](' ')
+  input  <- ''
+  key  <- 'Id'
+  value <- 'b2970410-bd60-478d-baf6-46cbc14e10fc' |> utilities[['Inclose']]('Quotes')
+  output <- "WHERE [Id] = 'b2970410-bd60-478d-baf6-46cbc14e10fc' "
 
   # Then
-  from |>
-    broker[['WHERE']](field, value) |>
-      expect_equal(expected) 
+  input |>
+    broker[['WHERE']](key, value) |>
+      expect_equal(output) 
 })
 
 # INSERT
@@ -202,34 +111,27 @@ test_that('broker instance has INSERT operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
-test_that("table |> broker[['INSERT']](fields) append collapsed list for fields to Insert into table SQL Statement",{
-  # Given
+test_that("input |> broker[['INSERT']](table) append collapsed list for fields to Insert into table SQL Statement",{
+    # Given
   utilities <-
     Utility.Broker() |> 
-    Utility.Service()
+    Utility.Service() |>
+    Utility.Processing()
 
   broker <- SQL.Broker()
 
-  table <- 'User' |> broker[['INCLOSE']]()
-  fields <- list(
-    'Id'             |> broker[['INCLOSE']](),
-    'Username'       |> broker[['INCLOSE']](),
-    'HashedPassword' |> broker[['INCLOSE']](),
-    'Salt'           |> broker[['INCLOSE']]())
+  table    <- 'User'
+  columns  <- list(
+    'Id'             |> utilities[['Inclose']](),
+    'Username'       |> utilities[['Inclose']](),
+    'HashedPassword' |> utilities[['Inclose']](),
+    'Salt'           |> utilities[['Inclose']]()
+  )
+  output <- "INSERT INTO [dbo].[User] ([Id], [Username], [HashedPassword], [Salt]) "
 
-  expected <- 
-    fields |> 
-      paste(collapse = ', ') |> 
-      utilities[['Prepend']]('] (') |> 
-      utilities[['Append']](')') |>
-      utilities[['Prepend']](table) |>
-      utilities[['Prepend']]('INSERT INTO [dbo].[') |>
-      utilities[['Append']](' ')
-
-  # WHEN
-  table |>
-    broker[['INSERT']](fields) |>
-      expect_equal(expected)
+  # Then
+  broker[['INSERT']](table, columns) |>
+    expect_equal(output)
 })
 
 # VALUES
@@ -245,58 +147,25 @@ test_that('broker instance has VALUES operation',{
 test_that("insert |> broker[['VALUES']](values) append collapsed list for fields to Insert into table SQL Statement",{
   # Given
   utilities <-
-    Utility.Broker()  |> 
+    Utility.Broker() |> 
     Utility.Service() |>
     Utility.Processing()
 
   broker <- SQL.Broker()
 
-  values <- list(
+  input    <- ''
+  values  <- list(
     '4a0ec243-78ff-4461-8696-c41e7d64e108' |> utilities[['Inclose']]('Quotes'),
     'test@gmail.com'                       |> utilities[['Inclose']]('Quotes'),
-    '2d2ee7bee3ae4795ba886ceffa3f03d0b155' |> utilities[['Inclose']]('Quotes'),
-    '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes'))
-  insert <- 'insert'
-
-  expected <- 
-    values |>
-      utilities[['Collapse']]() |>
-      utilities[['Inclose']]('Round')    |>
-      utilities[['Prepend']]('VALUES ') |>
-      utilities[['Prepend']](insert) |>
-      utilities[['Append']](' ')
+    '2d2ee7bee3ae4795ba88'                 |> utilities[['Inclose']]('Quotes'),
+    '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+  )
+  output <- "VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba88', '53dfd42f-5394-46d7-a917-11b7da15816d') "
 
   # Then
-  insert |>
+  input |>
     broker[['VALUES']](values) |>
-      expect_equal(expected)
-})
-
-
-# UPDATE
-test_that('broker instance has UPDATE operation',{
-  # Given
-  broker <- SQL.Broker()
-
-  # Then
-  broker[['UPDATE']] |>
-    is.null()         |>
-      expect_equal(FALSE)
-})
-
-# UPDATE
-test_that("table |> broker[['UPDATE']]() injects table name and inserts an update SQL statement",{
-  # Given
-  broker <- SQL.Broker()
-
-  table <- 'User'
-
-  # When
-  expected <- 'UPDATE [dbo].[User] '
-  # Then
-  table |>
-    broker[['UPDATE']]() |>
-      expect_equal(expected)
+      expect_equal(output)
 })
 
 # UTILITIES
@@ -585,5 +454,153 @@ test_that("input |> keywords[['UPDATE']]() Inject UPDATE and Prepend input",{
   # Then
   input |>
     keywords[['UPDATE']]() |>
+      expect_equal(output)
+})
+
+# SET KEYWORD
+test_that("broker[['KEYWORDS']] has SET operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['SET']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['SET']]() Inject SET and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input SET '
+
+  # Then
+  input |>
+    keywords[['SET']]() |>
+      expect_equal(output)
+})
+
+# INTO KEYWORD
+test_that("broker[['KEYWORDS']] has INTO operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['INTO']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['INTO']]() Inject INTO and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input INTO '
+
+  # Then
+  input |>
+    keywords[['INTO']]() |>
+      expect_equal(output)
+})
+
+# COLUMNS UTILITY
+test_that("broker[['UTILITIES']] has COLUMNS operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['UTILITIES']]
+
+  # Then
+  keywords[['COLUMNS']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['COLUMNS']]() Inject COLUMNS and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['UTILITIES']]
+
+  input <- 'input '
+  columns  <- list(
+    'one',
+    'two',
+    'three'
+  )
+  output <- "input one, two, three "
+
+  # Then
+  input |>
+    utilities[['COLUMNS']](columns) |>
+      expect_equal(output)
+})
+
+# KEYVALUE UTILITY
+test_that("broker[['UTILITIES']] has KEYVALUE operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['UTILITIES']]
+
+  # Then
+  keywords[['KEYVALUE']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['KEYVALUE']]() Inject COLUMNS and Prepend input",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  broker <- SQL.Broker()
+
+  input <- ''
+  key   <- 'Id'
+  value <- 'b2970410-bd60-478d-baf6-46cbc14e10fc' |> utilities[['Inclose']]('Quotes')
+
+  output <- "[Id] = 'b2970410-bd60-478d-baf6-46cbc14e10fc' "
+
+  # Then
+  input |>
+    broker[['UTILITIES']][['KEYVALUE']](key,value) |>
+      expect_equal(output)
+})
+
+# INCLOSELIST UTILITY
+test_that("broker[['UTILITIES']] has INCLOSELIST operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['UTILITIES']]
+
+  # Then
+  keywords[['INCLOSELIST']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['INCLOSELIST']]() Inject COLUMNS and Prepend input",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  broker <- SQL.Broker()
+
+  input    <- ''
+  columns  <- list(
+    'Id'             |> utilities[['Inclose']](),
+    'Username'       |> utilities[['Inclose']](),
+    'HashedPassword' |> utilities[['Inclose']](),
+    'Salt'           |> utilities[['Inclose']]()
+  )
+
+  output <- "([Id], [Username], [HashedPassword], [Salt]) "
+
+  # Then
+  input |>
+    broker[['UTILITIES']][['INCLOSELIST']](columns) |>
       expect_equal(output)
 })
