@@ -40,6 +40,11 @@ SQL.Broker <- \(...){
       utilities[['Append']]('WHERE') |>
       utilities[['Append']](' ')
   }
+  operations[['KEYWORDS']][['INSERT']] <- \(input) {
+    input |>
+      utilities[['Append']]('INSERT') |>
+      utilities[['Append']](' ')
+  }
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Inclose']]()
