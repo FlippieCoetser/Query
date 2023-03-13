@@ -151,3 +151,49 @@ test_that("field |> service[['IncloseInQuotes']]() inclose field in quotes",{
     service[['IncloseInQuotes']]() |>
       expect_equal(expected) 
 })
+
+# CollapseWithComma
+test_that('service instance has CollapseWithComma service',{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  # Then
+  service[['CollapseWithComma']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("fields |> service[['CollapseWithComma']]() collapse items in fields using comma separator",{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  fields  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- "one, two, three"
+
+  # Then
+  fields |>
+    service[['CollapseWithComma']]() |>
+      expect_equal(expected) 
+})
+test_that("fields |> service[['CollapseWithComma']]() throws exception if fields in not list",{
+  # Given
+  service <- 
+    Utility.Broker()  |>
+    Utility.Service()
+
+  fields  <- 1
+
+  # Then
+  fields |>
+    service[['CollapseWithComma']]() |>
+      expect_error() 
+})
