@@ -6,20 +6,20 @@ SQL.Broker <- \(...){
 
   operations <- list()
   operations[['UTILITIES']] <- list()
-  operations[['UTILITIES']][['SCHEMA']]  <- \(input, table) {
+  operations[['UTILITIES']][['SCHEMA']]      <- \(input, table) {
     table |>
       utilities[['Inclose']]() |>
       utilities[['Prepend']]('[dbo].') |>
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
-  operations[['UTILITIES']][['COLUMNS']] <- \(input, columns) {
+  operations[['UTILITIES']][['COLUMNS']]     <- \(input, columns) {
     columns |>
       utilities[['Collapse']]()  |>
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
-  operations[['UTILITIES']][['KEYVALUE']] <- \(input, key, value) {
+  operations[['UTILITIES']][['KEYVALUE']]    <- \(input, key, value) {
     key |>
       utilities[['Inclose']]()     |>
       utilities[['Append']](' = ') |>
@@ -34,10 +34,11 @@ SQL.Broker <- \(...){
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
-  operations[['UTILITIES']][['INCLOSE']] <- \(field, type = 'Square') {
+  operations[['UTILITIES']][['INCLOSE']]     <- \(field, type = 'Square') {
     field |> 
       utilities[['Inclose']](type)
   }
+
   operations[['FUNCTIONS']] <- list()
   operations[['FUNCTIONS']][['LOWER']] <- \(field, alias) {
     field |> 
@@ -45,6 +46,7 @@ SQL.Broker <- \(...){
       utilities[['Append']](') as ')   |> 
       utilities[['Append']](alias)
   }
+
   operations[['KEYWORDS']] <- list()
   operations[['KEYWORDS']][['SELECT']] <- \(input = '') {
     input |>
@@ -86,6 +88,7 @@ SQL.Broker <- \(...){
       utilities[['Append']]('SET') |>
       utilities[['Append']](' ')
   }
+  
   operations[['SELECT']] <- \(columns) {
     operations[['KEYWORDS']][['SELECT']]() |>
     operations[['UTILITIES']][['COLUMNS']](columns)
