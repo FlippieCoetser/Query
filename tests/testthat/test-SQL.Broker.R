@@ -437,3 +437,28 @@ test_that('broker[["KEYWORDS"]] return list of operations',{
     is.list()         |>
       expect_equal(TRUE)
 })
+
+# SELECT KEYWORD
+test_that("broker[['KEYWORDS']] has SELECT operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['SELECT']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['SELECT']]() Inject SELECT and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input SELECT '
+
+  # Then
+  input |>
+    keywords[['SELECT']]() |>
+      expect_equal(output)
+})
