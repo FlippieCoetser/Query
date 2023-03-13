@@ -13,6 +13,7 @@ SQL.Broker <- \(...){
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
+  operations[['FUNCTIONS']] <- list()
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Inclose']]()
