@@ -5,6 +5,7 @@ SQL.Broker <- \(...){
     Utility.Processing()
 
   operations <- list()
+  operations[['UTILITIES']] <- utilities
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Inclose']]()
