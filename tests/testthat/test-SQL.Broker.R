@@ -318,3 +318,29 @@ test_that('broker[["UTILITIES"]] return list of utility operations',{
     is.list()         |>
       expect_equal(TRUE)
 })
+
+# SCHEMA UTILITY
+test_that("broker[['UTILITIES']] has SCHEMA operation",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['UTILITIES']]
+
+  # Then
+  utilities[['SCHEMA']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("table |> utilities[['SCHEMA']]() inclose table with square brackets and add default schema",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['UTILITIES']]
+
+  # When
+  input  <- 'User'
+  output <- '[dbo].[User] '
+  
+  # Then
+  input |> 
+    utilities[['SCHEMA']]() |>
+      expect_equal(output)
+})
