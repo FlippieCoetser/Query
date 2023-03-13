@@ -86,7 +86,7 @@ test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapse
 
   broker <- SQL.Broker()
 
-  fields <- c(
+  fields <- list(
     'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
     'Username'       |> broker[['INCLOSE']](),
     'HashedPassword' |> broker[['INCLOSE']](),
@@ -119,7 +119,7 @@ test_that("table |> broker[['FROM']]() Append table after FROM statement",{
 
   broker <- SQL.Broker()
 
-  fields <- c(
+  fields <- list(
     'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
     'Username'       |> broker[['INCLOSE']](),
     'HashedPassword' |> broker[['INCLOSE']](),
@@ -155,30 +155,33 @@ test_that("from |> broker[['WHERE']](field, value) Inject where field equals val
   # Given
   utilities <-
     Utility.Broker() |> 
-    Utility.Service()
+    Utility.Service() |>
+    Utility.Processing()
 
   broker <- SQL.Broker()
 
-  fields <- c(
+  fields <- list(
     'Id'             |> broker[['INCLOSE']]() |> broker[['LOWER']]('Id'),
     'Username'       |> broker[['INCLOSE']](),
     'HashedPassword' |> broker[['INCLOSE']](),
     'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
 
-  select <- fields |> broker[['SELECT']]()
-  table  <- 'User'
-  from   <- select |> broker[['FROM']](table)
+  from   <- 
+    fields |> 
+    broker[['SELECT']]() |> 
+    broker[['FROM']]('User')
+
   field  <- 'Id'
-  value  <- 'b2970410-bd60-478d-baf6-46cbc14e10fc'
+
+  value  <- 'b2970410-bd60-478d-baf6-46cbc14e10fc' |> utilities[['Inclose']]('Quotes')
 
   # When
   expected <- 
     field |> 
-      broker[['INCLOSE']]()             |>
-      utilities[['Prepend']](' WHERE')  |> 
-      utilities[['Append']](" = '")     |>
+      utilities[['Inclose']]()          |>
+      utilities[['Prepend']](' WHERE ') |> 
+      utilities[['Append']](" = ")      |>
       utilities[['Append']](value)      |>
-      utilities[['Append']]("'")        |>
       utilities[['Prepend']](from)
 
   # Then
@@ -205,8 +208,8 @@ test_that("table |> broker[['INSERT']](fields) append collapsed list for fields 
 
   broker <- SQL.Broker()
 
-  table <- 'User'
-  fields <- c(
+  table <- 'User' |> broker[['INCLOSE']]()
+  fields <- list(
     'Id'             |> broker[['INCLOSE']](),
     'Username'       |> broker[['INCLOSE']](),
     'HashedPassword' |> broker[['INCLOSE']](),
@@ -239,8 +242,9 @@ test_that('broker instance has VALUES operation',{
 test_that("insert |> broker[['VALUES']](values) append collapsed list for fields to Insert into table SQL Statement",{
   # Given
   utilities <-
-    Utility.Broker() |> 
-    Utility.Service()
+    Utility.Broker()  |> 
+    Utility.Service() |>
+    Utility.Processing()
 
   broker <- SQL.Broker()
 
