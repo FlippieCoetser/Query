@@ -93,7 +93,7 @@ test_that("fields |> broker[['SELECT']]() Prepend SELECT statement to a collapse
     'Salt'           |> broker[['INCLOSE']]() |> broker[['LOWER']]('Salt'))
 
   # When
-  expected <- fields |> paste(collapse = ', ') |> utilities[['Prepend']]('SELECT ')
+  expected <- fields |> paste(collapse = ', ') |> utilities[['Prepend']]('SELECT ') |> utilities[['Append']](' ')
 
   # Then
   fields |>
@@ -132,8 +132,9 @@ test_that("table |> broker[['FROM']]() Append table after FROM statement",{
   expected <- 
     table |> 
       broker[['INCLOSE']]() |>
-      utilities[['Prepend']](' FROM [dbo].') |> 
-      utilities[['Prepend']](select)
+      utilities[['Prepend']]('FROM [dbo].') |> 
+      utilities[['Prepend']](select)  |>
+      utilities[['Append']](' ')
 
   # Then
   select |>
@@ -179,10 +180,11 @@ test_that("from |> broker[['WHERE']](field, value) Inject where field equals val
   expected <- 
     field |> 
       utilities[['Inclose']]()          |>
-      utilities[['Prepend']](' WHERE ') |> 
+      utilities[['Prepend']]('WHERE ')  |> 
       utilities[['Append']](" = ")      |>
       utilities[['Append']](value)      |>
-      utilities[['Prepend']](from)
+      utilities[['Prepend']](from)      |>
+      utilities[['Append']](' ')
 
   # Then
   from |>
@@ -221,7 +223,8 @@ test_that("table |> broker[['INSERT']](fields) append collapsed list for fields 
       utilities[['Prepend']]('] (') |> 
       utilities[['Append']](')') |>
       utilities[['Prepend']](table) |>
-      utilities[['Prepend']]('INSERT INTO [dbo].[')
+      utilities[['Prepend']]('INSERT INTO [dbo].[') |>
+      utilities[['Append']](' ')
 
   # WHEN
   table |>
@@ -259,8 +262,9 @@ test_that("insert |> broker[['VALUES']](values) append collapsed list for fields
     values |>
       utilities[['Collapse']]() |>
       utilities[['Inclose']]('Round')    |>
-      utilities[['Prepend']](' VALUES ') |>
-      utilities[['Prepend']](insert) 
+      utilities[['Prepend']]('VALUES ') |>
+      utilities[['Prepend']](insert) |>
+      utilities[['Append']](' ')
 
   # Then
   insert |>
@@ -268,25 +272,6 @@ test_that("insert |> broker[['VALUES']](values) append collapsed list for fields
       expect_equal(expected)
 })
 
-# UTILITIES
-test_that('broker instance has UTILITIES operation',{
-  # Given
-  broker <- SQL.Broker()
-
-  # Then
-  broker[['UTILITIES']] |>
-    is.null()         |>
-      expect_equal(FALSE)
-})
-test_that('broker[["UTILITIES"]] return list of operations',{
-  # Given
-  broker <- SQL.Broker()
-
-  # Then
-  broker[['UTILITIES']] |>
-    is.list()         |>
-      expect_equal(TRUE)
-})
 
 # UPDATE
 test_that('broker instance has UPDATE operation',{
@@ -298,6 +283,7 @@ test_that('broker instance has UPDATE operation',{
     is.null()         |>
       expect_equal(FALSE)
 })
+
 # UPDATE
 test_that("table |> broker[['UPDATE']]() injects table name and inserts an update SQL statement",{
   # Given
@@ -306,9 +292,29 @@ test_that("table |> broker[['UPDATE']]() injects table name and inserts an updat
   table <- 'User'
 
   # When
-  expected <- 'UPDATE [dbo].[User]'
+  expected <- 'UPDATE [dbo].[User] '
   # Then
   table |>
     broker[['UPDATE']]() |>
       expect_equal(expected)
+})
+
+# UTILITIES
+test_that('broker instance has UTILITIES',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['UTILITIES']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that('broker[["UTILITIES"]] return list of utility operations',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['UTILITIES']] |>
+    is.list()         |>
+      expect_equal(TRUE)
 })
