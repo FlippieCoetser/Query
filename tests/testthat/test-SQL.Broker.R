@@ -287,3 +287,28 @@ test_that('broker[["UTILITIES"]] return list of operations',{
     is.list()         |>
       expect_equal(TRUE)
 })
+
+# UPDATE
+test_that('broker instance has UPDATE operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['UPDATE']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+# UPDATE
+test_that("table |> broker[['UPDATE']]() injects table name and inserts an update SQL statement",{
+  # Given
+  broker <- SQL.Broker()
+
+  table <- 'User'
+
+  # When
+  expected <- 'UPDATE [dbo].[User]'
+  # Then
+  table |>
+    broker[['UPDATE']]() |>
+      expect_equal(expected)
+})
