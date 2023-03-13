@@ -38,5 +38,13 @@ Utility.Service <- \(broker) {
     field |>
       broker[['IncloseInQuotes']]()
   }
+  services[['CollapseWithComma']] <- \(fields) {
+    fields |>
+      validate[['Exist']]() |>
+      validate[['IsList']]()
+
+    fields |>
+      broker[['CollapseWithComma']]()
+  }
   return(services)
 }
