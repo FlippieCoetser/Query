@@ -6,11 +6,12 @@ SQL.Broker <- \(...){
 
   operations <- list()
   operations[['UTILITIES']] <- list()
-  operations[['UTILITIES']][['SCHEMA']] <- \(table) {
+  operations[['UTILITIES']][['SCHEMA']] <- \(input, table) {
     table |>
       utilities[['Inclose']]() |>
       utilities[['Prepend']]('[dbo].') |>
-      utilities[['Append']](' ')
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
   }
   operations[['INCLOSE']] <- \(field) {
     field |> 

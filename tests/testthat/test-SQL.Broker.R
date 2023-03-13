@@ -330,17 +330,18 @@ test_that("broker[['UTILITIES']] has SCHEMA operation",{
     is.null() |>
       expect_equal(FALSE)
 })
-test_that("table |> utilities[['SCHEMA']]() inclose table with square brackets and add default schema",{
+test_that("input |> utilities[['SCHEMA']](table) inclose table with square brackets and add default schema",{
   # Given
   broker <- SQL.Broker()
   utilities <- broker[['UTILITIES']]
 
   # When
-  input  <- 'User'
+  input  <- ''
+  table  <- 'User'
   output <- '[dbo].[User] '
   
   # Then
   input |> 
-    utilities[['SCHEMA']]() |>
+    utilities[['SCHEMA']](table) |>
       expect_equal(output)
 })
