@@ -50,5 +50,10 @@ SQL.Broker <- \(...){
       utilities[['Prepend']](' VALUES ') |>
       utilities[['Prepend']](insert) 
   }
+  operations[['UPDATE']] <- \(table) {
+    table |>
+      utilities[['Inclose']]() |>
+      utilities[['Prepend']]('UPDATE [dbo].')
+  }
   return(operations)
 }
