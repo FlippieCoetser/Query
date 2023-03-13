@@ -265,3 +265,23 @@ test_that("insert |> broker[['VALUES']](values) append collapsed list for fields
     broker[['VALUES']](values) |>
       expect_equal(expected)
 })
+
+# UTILITIES
+test_that('broker instance has UTILITIES operation',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['UTILITIES']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that('broker[["UTILITIES"]] return list of operations',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['UTILITIES']] |>
+    is.list()         |>
+      expect_equal(TRUE)
+})
