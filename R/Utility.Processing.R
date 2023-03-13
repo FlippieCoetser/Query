@@ -14,8 +14,11 @@ Utility.Processing <- \(service) {
     
     field |> types[[type]]()
   }
-  processors[['CollapseWithComma']] <- \(fields) {
-    fields |> service[['CollapseWithComma']]()
+  processors[['Collapse']] <- \(fields, type = 'Comma') {
+    types <- list()
+    types[['Comma']] <- service[['CollapseWithComma']]
+    
+    fields |> types[[type]]()
   }
   return(processors)
 }

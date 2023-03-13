@@ -257,7 +257,7 @@ test_that("insert |> broker[['VALUES']](values) append collapsed list for fields
 
   expected <- 
     values |>
-      utilities[['CollapseWithComma']]() |>
+      utilities[['Collapse']]() |>
       utilities[['Inclose']]('Round')    |>
       utilities[['Prepend']](' VALUES ') |>
       utilities[['Prepend']](insert) 

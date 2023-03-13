@@ -18,7 +18,7 @@ SQL.Broker <- \(...){
   }
   operations[['SELECT']] <- \(fields) {
     fields |> 
-      utilities[['CollapseWithComma']]() |> 
+      utilities[['Collapse']]() |> 
       utilities[['Prepend']]('SELECT ')
   }
   operations[['FROM']] <- \(statement, table) {
@@ -37,7 +37,7 @@ SQL.Broker <- \(...){
   }
   operations[['INSERT']] <- \(table, fields) {
     fields |> 
-      utilities[['CollapseWithComma']]() |> 
+      utilities[['Collapse']]() |> 
       utilities[['Inclose']]('Round') |> 
       utilities[['Prepend']]('] ') |>
       utilities[['Prepend']](table) |>
@@ -45,7 +45,7 @@ SQL.Broker <- \(...){
   }
   operations[['VALUES']] <- \(insert, values) {
     values |>
-      utilities[['CollapseWithComma']]() |>
+      utilities[['Collapse']]() |>
       utilities[['Inclose']]('Round')    |>
       utilities[['Prepend']](' VALUES ') |>
       utilities[['Prepend']](insert) 
