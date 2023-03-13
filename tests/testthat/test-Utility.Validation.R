@@ -48,3 +48,23 @@ test_that("data |> validator[['IsCharacter']]() should throw error when data is 
     validator[['IsCharacter']]() |>
       expect_error()
 })
+
+# Is List Validator
+test_that("validator instance has IsList validator",{
+  # Given
+  validator <- Utility.Validation()
+
+  # Then
+  validator[["IsList"]]  |>
+    is.null()               |>
+      expect_equal(FALSE)
+})
+test_that("data |> validator[['IsList']]() should throw error when data is not character",{
+  # Given
+  validator <- Utility.Validation()
+
+  # Then
+  1 |>
+    validator[['IsList']]() |>
+      expect_error()
+})
