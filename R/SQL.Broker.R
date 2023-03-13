@@ -25,6 +25,11 @@ SQL.Broker <- \(...){
       utilities[['Append']](alias)
   }
   operations[['KEYWORDS']] <- list()
+  operations[['KEYWORDS']][['SELECT']] <- \(input) {
+    input |>
+      utilities[['Append']]('SELECT') |>
+      utilities[['Append']](' ')
+  }
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Inclose']]()
