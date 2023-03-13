@@ -14,6 +14,12 @@ SQL.Broker <- \(...){
       utilities[['Prepend']](input)
   }
   operations[['FUNCTIONS']] <- list()
+  operations[['FUNCTIONS']][['LOWER']] <- \(field, alias) {
+    field |> 
+      utilities[['Prepend']]('LOWER(') |> 
+      utilities[['Append']](') as ')   |> 
+      utilities[['Append']](alias)
+  }
   operations[['INCLOSE']] <- \(field) {
     field |> 
       utilities[['Inclose']]()
