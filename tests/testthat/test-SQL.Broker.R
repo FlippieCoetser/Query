@@ -417,3 +417,23 @@ test_that("field |> functions[['LOWER']]() Inject field into lower() as alias SQ
     functions[['LOWER']](field) |>
       expect_equal(output)
 })
+
+# KEYWORDS
+test_that('broker instance has KEYWORDS',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['KEYWORDS']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that('broker[["KEYWORDS"]] return list of operations',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['KEYWORDS']] |>
+    is.list()         |>
+      expect_equal(TRUE)
+})
