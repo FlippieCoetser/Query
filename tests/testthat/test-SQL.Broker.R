@@ -345,3 +345,23 @@ test_that("input |> utilities[['SCHEMA']](table) inclose table with square brack
     utilities[['SCHEMA']](table) |>
       expect_equal(output)
 })
+
+# FUNCTIONS
+test_that('broker instance has FUNCTIONS',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['FUNCTIONS']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that('broker[["FUNCTIONS"]] return list of operations',{
+  # Given
+  broker <- SQL.Broker()
+
+  # Then
+  broker[['FUNCTIONS']] |>
+    is.list()         |>
+      expect_equal(TRUE)
+})
