@@ -346,6 +346,32 @@ test_that("input |> utilities[['SCHEMA']](table) inclose table with square brack
       expect_equal(output)
 })
 
+# INCLOSE UTILITY
+test_that("broker[['UTILITIES']] has INCLOSE operation",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['UTILITIES']]
+
+  # Then
+  utilities[['INCLOSE']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("field |> utilities[['INCLOSE']]() inclose field with square brackets",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['UTILITIES']]
+
+  # When
+  field  <- 'Id'
+  output <- '[Id]'
+  
+  # Then
+  field |> 
+    utilities[['INCLOSE']]() |>
+      expect_equal(output)
+})
+
 # FUNCTIONS
 test_that('broker instance has FUNCTIONS',{
   # Given
