@@ -462,3 +462,28 @@ test_that("input |> keywords[['SELECT']]() Inject SELECT and Prepend input",{
     keywords[['SELECT']]() |>
       expect_equal(output)
 })
+
+# FROM KEYWORD
+test_that("broker[['KEYWORDS']] has FROM operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['FROM']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['FROM']]() Inject FROM and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input FROM '
+
+  # Then
+  input |>
+    keywords[['FROM']]() |>
+      expect_equal(output)
+})
