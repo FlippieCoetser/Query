@@ -10,5 +10,9 @@ Utility.Validation <- \() {
     data |> is.character() |> isFALSE() |> exception[['CharacterException']]()
     return(data)
   }
+  validators[['IsList']] <- \(data) {
+    data |> is.list() |> isFALSE() |> exception[['ListException']]()
+    return(data)
+  }
   return(validators)
 }
