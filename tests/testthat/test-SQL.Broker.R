@@ -487,3 +487,28 @@ test_that("input |> keywords[['FROM']]() Inject FROM and Prepend input",{
     keywords[['FROM']]() |>
       expect_equal(output)
 })
+
+# WHERE KEYWORD
+test_that("broker[['KEYWORDS']] has WHERE operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['WHERE']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['WHERE']]() Inject WHERE and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input WHERE '
+
+  # Then
+  input |>
+    keywords[['WHERE']]() |>
+      expect_equal(output)
+})
