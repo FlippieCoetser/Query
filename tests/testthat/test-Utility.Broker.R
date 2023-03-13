@@ -135,3 +135,32 @@ test_that("field |> broker[['IncloseInQuotes']]() inclose field in quotes",{
     broker[['IncloseInQuotes']]() |>
       expect_equal(expected) 
 })
+
+# CollapseWithComma
+test_that('broker instance has CollapseWithComma operation',{
+  # Given
+  broker <- Utility.Broker()
+
+  # Then
+  broker[['CollapseWithComma']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("fields |> broker[['CollapseWithComma']]() collapse items in fields using comma separator",{
+  # Given
+  broker <- Utility.Broker()
+
+  fields  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- "one, two, three"
+
+  # Then
+  fields |>
+    broker[['CollapseWithComma']]() |>
+      expect_equal(expected) 
+})
