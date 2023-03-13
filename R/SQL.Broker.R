@@ -88,31 +88,5 @@ SQL.Broker <- \(...){
       utilities[['Append']]('SET') |>
       utilities[['Append']](' ')
   }
-  
-  operations[['SELECT']] <- \(columns) {
-    operations[['KEYWORDS']][['SELECT']]() |>
-    operations[['UTILITIES']][['COLUMNS']](columns)
-  }
-  operations[['FROM']] <- \(input, table) {
-    input |>
-      operations[['KEYWORDS']][['FROM']]() |>
-      operations[['UTILITIES']][['SCHEMA']](table)
-  }
-  operations[['WHERE']] <- \(input, key, value) {
-    input |>
-      operations[['KEYWORDS']][['WHERE']]() |>
-      operations[['UTILITIES']][['KEYVALUE']](key, value)
-  }
-  operations[['INSERT']] <- \(table, columns) {
-    operations[['KEYWORDS']][['INSERT']]()       |>
-    operations[['KEYWORDS']][['INTO']]()         |>
-    operations[['UTILITIES']][['SCHEMA']](table) |>
-    operations[['UTILITIES']][['INCLOSELIST']](columns)
-  }
-  operations[['VALUES']] <- \(input, values) {
-    input |>
-      operations[['KEYWORDS']][['VALUES']]() |>
-      operations[['UTILITIES']][['INCLOSELIST']](values)
-  }
   return(operations)
 }
