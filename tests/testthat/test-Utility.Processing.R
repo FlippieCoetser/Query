@@ -137,3 +137,38 @@ test_that("field |> processor[['Inclose']]('Quotes') inclose field in quotes",{
     processor[['Inclose']]('Quotes') |>
       expect_equal(expected) 
 })
+
+# CollapseWithComma
+test_that('processor instance has CollapseWithComma processor',{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  # Then
+  processor[['CollapseWithComma']] |>
+    is.null()          |>
+      expect_equal(FALSE)
+})
+test_that("fields |> processor[['CollapseWithComma']]() collapse items in fields using comma separator",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  fields  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- "one, two, three"
+
+  # Then
+  fields |>
+    processor[['CollapseWithComma']]() |>
+      expect_equal(expected) 
+})
