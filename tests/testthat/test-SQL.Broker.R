@@ -562,3 +562,28 @@ test_that("input |> keywords[['VALUES']]() Inject VALUES and Prepend input",{
     keywords[['VALUES']]() |>
       expect_equal(output)
 })
+
+# UPDATE KEYWORD
+test_that("broker[['KEYWORDS']] has UPDATE operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['UPDATE']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['UPDATE']]() Inject UPDATE and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input UPDATE '
+
+  # Then
+  input |>
+    keywords[['UPDATE']]() |>
+      expect_equal(output)
+})
