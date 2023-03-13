@@ -6,5 +6,8 @@ Utility.Exceptions <- \() {
   exceptions[['CharacterException']] <- \(invoke) {
     if (invoke) {stop('argument is not of type character')}
   }
+  exceptions[['ListException']] <- \(invoke) {
+    if (invoke) {stop('argument is not of type list')}
+  }
   return(exceptions)
 }
