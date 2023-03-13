@@ -21,5 +21,9 @@ Utility.Broker <- \() {
       operations[['Prepend']]("'") |> 
       operations[['Append']]("'")
   }
+  operations[['CollapseWithComma']] <- \(fields) {
+    fields |>
+      paste(collapse = ', ')
+  }
   return(operations)
 }
