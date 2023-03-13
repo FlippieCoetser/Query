@@ -18,7 +18,7 @@ SQL.Broker <- \(...){
   }
   operations[['SELECT']] <- \(fields) {
     fields |> 
-      paste(collapse = ', ') |> 
+      utilities[['CollapseWithComma']]() |> 
       utilities[['Prepend']]('SELECT ')
   }
   operations[['FROM']] <- \(statement, table) {
@@ -29,28 +29,25 @@ SQL.Broker <- \(...){
   }
   operations[['WHERE']] <- \(from, field, value) {
     field |> 
-      utilities[['Inclose']]()         |>
-      utilities[['Prepend']](' WHERE')  |> 
-      utilities[['Append']](" = '")     |>
+      utilities[['Inclose']]()          |>
+      utilities[['Prepend']](' WHERE ') |> 
+      utilities[['Append']](" = ")      |>
       utilities[['Append']](value)      |>
-      utilities[['Append']]("'")        |>
       utilities[['Prepend']](from)
   }
   operations[['INSERT']] <- \(table, fields) {
     fields |> 
-      paste(collapse = ', ') |> 
-      utilities[['Prepend']]('] (') |> 
-      utilities[['Append']](')') |>
+      utilities[['CollapseWithComma']]() |> 
+      utilities[['Inclose']]('Round') |> 
+      utilities[['Prepend']]('] ') |>
       utilities[['Prepend']](table) |>
       utilities[['Prepend']]('INSERT INTO [dbo].[')  
   }
   operations[['VALUES']] <- \(insert, values) {
-    "'" |>
-      paste(values, sep = '') |>
-      paste("'", sep = '')    |>
-      paste(collapse = ', ')  |>
-      utilities[['Prepend']](' VALUES (') |>
-      utilities[['Append']](')') |>
+    values |>
+      utilities[['CollapseWithComma']]() |>
+      utilities[['Inclose']]('Round')    |>
+      utilities[['Prepend']](' VALUES ') |>
       utilities[['Prepend']](insert) 
   }
   return(operations)
