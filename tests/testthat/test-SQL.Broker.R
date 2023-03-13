@@ -365,3 +365,29 @@ test_that('broker[["FUNCTIONS"]] return list of operations',{
     is.list()         |>
       expect_equal(TRUE)
 })
+
+# LOWER FUNCTION
+test_that("broker[['FUNCTIONS']] has LOWER operation",{
+  # Given
+  broker <- SQL.Broker()
+  utilities <- broker[['FUNCTIONS']]
+
+  # Then
+  utilities[['LOWER']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("field |> functions[['LOWER']]() Inject field into lower() as alias SQL Statement",{
+  # Given
+  broker <- SQL.Broker()
+  functions <- broker[['FUNCTIONS']]
+
+  # When
+  field  <- 'Id'
+  output <- 'LOWER(Id) as Id'
+  
+  # Then
+  field |> 
+    functions[['LOWER']](field) |>
+      expect_equal(output)
+})
