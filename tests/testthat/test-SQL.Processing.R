@@ -275,3 +275,35 @@ test_that("pairs |> processor[['SET']]() Append key value pairs after SET statem
     processor[['SET']](pairs) |>
       expect_equal(output)
 })
+
+# DELETE
+test_that('processor instance has DELETE operation',{
+  # Given
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  # Then
+  processor[['DELETE']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("processor[['DELETE']]() inject DELETE sql statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  output <- "DELETE "
+
+  # Then
+  processor[['DELETE']]() |>
+    expect_equal(output)
+})
