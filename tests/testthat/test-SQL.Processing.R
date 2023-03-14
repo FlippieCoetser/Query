@@ -227,13 +227,12 @@ test_that("table |> processor[['UPDATE']]() Append table after UPDATE statement"
     SQL.Service() |>
     SQL.Processing()
 
-  input  <- ''
   table  <- 'User'
   output <- 'UPDATE [dbo].[User] '
 
   # Then
-  input |>
-    processor[['UPDATE']](table) |>
+  table |>
+    processor[['UPDATE']]() |>
       expect_equal(output)
 })
 

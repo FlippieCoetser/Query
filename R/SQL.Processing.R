@@ -25,10 +25,9 @@ SQL.Processing <- \(service) {
       service[['KEYWORDS']][['VALUES']]() |>
       service[['UTILITIES']][['INCLOSELIST']](values)
   }
-  processors[['UPDATE']] <- \(input, table) {
-    input |>
-      service[['KEYWORDS']][['UPDATE']]() |>
-      service[['UTILITIES']][['SCHEMA']](table) 
+  processors[['UPDATE']] <- \(table) {
+    service[['KEYWORDS']][['UPDATE']]() |>
+    service[['UTILITIES']][['SCHEMA']](table) 
   }
   processors[['SET']] <- \(input, pairs) {
     input |>
