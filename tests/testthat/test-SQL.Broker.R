@@ -445,3 +445,38 @@ test_that("input |> keywords[['INCLOSELIST']]() Inject COLUMNS and Prepend input
     broker[['UTILITIES']][['INCLOSELIST']](columns) |>
       expect_equal(output)
 })
+
+# KEYVALUES UTILITY
+test_that("broker[['UTILITIES']] has KEYVALUES operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['UTILITIES']]
+
+  # Then
+  keywords[['KEYVALUES']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['KEYVALUES']](pairs) Inject Key Value Pairs and Prepend input",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  broker <- SQL.Broker()
+
+  input    <- ''
+  pairs <- list(
+    Username = 'test.updated@gmail.com' |> utilities[['Inclose']]('Quotes'),
+    HashedPassword = '2d2ee7bee3ae4795ba886' |> utilities[['Inclose']]('Quotes'),
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+  )
+
+  output <- "[Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
+
+  # Then
+  input |>
+    broker[['UTILITIES']][['KEYVALUES']](pairs) |>
+      expect_equal(output)
+})
