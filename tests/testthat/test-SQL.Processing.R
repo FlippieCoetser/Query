@@ -236,3 +236,43 @@ test_that("table |> processor[['UPDATE']]() Append table after UPDATE statement"
     processor[['UPDATE']](table) |>
       expect_equal(output)
 })
+
+# SET
+test_that('processor instance has SET operation',{
+  # Given
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  # Then
+  processor[['SET']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("pairs |> processor[['SET']]() Append key value pairs after SET statement",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  input <- ''
+  pairs <- list(
+    Username = 'test.updated@gmail.com' |> utilities[['Inclose']]('Quotes'),
+    HashedPassword = '2d2ee7bee3ae4795ba886' |> utilities[['Inclose']]('Quotes'),
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+  )
+
+  output <- "SET [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
+
+  # Then
+  input |>
+    processor[['SET']](pairs) |>
+      expect_equal(output)
+})
