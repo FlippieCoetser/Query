@@ -99,5 +99,10 @@ SQL.Broker <- \(...){
       utilities[['Append']]('SET') |>
       utilities[['Append']](' ')
   }
+  operations[['KEYWORDS']][['DELETE']] <- \(input = '') {
+    input |>
+      utilities[['Append']]('DELETE') |>
+      utilities[['Append']](' ')
+  }
   return(operations)
 }
