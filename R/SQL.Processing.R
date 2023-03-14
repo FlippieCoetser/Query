@@ -30,5 +30,10 @@ SQL.Processing <- \(service) {
       service[['KEYWORDS']][['UPDATE']]() |>
       service[['UTILITIES']][['SCHEMA']](table) 
   }
+  processors[['SET']] <- \(input, pairs) {
+    input |>
+      service[['KEYWORDS']][['SET']]() |>
+      service[['UTILITIES']][['KEYVALUES']](pairs) 
+  }
   return(processors)
 }
