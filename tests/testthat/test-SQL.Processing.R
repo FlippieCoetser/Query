@@ -202,3 +202,37 @@ test_that("insert |> processor[['VALUES']](values) append collapsed list for fie
     processor[['VALUES']](values) |>
       expect_equal(output)
 })
+
+# UPDATE
+test_that('processor instance has UPDATE operation',{
+  # Given
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  # Then
+  processor[['UPDATE']] |>
+    is.null()         |>
+      expect_equal(FALSE)
+})
+test_that("table |> processor[['UPDATE']]() Append table after UPDATE statement",{
+    # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service()
+
+  processor <-
+    SQL.Broker() |>
+    SQL.Service() |>
+    SQL.Processing()
+
+  input  <- ''
+  table  <- 'User'
+  output <- 'UPDATE [dbo].[User] '
+
+  # Then
+  input |>
+    processor[['UPDATE']](table) |>
+      expect_equal(output)
+})
