@@ -34,5 +34,8 @@ SQL.Processing <- \(service) {
       service[['KEYWORDS']][['SET']]() |>
       service[['UTILITIES']][['KEYVALUES']](pairs) 
   }
+  processors[['DELETE']] <- \() {
+    service[['KEYWORDS']][['DELETE']]()
+  }
   return(processors)
 }
