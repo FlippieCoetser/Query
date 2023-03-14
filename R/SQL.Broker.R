@@ -89,7 +89,7 @@ SQL.Broker <- \(...){
       utilities[['Append']]('VALUES') |>
       utilities[['Append']](' ')
   }
-  operations[['KEYWORDS']][['UPDATE']] <- \(input) {
+  operations[['KEYWORDS']][['UPDATE']] <- \(input = '') {
     input |>
       utilities[['Append']]('UPDATE') |>
       utilities[['Append']](' ')
