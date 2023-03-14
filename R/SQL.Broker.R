@@ -27,6 +27,17 @@ SQL.Broker <- \(...){
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
+  operations[['UTILITIES']][['KEYVALUES']]   <- \(input, pairs) { 
+    Values <- \(input, items) { paste(input, items, sep='')} 
+    pairs |> 
+      names() |> 
+      utilities[['Inclose']]() |> 
+      utilities[['Append']](' = ') |> 
+      Values(pairs) |> 
+      paste(collapse = ', ')  |>
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
+  }
   operations[['UTILITIES']][['INCLOSELIST']] <- \(input, items) {
     items |>
       utilities[['Collapse']]()  |>
