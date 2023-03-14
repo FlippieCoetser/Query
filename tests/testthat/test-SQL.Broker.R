@@ -480,3 +480,28 @@ test_that("input |> keywords[['KEYVALUES']](pairs) Inject Key Value Pairs and Pr
     broker[['UTILITIES']][['KEYVALUES']](pairs) |>
       expect_equal(output)
 })
+
+# DELETE KEYWORDS
+test_that("broker[['KEYWORDS']] has DELETE operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  # Then
+  keywords[['DELETE']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['DELETE']]() Inject DELETE and Prepend input",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['KEYWORDS']]
+
+  input <- 'input '
+  output <- 'input DELETE '
+
+  # Then
+  input |>
+    keywords[['DELETE']]() |>
+      expect_equal(output)
+})
