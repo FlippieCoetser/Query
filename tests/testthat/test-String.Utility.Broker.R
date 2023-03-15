@@ -8,3 +8,14 @@ test_that('String.Utility.Broker() return list of operations',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+# Append Operation
+test_that('broker instance has Append operation',{
+  # Given
+  broker <- String.Utility.Broker()
+
+  # Then
+  broker[['Append']] |>
+    Exist()          |>
+      expect_equal(TRUE)
+})
