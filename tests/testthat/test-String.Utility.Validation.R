@@ -44,3 +44,14 @@ test_that("input |> validate[['Exist']]() throw no exception if input is not NUL
     validate[['Exist']]() |>
       expect_no_error()
 })
+
+# Is String Validator
+test_that('validators contains IsString validator',{
+  # Given
+  validators <- String.Utility.Validation()
+
+  # Then
+  validators[['IsString']] |>
+    Exist()             |>
+      expect_equal(TRUE)
+})
