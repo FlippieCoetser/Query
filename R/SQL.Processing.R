@@ -4,12 +4,12 @@ SQL.Processing <- \(service) {
     service[['KEYWORDS']][['SELECT']]() |>
     service[['UTILITIES']][['COLUMNS']](columns)
   }
-  processors[['FROM']] <- \(input, table) {
+  processors[['FROM']]   <- \(input, table) {
     input |>
       service[['KEYWORDS']][['FROM']]() |>
       service[['UTILITIES']][['SCHEMA']](table)
   }
-  processors[['WHERE']] <- \(input, key, value) {
+  processors[['WHERE']]  <- \(input, key, value) {
     input |>
       service[['KEYWORDS']][['WHERE']]() |>
       service[['UTILITIES']][['KEYVALUE']](key, value)
@@ -29,7 +29,7 @@ SQL.Processing <- \(service) {
     service[['KEYWORDS']][['UPDATE']]() |>
     service[['UTILITIES']][['SCHEMA']](table) 
   }
-  processors[['SET']] <- \(input, pairs) {
+  processors[['SET']]    <- \(input, pairs) {
     input |>
       service[['KEYWORDS']][['SET']]() |>
       service[['UTILITIES']][['KEYVALUES']](pairs) 
