@@ -190,10 +190,10 @@ test_that("insert |> processor[['VALUES']](values) append collapsed list for fie
 
   input    <- ''
   values  <- list(
-    '4a0ec243-78ff-4461-8696-c41e7d64e108' |> utilities[['Inclose']]('Quotes'),
-    'test@gmail.com'                       |> utilities[['Inclose']]('Quotes'),
-    '2d2ee7bee3ae4795ba88'                 |> utilities[['Inclose']]('Quotes'),
-    '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+    '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    'test@gmail.com',
+    '2d2ee7bee3ae4795ba88',
+    '53dfd42f-5394-46d7-a917-11b7da15816d'
   )
   output <- "VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba88', '53dfd42f-5394-46d7-a917-11b7da15816d') "
 
@@ -263,9 +263,9 @@ test_that("pairs |> processor[['SET']]() Append key value pairs after SET statem
 
   input <- ''
   pairs <- list(
-    Username = 'test.updated@gmail.com' |> utilities[['Inclose']]('Quotes'),
-    HashedPassword = '2d2ee7bee3ae4795ba886' |> utilities[['Inclose']]('Quotes'),
-    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+    Username = 'test.updated@gmail.com',
+    HashedPassword = '2d2ee7bee3ae4795ba886',
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d'
   )
 
   output <- "SET [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "

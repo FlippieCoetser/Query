@@ -23,7 +23,7 @@ SQL.Processing <- \(service) {
   processors[['VALUES']] <- \(input, values) {
     input |>
       service[['KEYWORDS']][['VALUES']]() |>
-      service[['UTILITIES']][['INCLOSELIST']](values)
+      service[['UTILITIES']][['INCLOSEVALUES']](values)
   }
   processors[['UPDATE']] <- \(table) {
     service[['KEYWORDS']][['UPDATE']]() |>
