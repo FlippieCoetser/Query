@@ -40,8 +40,7 @@ Utility.Service <- \(broker) {
   }
   services[['CollapseWithComma']] <- \(fields) {
     fields |>
-      validate[['Exist']]() |>
-      validate[['IsList']]()
+      validate[['Exist']]()
 
     fields |>
       broker[['CollapseWithComma']]()
