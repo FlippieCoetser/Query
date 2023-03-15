@@ -220,3 +220,34 @@ test_that("field |> processor[['IncloseString']]() will not inclose field with q
     processor[['IncloseString']]() |>
       expect_equal(expected) 
 })
+
+# IncloseStrings
+test_that('processor instance has IncloseStrings processor',{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  # Then
+  processor[['IncloseStrings']] |>
+    is.null()          |>
+      expect_equal(FALSE)
+})
+test_that("fields |> processor[['IncloseStrings']]() inclose field with quotes when field string",{
+    # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- list('one','two',1,2)
+
+  # When
+  expected <- list("'one'","'two'",1,2)
+
+  # Then
+  field |>
+    processor[['IncloseStrings']]() |>
+      expect_equal(expected) 
+})
