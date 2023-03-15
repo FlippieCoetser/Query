@@ -6,5 +6,8 @@ String.Utility.Broker <- \() {
   operations[['Prepend']] <- \(field, string) {
     string |> paste(field, sep = '')
   }
+  operations[['Inclose']] <- \(field, before, after) {
+    
+  }
   return(operations)
 }
