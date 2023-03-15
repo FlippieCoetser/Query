@@ -8,3 +8,14 @@ test_that('String.Utility.Validation() return list of validators',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+# Exist Validator
+test_that('validators contains Exist validator',{
+  # Given
+  validators <- String.Utility.Validation()
+
+  # Then
+  validators[['Exist']] |>
+    Exist()             |>
+      expect_equal(TRUE)
+})
