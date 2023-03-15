@@ -35,3 +35,20 @@ test_that("field |> service[['Append']](string) appends string to end of field",
     service[['Append']](string) |>
       expect_equal('fieldstring')
 })
+test_that("field |> service[['Append']](string) throws error if field null",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is NULL'
+
+  # When
+  field <- NULL
+  string <- 'string'
+
+  # Then
+  field |>
+    service[['Append']](string) |>
+      expect_error(error)
+})
