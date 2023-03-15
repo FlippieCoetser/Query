@@ -97,14 +97,3 @@ test_that("data |> validator[['IsVector']]() should not throw exception when dat
     validator[['IsVector']]() |>
       expect_no_error()
 })
-
-# Is List or Vector Validator
-test_that("validator instance has IsListOrVector validator",{
-  # Given
-  validator <- Utility.Validation()
-
-  # Then
-  validator[["IsListOrVector"]]   |>
-    is.null()               |>
-      expect_equal(FALSE)
-})

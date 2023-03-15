@@ -19,7 +19,7 @@ Utility.Validation <- \() {
     return(data)
   }
   validators[['IsListOrVector']] <- \(data) {
-    
+    (data |> is.vector())
   }
   return(validators)
 }
