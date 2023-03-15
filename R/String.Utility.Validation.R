@@ -6,7 +6,7 @@ String.Utility.Validation <- \() {
     input |> is.null() |> exception[['NullException']]()
   }
   validators[['IsString']] <- \(input) {
-    
+    input |> is.character() |> isFALSE() |> exception[['StringException']]()
   }
   return(validators)
 }
