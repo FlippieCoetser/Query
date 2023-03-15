@@ -4,7 +4,7 @@ String.Utility.Broker <- \() {
     field |> paste(string, sep = '')
   }
   operations[['Prepend']] <- \(field, string) {
-    
+    string |> paste(field, sep = '')
   }
   return(operations)
 }
