@@ -8,3 +8,15 @@ test_that('String.Utility.Service() return list of services',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+test_that('services contains Append service',{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  # Then
+  service[['Append']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
