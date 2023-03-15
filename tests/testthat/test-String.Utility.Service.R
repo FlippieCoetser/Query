@@ -52,3 +52,20 @@ test_that("field |> service[['Append']](string) throws error if field null",{
     service[['Append']](string) |>
       expect_error(error)
 })
+test_that("field |> service[['Append']](string) throws error if string null",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is NULL'
+
+  # When
+  field <- 'field' 
+  string <- NULL
+
+  # Then
+  field |>
+    service[['Append']](string) |>
+      expect_error(error)
+})
