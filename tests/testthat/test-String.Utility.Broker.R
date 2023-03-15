@@ -56,3 +56,14 @@ test_that("field |> broker[['Prepend']](string) appends string to front of field
     broker[['Prepend']](string) |>
       expect_equal('stringfield')
 })
+
+# Inclose Operation
+test_that('broker instance has Inclose operation',{
+  # Given
+  broker <- String.Utility.Broker()
+
+  # Then
+  broker[['Inclose']] |>
+    Exist()          |>
+      expect_equal(TRUE)
+})
