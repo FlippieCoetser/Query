@@ -96,6 +96,35 @@ test_that("TRUE |> exception[['ListException']]() throw NULL exception",{
       expect_error('argument is not of type list')
 })
 
+# Vector Exception
+test_that("exception instance has VectorException",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  exception[['VectorException']]  |>
+    is.null()              |>
+      expect_equal(FALSE)
+})
+test_that("FALSE |> exception[['VectorException']]() throw no exception",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  FALSE |>
+    exception[['VectorException']]() |>
+      expect_no_error()
+})
+test_that("TRUE |> exception[['VectorException']]() throw Vector exception",{
+  # Given
+  exception <- Utility.Exceptions()
+
+  # Then
+  TRUE |>
+    exception[['VectorException']]() |>
+      expect_error('argument is not of type vector')
+})
+
 # List or Vector Exception
 test_that("exception instance has ListOrVectorException",{
   # Given
