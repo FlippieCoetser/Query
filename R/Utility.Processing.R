@@ -27,5 +27,8 @@ Utility.Processing <- \(service) {
       return(field)
     }
   }
+  processors[['IncloseStrings']] <- \(fields) {
+    fields |> lapply(processors[['IncloseString']])
+  }
   return(processors)
 }
