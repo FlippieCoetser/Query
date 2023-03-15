@@ -55,3 +55,28 @@ test_that('validators contains IsString validator',{
     Exist()             |>
       expect_equal(TRUE)
 })
+test_that("input |> validate[['IsString']]() throws exception if input is not character",{
+  # Given
+  validate <- String.Utility.Validation()
+  error     <- 'argument is not a String'
+
+  # When
+  input <- 1
+
+  # Then
+  input |>
+    validate[['IsString']]() |>
+      expect_error(error)
+})
+test_that("input |> validate[['IsString']]() throw no exception if input is character",{
+  # Given
+  validate <- String.Utility.Validation()
+
+  # When
+  input <- ''
+
+  # Then
+  input |>
+    validate[['IsString']]() |>
+      expect_no_error()
+})
