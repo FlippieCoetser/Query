@@ -32,3 +32,14 @@ test_that("field |> broker[['Append']](string) appends string to end of field",{
     broker[['Append']](string) |>
       expect_equal('fieldstring')
 })
+
+# Prepend Operation
+test_that('broker instance has Prepend operation',{
+  # Given
+  broker <- String.Utility.Broker()
+
+  # Then
+  broker[['Prepend']] |>
+    Exist()          |>
+      expect_equal(TRUE)
+})
