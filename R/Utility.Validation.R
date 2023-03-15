@@ -18,8 +18,5 @@ Utility.Validation <- \() {
     data |> is.vector() |> isFALSE() |> exception[['VectorException']]()
     return(data)
   }
-  validators[['IsListOrVector']] <- \(data) {
-    (data |> is.vector())
-  }
   return(validators)
 }
