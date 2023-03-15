@@ -16,7 +16,7 @@ test_that('exceptions contains Null exception',{
 
   # Then
   exceptions[['NullException']] |>
-    Exist()          |>
+    Exist()                     |>
       expect_equal(TRUE)
 })
 test_that("FALSE |> exception[['NullExceptions']]() throws no exception",{
