@@ -1,0 +1,1 @@
+Exist <- \(input) input |> is.null() |> isFALSE()
