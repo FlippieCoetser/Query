@@ -20,5 +20,12 @@ Utility.Processing <- \(service) {
     
     fields |> types[[type]]()
   }
+  processors[['IncloseString']] <- \(field) {
+    if(field |> is.character()) {
+      field |> service[['IncloseInQuotes']]()
+    } else {
+      return(field)
+    }
+  }
   return(processors)
 }
