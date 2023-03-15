@@ -34,7 +34,7 @@ SQL.Broker <- \(...){
       utilities[['Inclose']]() |> 
       utilities[['Append']](' = ') |> 
       Values(pairs) |> 
-      paste(collapse = ', ')  |>
+      utilities[['Collapse']]()  |>
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
