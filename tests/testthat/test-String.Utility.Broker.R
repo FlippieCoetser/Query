@@ -67,3 +67,17 @@ test_that('broker instance has Inclose operation',{
     Exist()          |>
       expect_equal(TRUE)
 })
+test_that("field |> broker[['Inclose']](before, after) inclose field with before and after",{
+  # Given
+  broker <- String.Utility.Broker()
+
+  # When
+  field  <- 'field'
+  before <- 'before'
+  after  <- 'after'
+
+  # Then
+  field |>
+    broker[['Inclose']](before,after) |>
+      expect_equal('beforefieldafter')
+})
