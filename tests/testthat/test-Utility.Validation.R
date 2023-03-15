@@ -68,3 +68,14 @@ test_that("data |> validator[['IsList']]() should throw error when data is not c
     validator[['IsList']]() |>
       expect_error()
 })
+
+# Is Vector Validator
+test_that("validator instance has IsVector validator",{
+  # Given
+  validator <- Utility.Validation()
+
+  # Then
+  validator[["IsVector"]]   |>
+    is.null()               |>
+      expect_equal(FALSE)
+})
