@@ -172,3 +172,51 @@ test_that("fields |> processor[['Collapse']]() collapse items in fields using co
     processor[['Collapse']]() |>
       expect_equal(expected) 
 })
+
+# IncloseString
+test_that('processor instance has IncloseString processor',{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  # Then
+  processor[['IncloseString']] |>
+    is.null()          |>
+      expect_equal(FALSE)
+})
+test_that("field |> processor[['IncloseString']]() inclose field with quotes when field string",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 'one'
+
+  # When
+  expected <- "'one'"
+
+  # Then
+  field |>
+    processor[['IncloseString']]() |>
+      expect_equal(expected) 
+})
+test_that("field |> processor[['IncloseString']]() will not inclose field with quotes when field not string",{
+  # Given
+  processor <- 
+    Utility.Broker()  |>
+    Utility.Service() |>
+    Utility.Processing()
+
+  field  <- 1
+
+  # When
+  expected <- 1
+
+  # Then
+  field |>
+    processor[['IncloseString']]() |>
+      expect_equal(expected) 
+})
