@@ -468,9 +468,9 @@ test_that("input |> keywords[['KEYVALUES']](pairs) Inject Key Value Pairs and Pr
 
   input    <- ''
   pairs <- list(
-    Username = 'test.updated@gmail.com' |> utilities[['Inclose']]('Quotes'),
-    HashedPassword = '2d2ee7bee3ae4795ba886' |> utilities[['Inclose']]('Quotes'),
-    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d' |> utilities[['Inclose']]('Quotes')
+    Username = 'test.updated@gmail.com',
+    HashedPassword = '2d2ee7bee3ae4795ba886',
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d'
   )
 
   output <- "[Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
@@ -503,5 +503,40 @@ test_that("input |> keywords[['DELETE']]() Inject DELETE and Prepend input",{
   # Then
   input |>
     keywords[['DELETE']]() |>
+      expect_equal(output)
+})
+
+# INCLOSE VALUES UTILITY
+test_that("broker[['UTILITIES']] has INCLOSEVALUES operation",{
+  # Given
+  broker <- SQL.Broker()
+  keywords <- broker[['UTILITIES']]
+
+  # Then
+  keywords[['INCLOSEVALUES']] |>
+    is.null() |>
+      expect_equal(FALSE)
+})
+test_that("input |> keywords[['INCLOSEVALUES']]() Inject COLUMNS and Prepend input",{
+  # Given
+  utilities <-
+    Utility.Broker() |> 
+    Utility.Service() |>
+    Utility.Processing()
+
+  broker <- SQL.Broker()
+
+  input    <- ''
+  values  <- list(
+    '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    'test@gmail.com',
+    '2d2ee7bee3ae4795ba88',
+    '53dfd42f-5394-46d7-a917-11b7da15816d'
+  )
+  output <- "('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba88', '53dfd42f-5394-46d7-a917-11b7da15816d') "
+
+  # Then
+  input |>
+    broker[['UTILITIES']][['INCLOSEVALUES']](values) |>
       expect_equal(output)
 })
