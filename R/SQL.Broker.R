@@ -28,13 +28,22 @@ SQL.Broker <- \(...){
       utilities[['Prepend']](input)
   }
   operations[['UTILITIES']][['KEYVALUES']]   <- \(input, pairs) { 
-    Values <- \(input, items) { paste(input, items, sep='')} 
+    pairs <- pairs |> lapply(utilities[['IncloseString']])
+    Values <- \(name, items) { paste(name, items, sep='')} 
     pairs |> 
       names() |> 
       utilities[['Inclose']]() |> 
       utilities[['Append']](' = ') |> 
       Values(pairs) |> 
       utilities[['Collapse']]()  |>
+      utilities[['Append']](' ') |>
+      utilities[['Prepend']](input)
+  }
+  operations[['UTILITIES']][['INCLOSEVALUES']] <- \(input, values) {
+    values |>
+      utilities[['IncloseStrings']]() |>
+      utilities[['Collapse']]()  |>
+      utilities[['Inclose']]('Round')  |>
       utilities[['Append']](' ') |>
       utilities[['Prepend']](input)
   }
