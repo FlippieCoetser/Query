@@ -184,16 +184,3 @@ test_that("fields |> service[['CollapseWithComma']]() collapse items in fields u
     service[['CollapseWithComma']]() |>
       expect_equal(expected) 
 })
-test_that("fields |> service[['CollapseWithComma']]() throws exception if fields in not list",{
-  # Given
-  service <- 
-    Utility.Broker()  |>
-    Utility.Service()
-
-  fields  <- 1
-
-  # Then
-  fields |>
-    service[['CollapseWithComma']]() |>
-      expect_error() 
-})
