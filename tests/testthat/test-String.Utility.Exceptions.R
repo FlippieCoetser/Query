@@ -38,3 +38,14 @@ test_that("TRUE |> exception[['NullExceptions']]() throws Null exception",{
     exception[['NullException']]() |>
       expect_error(error)
 })
+
+# String Exception
+test_that('exceptions contains String exception',{
+  # Given
+  exceptions <- String.Utility.Exceptions()
+
+  # Then
+  exceptions[['StringException']] |>
+    Exist()                       |>
+      expect_equal(TRUE)
+})
