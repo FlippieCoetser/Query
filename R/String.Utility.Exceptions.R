@@ -1,6 +1,7 @@
 String.Utility.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['NullException']] <- \() {
+  exceptions[['NullException']] <- \(invoke) {
+    if (invoke) {stop('argument is NULL')}
   }
   return(exceptions)
 }
