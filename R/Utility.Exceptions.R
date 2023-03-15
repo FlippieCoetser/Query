@@ -9,5 +9,8 @@ Utility.Exceptions <- \() {
   exceptions[['ListException']] <- \(invoke) {
     if (invoke) {stop('argument is not of type list')}
   }
+  exceptions[['ListOrVectorException']] <- \(invoke) {
+    if (invoke) {stop('argument is not a list or vector')}
+  }
   return(exceptions)
 }
