@@ -19,3 +19,22 @@ test_that('exceptions contains Null exception',{
     Exist()          |>
       expect_equal(TRUE)
 })
+test_that("FALSE |> exception[['NullExceptions']]() throws no exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+
+  # Then 
+  FALSE |>
+    exception[['NullException']]() |>
+      expect_no_error()
+})
+test_that("TRUE |> exception[['NullExceptions']]() throws Null exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+  error     <- 'argument is NULL'
+
+  # Then 
+  TRUE |>
+    exception[['NullException']]() |>
+      expect_error(error)
+})
