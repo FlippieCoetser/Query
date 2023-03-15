@@ -19,3 +19,28 @@ test_that('validators contains Exist validator',{
     Exist()             |>
       expect_equal(TRUE)
 })
+test_that("input |> validate[['Exist']]() throws exception if input NULL",{
+  # Given
+  validate <- String.Utility.Validation()
+  error     <- 'argument is NULL'
+
+  # When
+  input <- NULL
+
+  # Then
+  input |>
+    validate[['Exist']]() |>
+      expect_error(error)
+})
+test_that("input |> validate[['Exist']]() throw no exception if input is not NULL",{
+  # Given
+  validate <- String.Utility.Validation()
+
+  # When
+  input <- ''
+
+  # Then
+  input |>
+    validate[['Exist']]() |>
+      expect_no_error()
+})
