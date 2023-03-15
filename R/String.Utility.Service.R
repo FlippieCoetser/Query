@@ -3,8 +3,10 @@ String.Utility.Service <- \(broker) {
   
   services <- list()
   services[['Append']] <- \(field, string) {
-    field |> validate[['Exist']]()
-    
+    field  |> validate[['Exist']]()
+
+    string |> validate[['Exist']]()
+
     field |> broker[['Append']](string)
   }
   return(services)
