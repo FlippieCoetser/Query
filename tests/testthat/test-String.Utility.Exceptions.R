@@ -49,3 +49,22 @@ test_that('exceptions contains String exception',{
     Exist()                       |>
       expect_equal(TRUE)
 })
+test_that("FALSE |> exception[['StringException']]() throws no exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+
+  # Then 
+  FALSE |>
+    exception[['StringException']]() |>
+      expect_no_error()
+})
+test_that("TRUE |> exception[['StringException']]() throws String exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+  error     <- 'argument is not a String'
+
+  # Then 
+  TRUE |>
+    exception[['StringException']]() |>
+      expect_error(error)
+})
