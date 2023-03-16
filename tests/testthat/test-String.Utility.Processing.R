@@ -9,6 +9,19 @@ test_that('String.Utility.Processing() return list of processors',{
       expect_equal(TRUE)
 })
 
+# Append Processor
+test_that('processors contain Append processor',{
+  # Given 
+  processor <- 
+    String.Utility.Service()
+    String.Utility.Processing()
+
+  # Then
+  processor[['Append']] |>
+    Exist()              |>
+      expect_equal(TRUE)
+})
+
 # Inclose Processor
 test_that('processors contain Inclose processor',{
   # Given 
