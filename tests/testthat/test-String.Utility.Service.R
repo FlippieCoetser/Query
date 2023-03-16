@@ -232,3 +232,21 @@ test_that("field |> service[['Inclose']](before, after) throws error if after nu
     service[['Inclose']](before,after) |>
       expect_error(error)
 })
+test_that("field |> service[['Inclose']](before, after) throws error if after is not character",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is not a String'
+
+  # When
+  field  <- 'field'
+  before <- 'before'
+  after  <- 1
+
+  # Then
+  field |>
+    service[['Inclose']](before,after) |>
+      expect_error(error)
+})
