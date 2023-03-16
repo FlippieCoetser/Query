@@ -49,6 +49,21 @@ test_that('processors contain Prepend processor',{
     Exist()              |>
       expect_equal(TRUE)
 })
+test_that("field |> processor[['Prepend']](string) appends string to start of field",{
+  # Given 
+  processor <- 
+    String.Utility.Service()
+    String.Utility.Processing()
+
+  # When
+  field  <- 'field'
+  string <- 'string'
+
+  # Then
+  field |>
+    processor[['Prepend']](string) |>
+      expect_equal('stringfield')
+})
 
 # Inclose Processor
 test_that('processors contain Inclose processor',{
