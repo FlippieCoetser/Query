@@ -21,3 +21,17 @@ test_that('processors contain Inclose processor',{
     Exist()              |>
       expect_equal(TRUE)
 })
+test_that("field |> processor[['Inclose']]() inclose field with square brackets",{
+  # Given
+  service <- 
+    String.Utility.Service() |>
+    String.Utility.Processing()
+
+  # When
+  field  <- 'field'
+
+  # Then
+  field |>
+    service[['Inclose']]() |>
+      expect_equal('[field]')
+})
