@@ -10,7 +10,10 @@ DQL.Service <- \() {
       utilities[['Append']](' ')
   }
   services[['FIELDS']] <- \(input, fields) {
-    
+    fields |>
+      utilities[['Collapse']]()    |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   return(services)
 }
