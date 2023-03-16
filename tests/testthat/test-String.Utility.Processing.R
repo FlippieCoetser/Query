@@ -50,3 +50,18 @@ test_that("field |> processor[['Inclose']](type = 'Round') inclose field with ro
     service[['Inclose']](type) |>
       expect_equal('(field)')
 })
+test_that("field |> processor[['Inclose']](type = 'Quotes') inclose field with quotes",{
+  # Given
+  service <- 
+    String.Utility.Service() |>
+    String.Utility.Processing()
+
+  # When
+  field  <- 'field'
+  type   <- 'Quotes'
+
+  # Then
+  field |>
+    service[['Inclose']](type) |>
+      expect_equal("'field'")
+})
