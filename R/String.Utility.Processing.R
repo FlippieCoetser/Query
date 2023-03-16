@@ -4,6 +4,7 @@ String.Utility.Processing <- \(service) {
     types <- list()
     types[['Square']] <- \(field) field |> service[['Inclose']]('[',']')   
     types[['Round']]  <- \(field) field |> service[['Inclose']]('(',')') 
+    types[['Quotes']] <- \(field) field |> service[['Inclose']]("'","'")
 
     types[[type]](field)
   }
