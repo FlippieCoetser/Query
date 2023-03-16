@@ -92,3 +92,15 @@ test_that("input |> validate[['IsString']]() throw no exception if input is char
     validate[['IsString']]() |>
       expect_no_error()
 })
+test_that("input |> validate[['IsString']]() returns input if input is String",{
+  # Given
+  validate <- String.Utility.Validation()
+
+  # When
+  input <- ''
+
+  # Then
+  input |>
+    validate[['IsString']]() |>
+      expect_equal(input)
+})
