@@ -235,3 +235,15 @@ test_that("field |> service[['Inclose']](before, after) throws error if after is
     service[['Inclose']](before,after) |>
       expect_error(error)
 })
+
+# Collapse Service
+test_that('services instance has Collapse service',{
+  # Given
+  service <- 
+    String.Utility.Service()
+
+  # Then
+  service[['Collapse']] |>
+    Exist()            |>
+      expect_equal(TRUE)
+})
