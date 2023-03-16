@@ -17,7 +17,7 @@ String.Utility.Service <- \(broker) {
   services[['Inclose']] <- \(field, before, after) {
     field   |> validate[['Exist']]()
     before  |> validate[['Exist']]() |> validate[['IsString']]()
-    after   |> validate[['Exist']]()
+    after   |> validate[['Exist']]() |> validate[['IsString']]()
 
     before |> paste(field, sep = '') |> paste(after, sep = '')
   }
