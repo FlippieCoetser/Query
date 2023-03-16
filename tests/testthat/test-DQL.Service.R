@@ -1,11 +1,11 @@
 test_that('DQL.Service exist',{
   DQL.Service   |>
-    is.null() |>
+    is.null()   |>
       expect_equal(FALSE)
 })
 test_that('DQL.Service() return list of services',{
   DQL.Service() |>
-    is.list() |>
+    is.list()   |>
       expect_equal(TRUE)
 })
 
@@ -63,7 +63,7 @@ test_that('services contains * service',{
 
   # Then
   service[['*']] |>
-    Exist()           |>
+    Exist()      |>
       expect_equal(TRUE)
 })
 test_that("input |> service[['*']]() returns * and prepend input",{
@@ -74,7 +74,7 @@ test_that("input |> service[['*']]() returns * and prepend input",{
   output  <- 'input * '
 
   # Then
-  input                         |>
+  input              |>
     service[['*']]() |>
       expect_equal(output)
 })
