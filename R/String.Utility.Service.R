@@ -10,7 +10,8 @@ String.Utility.Service <- \(broker) {
   }
   services[['Prepend']] <- \(field, string) {
     field  |> validate[['Exist']]()
-    
+    string |> validate[['Exist']]()
+
     string |> paste(field, sep = '')
   }
   return(services)
