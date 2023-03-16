@@ -68,3 +68,14 @@ test_that("TRUE |> exception[['StringException']]() throws String exception",{
     exception[['StringException']]() |>
       expect_error(error)
 })
+
+# Vector Exception
+test_that('exceptions contains Vector exception',{
+  # Given
+  exceptions <- String.Utility.Exceptions()
+
+  # Then
+  exceptions[['VectorException']] |>
+    Exist()                       |>
+      expect_equal(TRUE)
+})
