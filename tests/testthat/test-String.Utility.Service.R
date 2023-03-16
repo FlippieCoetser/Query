@@ -144,3 +144,19 @@ test_that('services instance has Inclose service',{
     Exist()            |>
       expect_equal(TRUE)
 })
+test_that("field |> service[['Inclose']](before, after) inclose field with before and after",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  # When
+  field  <- 'field'
+  before <- 'before'
+  after  <- 'after'
+
+  # Then
+  field |>
+    service[['Inclose']](before,after) |>
+      expect_equal('beforefieldafter')
+})
