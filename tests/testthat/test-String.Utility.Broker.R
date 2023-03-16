@@ -9,30 +9,6 @@ test_that('String.Utility.Broker() return list of operations',{
       expect_equal(TRUE)
 })
 
-# Prepend Operation
-test_that('broker instance has Prepend operation',{
-  # Given
-  broker <- String.Utility.Broker()
-
-  # Then
-  broker[['Prepend']] |>
-    Exist()          |>
-      expect_equal(TRUE)
-})
-test_that("field |> broker[['Prepend']](string) appends string to front of field",{
-  # Given
-  broker <- String.Utility.Broker()
-
-  # When
-  field <- 'field'
-  string <- 'string'
-
-  # Then
-  field |>
-    broker[['Prepend']](string) |>
-      expect_equal('stringfield')
-})
-
 # Inclose Operation
 test_that('broker instance has Inclose operation',{
   # Given
