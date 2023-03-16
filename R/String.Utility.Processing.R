@@ -3,6 +3,9 @@ String.Utility.Processing <- \(service) {
   processors[['Append']]  <- \(field, string) {
     field |> service[['Append']](string)
   }
+  processors[['Prepend']] <- \(args) {
+    
+  }
   processors[['Inclose']] <- \(field, type = 'Square') { 
     types <- list()
     types[['Square']] <- \(field) field |> service[['Inclose']]('[',']')   
