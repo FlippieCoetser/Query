@@ -247,3 +247,22 @@ test_that('services instance has Collapse service',{
     Exist()            |>
       expect_equal(TRUE)
 })
+test_that("fields |> service[['Collapse']]() collapse items using comma separator",{
+  # Given
+  service <- 
+    String.Utility.Service()
+
+  fields  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- "one, two, three"
+
+  # Then
+  fields |>
+    service[['Collapse']]() |>
+      expect_equal(expected) 
+})
