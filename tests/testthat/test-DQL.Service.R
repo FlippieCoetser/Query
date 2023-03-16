@@ -101,3 +101,14 @@ test_that("input |> service[['FROM']]() returns FROM keyword prepended with inpu
     service[['FROM']]() |>
       expect_equal(output)
 })
+
+# TABLE
+test_that('services contains TABLE service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['TABLE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
