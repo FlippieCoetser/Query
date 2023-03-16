@@ -14,5 +14,8 @@ String.Utility.Processing <- \(service) {
 
     types[[type]](field)
   }
+  processors[['Collapse']] <- \(args) {
+    
+  }
   return(processors)
 }
