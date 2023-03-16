@@ -15,7 +15,7 @@ String.Utility.Service <- \(broker) {
     string |> paste(field, sep = '')
   }
   services[['Inclose']] <- \(field, before, after) {
-    
+    before |> paste(field, sep = '') |> paste(after, sep = '')
   }
   return(services)
 }
