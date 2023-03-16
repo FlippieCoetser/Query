@@ -69,3 +69,16 @@ test_that("field |> service[['Append']](string) throws error if string null",{
     service[['Append']](string) |>
       expect_error(error)
 })
+
+# Prepend Operation
+test_that('services contains Prepend service',{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  # Then
+  service[['Prepend']] |>
+    Exist()            |>
+      expect_equal(TRUE)
+})
