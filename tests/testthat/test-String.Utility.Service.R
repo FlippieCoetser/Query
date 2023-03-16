@@ -12,7 +12,6 @@ test_that('String.Utility.Service() return list of services',{
 test_that('services contains Append service',{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # Then
@@ -23,7 +22,6 @@ test_that('services contains Append service',{
 test_that("field |> service[['Append']](string) appends string to end of field",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # When
@@ -38,7 +36,6 @@ test_that("field |> service[['Append']](string) appends string to end of field",
 test_that("field |> service[['Append']](string) throws error if field null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -55,7 +52,6 @@ test_that("field |> service[['Append']](string) throws error if field null",{
 test_that("field |> service[['Append']](string) throws error if string null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -74,7 +70,6 @@ test_that("field |> service[['Append']](string) throws error if string null",{
 test_that('services contains Prepend service',{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # Then
@@ -85,7 +80,6 @@ test_that('services contains Prepend service',{
 test_that("field |> service[['Prepend']](string) appends string to front of field",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # When
@@ -100,7 +94,6 @@ test_that("field |> service[['Prepend']](string) appends string to front of fiel
 test_that("field |> service[['Prepend']](string) throws error if field null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -117,7 +110,6 @@ test_that("field |> service[['Prepend']](string) throws error if field null",{
 test_that("field |> service[['Prepend']](string) throws error if string null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -136,7 +128,6 @@ test_that("field |> service[['Prepend']](string) throws error if string null",{
 test_that('services instance has Inclose service',{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # Then
@@ -147,7 +138,6 @@ test_that('services instance has Inclose service',{
 test_that("field |> service[['Inclose']](before, after) inclose field with before and after",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   # When
@@ -163,7 +153,6 @@ test_that("field |> service[['Inclose']](before, after) inclose field with befor
 test_that("field |> service[['Inclose']](before, after) throws error if field null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -181,7 +170,6 @@ test_that("field |> service[['Inclose']](before, after) throws error if field nu
 test_that("field |> service[['Inclose']](before, after) throws error if before null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -199,7 +187,6 @@ test_that("field |> service[['Inclose']](before, after) throws error if before n
 test_that("field |> service[['Inclose']](before, after) throws error if before is not character",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is not a String'
@@ -217,7 +204,6 @@ test_that("field |> service[['Inclose']](before, after) throws error if before i
 test_that("field |> service[['Inclose']](before, after) throws error if after null",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is NULL'
@@ -235,7 +221,6 @@ test_that("field |> service[['Inclose']](before, after) throws error if after nu
 test_that("field |> service[['Inclose']](before, after) throws error if after is not character",{
   # Given
   service <- 
-    String.Utility.Broker() |>
     String.Utility.Service()
 
   error <- 'argument is not a String'
