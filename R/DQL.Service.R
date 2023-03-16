@@ -5,9 +5,9 @@ DQL.Service <- \() {
 
   services <- list()
   services[['SELECT']] <- \(input = '') {
-    input |>
-      utilities[['Append']]('SELECT') |>
-      utilities[['Append']](' ')
+    'SELECT' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   services[['FIELDS']] <- \(input, fields) {
     fields |>
@@ -16,18 +16,17 @@ DQL.Service <- \() {
       utilities[['Prepend']](input)
   }
   services[['*']]      <- \(input) {
-    input |>
-      utilities[['Append']]('*') |>
-      utilities[['Append']](' ')
+    '*' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   services[['FROM']]   <- \(input) {
-    input |>
-      utilities[['Append']]('FROM') |>
-      utilities[['Append']](' ')
+    'FROM' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   services[['TABLE']]  <- \(input, table) {
-    '' |>
-      utilities[['Append']](table) |>
+    table |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
