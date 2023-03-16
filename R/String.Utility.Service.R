@@ -2,7 +2,7 @@ String.Utility.Service <- \() {
   validate <- String.Utility.Validation()
   
   services <- list()
-  services[['Append']] <- \(field, string) {
+  services[['Append']]  <- \(field, string) {
     field  |> validate[['Exist']]()
     string |> validate[['Exist']]()
 
