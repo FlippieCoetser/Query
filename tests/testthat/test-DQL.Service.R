@@ -55,3 +55,14 @@ test_that("input |> service[['FIELDS']](fields) collapse list using comma as sep
     service[['FIELDS']](fields) |>
       expect_equal(output)
 })
+
+# *
+test_that('services contains * service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['*']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
