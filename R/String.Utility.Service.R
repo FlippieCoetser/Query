@@ -8,5 +8,8 @@ String.Utility.Service <- \(broker) {
 
     field |> paste(string, sep = '')
   }
+  services[['Prepend']] <- \(field, string) {
+    
+  }
   return(services)
 }
