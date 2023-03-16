@@ -121,3 +121,16 @@ test_that("field |> processor[['Inclose']](type = 'Quotes') inclose field with q
     service[['Inclose']](type) |>
       expect_equal("'field'")
 })
+
+# Collapse Processor
+test_that('processors contain Collapse processor',{
+  # Given 
+  processor <- 
+    String.Utility.Service()
+    String.Utility.Processing()
+
+  # Then
+  processor[['Collapse']] |>
+    Exist()              |>
+      expect_equal(TRUE)
+})
