@@ -40,3 +40,18 @@ test_that('services contains FIELDS service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['FIELDS']](fields) collapse list using comma as separator and prepend input",{
+  # Given
+  service <- DQL.Service()
+  
+  input   <- 'input '
+  output  <- 'input one, two, three '
+
+  # When 
+  fields <- list('one','two','three')
+
+  # Then
+  input                         |>
+    service[['FIELDS']](fields) |>
+      expect_equal(output)
+})
