@@ -6,8 +6,8 @@ String.Utility.Exceptions <- \() {
   exceptions[['StringException']] <- \(invoke) {
     if (invoke) {stop('argument is not a String')}
   }
-  exceptions[['VectorException']] <- \(args) {
-    
+  exceptions[['VectorException']] <- \(invoke) {
+    if (invoke) {stop('argument is not a Vector')}    
   }
   return(exceptions)
 }
