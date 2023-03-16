@@ -89,3 +89,15 @@ test_that('services contains FROM service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['FROM']]() returns FROM keyword prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  output <- 'input FROM '
+
+  # Then
+  input |>
+    service[['FROM']]() |>
+      expect_equal(output)
+})
