@@ -22,7 +22,7 @@ String.Utility.Service <- \() {
     before |> paste(field, sep = '') |> paste(after, sep = '')
   }
   services[['Collapse']] <- \(items) {
-    
+    items |> paste(collapse = ', ')
   }
   return(services)
 }
