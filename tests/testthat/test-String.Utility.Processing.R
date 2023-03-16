@@ -134,3 +134,23 @@ test_that('processors contain Collapse processor',{
     Exist()              |>
       expect_equal(TRUE)
 })
+test_that("fields |> processor[['Collapse']]() collapse items using comma separator",{
+  # Given 
+  processor <- 
+    String.Utility.Service()
+    String.Utility.Processing()
+
+  fields  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- "one, two, three"
+
+  # Then
+  fields |>
+    processor[['Collapse']]() |>
+      expect_equal(expected) 
+})
