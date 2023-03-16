@@ -128,3 +128,27 @@ test_that("input |> validate[['IsVector']]() throws exception if input is not ve
     validate[['IsVector']]() |>
       expect_error(error)
 })
+test_that("input |> validate[['IsVector']]() throw no exception if input is vector",{
+  # Given
+  validate <- String.Utility.Validation()
+
+  # When
+  input <- ''
+
+  # Then
+  input |>
+    validate[['IsVector']]() |>
+      expect_no_error()
+})
+test_that("input |> validate[['IsVector']]() returns input if input is Vector",{
+  # Given
+  validate <- String.Utility.Validation()
+
+  # When
+  input <- ''
+
+  # Then
+  input |>
+    validate[['IsVector']]() |>
+      expect_equal(input)
+})
