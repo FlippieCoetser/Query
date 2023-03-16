@@ -6,7 +6,7 @@ String.Utility.Service <- \(broker) {
     field  |> validate[['Exist']]()
     string |> validate[['Exist']]()
 
-    field |> broker[['Append']](string)
+    field |> paste(string, sep = '')
   }
   return(services)
 }
