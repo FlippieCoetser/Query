@@ -196,3 +196,21 @@ test_that("field |> service[['Inclose']](before, after) throws error if before n
     service[['Inclose']](before,after) |>
       expect_error(error)
 })
+test_that("field |> service[['Inclose']](before, after) throws error if after null",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is NULL'
+
+  # When
+  field  <- 'field'
+  before <- 'before'
+  after  <- NULL
+
+  # Then
+  field |>
+    service[['Inclose']](before,after) |>
+      expect_error(error)
+})
