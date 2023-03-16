@@ -10,5 +10,8 @@ String.Utility.Validation <- \() {
     input |> is.character() |> isFALSE() |> exception[['StringException']]()
     return(input)
   }
+  validators[['IsVector']] <- \(args) {
+    
+  }
   return(validators)
 }
