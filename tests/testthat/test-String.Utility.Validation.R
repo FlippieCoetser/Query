@@ -115,3 +115,16 @@ test_that('validators contains IsVector validator',{
     Exist()             |>
       expect_equal(TRUE)
 })
+test_that("input |> validate[['IsVector']]() throws exception if input is not vector",{
+  # Given
+  validate <- String.Utility.Validation()
+  error     <- 'argument is not a Vector'
+
+  # When
+  input <- data.frame()
+
+  # Then
+  input |>
+    validate[['IsVector']]() |>
+      expect_error(error)
+})
