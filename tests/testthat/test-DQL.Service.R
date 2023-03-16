@@ -19,3 +19,13 @@ test_that('services contains SELECT service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("service[['SELECT']]() returns SELECT keyword",{
+  # Given
+  service <- DQL.Service()
+
+  output <- 'SELECT '
+
+  # Then
+  service[['SELECT']]() |>
+    expect_equal(output)
+})
