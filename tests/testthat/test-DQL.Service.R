@@ -29,3 +29,14 @@ test_that("service[['SELECT']]() returns SELECT keyword",{
   service[['SELECT']]() |>
     expect_equal(output)
 })
+
+# FIELDS
+test_that('services contains FIELDS service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['FIELDS']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
