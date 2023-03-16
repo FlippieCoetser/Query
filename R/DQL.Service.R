@@ -20,8 +20,10 @@ DQL.Service <- \() {
       utilities[['Append']]('*') |>
       utilities[['Append']](' ')
   }
-  services[['FROM']]   <- \(args) {
-    
+  services[['FROM']]   <- \(input) {
+    input |>
+      utilities[['Append']]('FROM') |>
+      utilities[['Append']](' ')
   }
   return(services)
 }
