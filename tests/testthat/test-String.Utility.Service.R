@@ -160,3 +160,21 @@ test_that("field |> service[['Inclose']](before, after) inclose field with befor
     service[['Inclose']](before,after) |>
       expect_equal('beforefieldafter')
 })
+test_that("field |> service[['Inclose']](before, after) throws error if field null",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is NULL'
+
+  # When
+  field  <- NULL
+  before <- 'before'
+  after  <- 'after'
+
+  # Then
+  field |>
+    service[['Inclose']](before,after) |>
+      expect_error(error)
+})
