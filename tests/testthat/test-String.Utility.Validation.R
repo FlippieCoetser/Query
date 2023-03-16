@@ -104,3 +104,14 @@ test_that("input |> validate[['IsString']]() returns input if input is String",{
     validate[['IsString']]() |>
       expect_equal(input)
 })
+
+# Is Vector Validator
+test_that('validators contains IsVector validator',{
+  # Given
+  validators <- String.Utility.Validation()
+
+  # Then
+  validators[['IsVector']] |>
+    Exist()             |>
+      expect_equal(TRUE)
+})
