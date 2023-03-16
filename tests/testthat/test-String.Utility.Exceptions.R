@@ -79,3 +79,22 @@ test_that('exceptions contains Vector exception',{
     Exist()                       |>
       expect_equal(TRUE)
 })
+test_that("FALSE |> exception[['VectorException']]() throws no exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+
+  # Then 
+  FALSE |>
+    exception[['VectorException']]() |>
+      expect_no_error()
+})
+test_that("TRUE |> exception[['VectorException']]() throws Vector exception",{
+  # Given
+  exception <- String.Utility.Exceptions()
+  error     <- 'argument is not a Vector'
+
+  # Then 
+  TRUE |>
+    exception[['VectorException']]() |>
+      expect_error(error)
+})
