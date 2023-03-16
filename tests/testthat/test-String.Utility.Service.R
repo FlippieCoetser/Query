@@ -82,3 +82,18 @@ test_that('services contains Prepend service',{
     Exist()            |>
       expect_equal(TRUE)
 })
+test_that("field |> service[['Prepend']](string) appends string to front of field",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  # When
+  field <- 'field'
+  string <- 'string'
+
+  # Then
+  field |>
+    service[['Prepend']](string) |>
+      expect_equal('stringfield')
+})
