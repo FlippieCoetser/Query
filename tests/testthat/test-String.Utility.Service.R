@@ -97,3 +97,20 @@ test_that("field |> service[['Prepend']](string) appends string to front of fiel
     service[['Prepend']](string) |>
       expect_equal('stringfield')
 })
+test_that("field |> service[['Prepend']](string) throws error if field null",{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  error <- 'argument is NULL'
+
+  # When
+  field <- NULL
+  string <- 'string'
+
+  # Then
+  field |>
+    service[['Prepend']](string) |>
+      expect_error(error)
+})
