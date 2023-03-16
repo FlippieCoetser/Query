@@ -131,3 +131,16 @@ test_that("field |> service[['Prepend']](string) throws error if string null",{
     service[['Prepend']](string) |>
       expect_error(error)
 })
+
+# Inclose Service
+test_that('services instance has Inclose service',{
+  # Given
+  service <- 
+    String.Utility.Broker() |>
+    String.Utility.Service()
+
+  # Then
+  service[['Inclose']] |>
+    Exist()            |>
+      expect_equal(TRUE)
+})
