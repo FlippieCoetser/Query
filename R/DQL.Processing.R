@@ -16,7 +16,11 @@ DQL.Processing <- \(service) {
       service[['TABLE']](table)
   }
   processors[['WHERE']]  <- \(input, key, value) {
-    
+    input |>
+      service[['WHERE']]()     |>
+      service[['KEY']](key)    |>
+      service[['OPERATOR']]()  |>
+      service[['VALUE']](value)  
   }
   return(processors)
 }
