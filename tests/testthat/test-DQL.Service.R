@@ -185,3 +185,14 @@ test_that("input |> service[['KEY']](key) returns key in brackets prepended with
     service[['KEY']](key) |>
       expect_equal(output)
 })
+
+# OPERATOR
+test_that('services contains OPERATOR service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['OPERATOR']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
