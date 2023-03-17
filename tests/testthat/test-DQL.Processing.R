@@ -102,3 +102,39 @@ test_that("input |> processor[['WHERE']](key, value) returns WHERE key equal val
     processor[['WHERE']](key, value) |>
       expect_equal(output)
 })
+test_that("input |> processor[['WHERE']](key, value) returns WHERE key equal value in quotes with input prepended if value character",{
+  # Given
+  processor <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  # When
+  input <- 'input '
+  key   <- 'id'
+  value <- 'value'
+
+  output <- "input WHERE [id] = 'value' "
+
+  # Then
+  input |>
+    processor[['WHERE']](key, value) |>
+      expect_equal(output)
+})
+test_that("input |> processor[['WHERE']](key, value) returns WHERE key equal value with input prepended if value not character",{
+  # Given
+  processor <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  # When
+  input <- 'input '
+  key   <- 'id'
+  value <- 1
+
+  output <- "input WHERE [id] = 1 "
+
+  # Then
+  input |>
+    processor[['WHERE']](key, value) |>
+      expect_equal(output)
+})
