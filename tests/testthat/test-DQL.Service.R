@@ -232,3 +232,16 @@ test_that('services contains VALUE service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['VALUE']](value) returns value if value is not character and prepend input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  value  <- 1
+  output <- 'input 1 '
+
+  # Then
+  input |>
+    service[['VALUE']](value) |>
+      expect_equal(output)
+})
