@@ -45,3 +45,14 @@ test_that("fields |> service[['SELECT']]() returns a SELECT fields statement",{
     service[['SELECT']]() |>         
       expect_equal(output)
 })
+
+# FROM SQL Statement
+test_that('services contains FROM processor',{
+  # Given
+  processor <- DQL.Processing()
+
+  # Then
+  processor[['FROM']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
