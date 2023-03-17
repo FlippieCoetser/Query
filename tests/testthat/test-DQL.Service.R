@@ -196,3 +196,16 @@ test_that('services contains OPERATOR service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['OPERATOR']](operator) returns operator prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input    <- 'input '
+  operator <- '='
+  output <- 'input = '
+
+  # Then
+  input |>
+    service[['OPERATOR']](operator) |>
+      expect_equal(output)
+})
