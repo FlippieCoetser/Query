@@ -48,5 +48,8 @@ DQL.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
+  services[['VALUE']]    <- \(input, value) {
+    
+  }
   return(services)
 }
