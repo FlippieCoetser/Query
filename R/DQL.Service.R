@@ -27,11 +27,13 @@ DQL.Service <- \() {
   }
   services[['TABLE']]  <- \(input, table) {
     table |>
+      utilities[['Inclose']]()     |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
   services[['SCHEMA']] <- \(input, schema) {
     schema |>
+      utilities[['Inclose']]()   |>
       utilities[['Append']]('.') |>
       utilities[['Prepend']](input)
   }

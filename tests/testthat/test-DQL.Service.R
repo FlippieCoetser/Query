@@ -118,7 +118,7 @@ test_that("input |> service[['TABLE']](table) returns table prepended with input
 
   input  <- 'input '
   table  <- 'table'
-  output <- 'input table '
+  output <- 'input [table] '
 
   # Then
   input |>
@@ -142,7 +142,7 @@ test_that("input |> service[['SCHEMA']](schema) returns schema prepended with in
 
   input  <- 'input '
   schema <- 'schema'
-  output <- 'input schema.'
+  output <- 'input [schema].'
 
   # Then
   input |>
