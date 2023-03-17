@@ -11,8 +11,8 @@ DQL.Processing <- \(service) {
   }
   processors[['FROM']] <- \(input, table) {
     input |>
-      service[['FROM']]() |>
-      service[['SCHEMA']]('dbo') |>
+      service[['FROM']]()   |>
+      service[['SCHEMA']]() |>
       service[['TABLE']](table)
   }
   return(processors)
