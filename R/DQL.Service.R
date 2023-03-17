@@ -31,7 +31,7 @@ DQL.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['SCHEMA']] <- \(input, schema) {
+  services[['SCHEMA']] <- \(input, schema = 'dbo') {
     schema |>
       utilities[['Inclose']]()   |>
       utilities[['Append']]('.') |>
