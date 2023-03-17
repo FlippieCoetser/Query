@@ -15,33 +15,36 @@ DQL.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['*']]      <- \(input) {
+  services[['*']]        <- \(input) {
     '*' |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['FROM']]   <- \(input) {
+  services[['FROM']]     <- \(input) {
     'FROM' |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['TABLE']]  <- \(input, table) {
+  services[['TABLE']]    <- \(input, table) {
     table |>
       utilities[['Inclose']]()     |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['SCHEMA']] <- \(input, schema = 'dbo') {
+  services[['SCHEMA']]   <- \(input, schema = 'dbo') {
     schema |>
       utilities[['Inclose']]()   |>
       utilities[['Append']]('.') |>
       utilities[['Prepend']](input)
   }
-  services[['KEY']]    <- \(input, key) {
+  services[['KEY']]      <- \(input, key) {
     key |>
       utilities[['Inclose']]()     |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
+  }
+  services[['OPERATOR']] <- \(input, operator) {
+    
   }
   return(services)
 }
