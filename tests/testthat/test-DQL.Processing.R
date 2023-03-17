@@ -84,3 +84,21 @@ test_that('processors contains WHERE processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> processor[['WHERE']](key, value) returns WHERE key equal value with input prepended",{
+  # Given
+  processor <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  # When
+  input <- 'input '
+  key   <- 'id'
+  value <- 'value'
+
+  output <- "input WHERE [id] = 'value' "
+
+  # Then
+  input |>
+    processor[['WHERE']](key, value) |>
+      expect_equal(output)
+})
