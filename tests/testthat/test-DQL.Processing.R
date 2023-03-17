@@ -73,3 +73,14 @@ test_that("input |> processor[['FROM']](table) returns FROM table statement and 
     processor[['FROM']](table) |>
       expect_equal(output)
 })
+
+# WHERE SQL Statement
+test_that('processors contains WHERE processor',{
+  # Given
+  processor <- DQL.Processing()
+
+  # Then
+  processor[['WHERE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
