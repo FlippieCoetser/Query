@@ -9,11 +9,14 @@ DQL.Processing <- \(service) {
       service[['*']]()
     }
   }
-  processors[['FROM']] <- \(input, table) {
+  processors[['FROM']]   <- \(input, table) {
     input |>
       service[['FROM']]()   |>
       service[['SCHEMA']]() |>
       service[['TABLE']](table)
+  }
+  processors[['WHERE']]  <- \(input, key, value) {
+    
   }
   return(processors)
 }
