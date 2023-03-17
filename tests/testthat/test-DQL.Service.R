@@ -269,3 +269,15 @@ test_that('services contains WHERE service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['WHERE']]() returns WHERE keyword prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  output <- 'input WHERE '
+
+  # Then
+  input |>
+    service[['WHERE']]() |>
+      expect_equal(output)
+})
