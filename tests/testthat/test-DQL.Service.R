@@ -258,3 +258,14 @@ test_that("input |> service[['VALUE']](value) returns value in quote if value is
     service[['VALUE']](value) |>
       expect_equal(output)
 })
+
+# WHERE KEYWORD
+test_that('services contains WHERE service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['WHERE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
