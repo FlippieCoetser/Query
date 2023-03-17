@@ -54,7 +54,6 @@ DQL.Service <- \() {
         utilities[['Inclose']]('Quotes') |>
         utilities[['Append']](' ')       |>
         utilities[['Prepend']](input)
-
     } else {
       value |>
         utilities[['Append']](' ')   |>
