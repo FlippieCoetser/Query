@@ -161,3 +161,14 @@ test_that("input |> service[['SCHEMA']]() returns dbo in brackets with dot and p
     service[['SCHEMA']]() |>
       expect_equal(output)
 })
+
+# KEY
+test_that('services contains KEY service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['KEY']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
