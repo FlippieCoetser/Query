@@ -209,3 +209,15 @@ test_that("input |> service[['OPERATOR']](operator) returns operator prepended w
     service[['OPERATOR']](operator) |>
       expect_equal(output)
 })
+test_that("input |> service[['OPERATOR']]() returns = prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input    <- 'input '
+  output <- 'input = '
+
+  # Then
+  input |>
+    service[['OPERATOR']]() |>
+      expect_equal(output)
+})
