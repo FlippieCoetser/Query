@@ -43,7 +43,7 @@ DQL.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['OPERATOR']] <- \(input, operator) {
+  services[['OPERATOR']] <- \(input, operator = '=' ) {
     operator |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
