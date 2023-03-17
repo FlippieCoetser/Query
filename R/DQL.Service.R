@@ -38,7 +38,9 @@ DQL.Service <- \() {
       utilities[['Prepend']](input)
   }
   services[['WHERE']]    <- \(input) {
-    
+    'WHERE' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   services[['KEY']]      <- \(input, key) {
     key |>
