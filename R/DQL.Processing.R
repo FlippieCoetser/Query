@@ -9,8 +9,11 @@ DQL.Processing <- \(service) {
       service[['*']]()
     }
   }
-  processors[['FROM']] <- \(args) {
-    
+  processors[['FROM']] <- \(input, table) {
+    input |>
+      service[['FROM']]() |>
+      service[['SCHEMA']]('dbo') |>
+      service[['TABLE']](table)
   }
   return(processors)
 }
