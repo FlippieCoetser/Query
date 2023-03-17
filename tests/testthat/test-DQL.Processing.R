@@ -47,7 +47,7 @@ test_that("fields |> service[['SELECT']]() returns a SELECT fields statement",{
 })
 
 # FROM SQL Statement
-test_that('services contains FROM processor',{
+test_that('processors contains FROM processor',{
   # Given
   processor <- DQL.Processing()
 
