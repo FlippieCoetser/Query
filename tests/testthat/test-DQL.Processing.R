@@ -10,12 +10,12 @@ test_that('DQL.Processing() return list of processors',{
 })
 
 # SELECT SQL Statement
-test_that('services contains SELECT service',{
+test_that('services contains SELECT processor',{
   # Given
-  service <- DQL.Service()
+  processor <- DQL.Service()
 
   # Then
-  service[['SELECT']] |>
+  processor[['SELECT']] |>
     Exist()           |>
       expect_equal(TRUE)
 })
