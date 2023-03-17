@@ -56,3 +56,20 @@ test_that('processors contains FROM processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> processor[['FROM']](table) returns FROM table statement and prepend input",{
+  # Given
+  processor <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  # When
+  input <- 'input '
+  table <- 'table'
+
+  output <- 'input FROM [dbo].[table] '
+
+  # Then
+  input |>
+    processor[['FROM']](table) |>
+      expect_equal(output)
+})
