@@ -19,3 +19,15 @@ test_that('services contains SELECT processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("service[['SELECT']]() returns a SELECT * statement",{
+  # Given
+  service <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  output <- 'SELECT * '
+
+  # Then
+  service[['SELECT']]() |>         
+    expect_equal(output)
+})
