@@ -142,7 +142,7 @@ test_that("input |> service[['SCHEMA']](schema) returns schema prepended with in
 
   input  <- 'input '
   schema <- 'schema'
-  output <- 'input [schema].'
+  output <- 'input schema.'
 
   # Then
   input |>
