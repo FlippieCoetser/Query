@@ -221,3 +221,14 @@ test_that("input |> service[['OPERATOR']]() returns = prepended with input",{
     service[['OPERATOR']]() |>
       expect_equal(output)
 })
+
+# VALUE
+test_that('services contains VALUE service',{
+  # Given
+  service <- DQL.Service()
+
+  # Then
+  service[['VALUE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
