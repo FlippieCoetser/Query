@@ -149,3 +149,15 @@ test_that("input |> service[['SCHEMA']](schema) returns schema prepended with in
     service[['SCHEMA']](schema) |>
       expect_equal(output)
 })
+test_that("input |> service[['SCHEMA']]() returns dbo in brackets with dot and prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  output <- 'input [dbo].'
+
+  # Then
+  input |>
+    service[['SCHEMA']]() |>
+      expect_equal(output)
+})
