@@ -25,18 +25,19 @@ DQL.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['TABLE']]    <- \(input, table) {
-    table |>
-      utilities[['Inclose']]()     |>
-      utilities[['Append']](' ')   |>
-      utilities[['Prepend']](input)
-  }
   services[['SCHEMA']]   <- \(input, schema = 'dbo') {
     schema |>
       utilities[['Inclose']]()   |>
       utilities[['Append']]('.') |>
       utilities[['Prepend']](input)
   }
+  services[['TABLE']]    <- \(input, table) {
+    table |>
+      utilities[['Inclose']]()     |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
+  }
+
   services[['KEY']]      <- \(input, key) {
     key |>
       utilities[['Inclose']]()     |>
