@@ -245,3 +245,16 @@ test_that("input |> service[['VALUE']](value) returns value if value is not char
     service[['VALUE']](value) |>
       expect_equal(output)
 })
+test_that("input |> service[['VALUE']](value) returns value in quote if value is character and prepend input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  value  <- 'one'
+  output <- "input 'one' "
+
+  # Then
+  input |>
+    service[['VALUE']](value) |>
+      expect_equal(output)
+})
