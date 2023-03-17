@@ -12,7 +12,7 @@ test_that('DQL.Processing() return list of processors',{
 # SELECT SQL Statement
 test_that('services contains SELECT processor',{
   # Given
-  processor <- DQL.Service()
+  processor <- DQL.Processing()
 
   # Then
   processor[['SELECT']] |>
