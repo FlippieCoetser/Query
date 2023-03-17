@@ -136,3 +136,16 @@ test_that('services contains SCHEMA service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['SCHEMA']](schema) returns schema prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  schema <- 'schema'
+  output <- 'input [schema].'
+
+  # Then
+  input |>
+    service[['SCHEMA']](schema) |>
+      expect_equal(output)
+})
