@@ -10,7 +10,7 @@ test_that('DQL.Processing() return list of processors',{
 })
 
 # SELECT SQL Statement
-test_that('services contains SELECT processor',{
+test_that('processors contains SELECT processor',{
   # Given
   processor <- DQL.Processing()
 
@@ -19,21 +19,21 @@ test_that('services contains SELECT processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
-test_that("service[['SELECT']]() returns a SELECT * statement",{
+test_that("processor[['SELECT']]() returns a SELECT * statement",{
   # Given
-  service <- 
+  processor <- 
     DQL.Service() |>
     DQL.Processing()
 
   output <- 'SELECT * '
 
   # Then
-  service[['SELECT']]() |>         
+  processor[['SELECT']]() |>         
     expect_equal(output)
 })
-test_that("fields |> service[['SELECT']]() returns a SELECT fields statement",{
+test_that("fields |> processor[['SELECT']]() returns a SELECT fields statement",{
   # Given
-  service <- 
+  processor <- 
     DQL.Service() |>
     DQL.Processing()
 
@@ -42,7 +42,7 @@ test_that("fields |> service[['SELECT']]() returns a SELECT fields statement",{
 
   # Then
   fields |>
-    service[['SELECT']]() |>         
+    processor[['SELECT']]() |>         
       expect_equal(output)
 })
 
