@@ -31,3 +31,17 @@ test_that("service[['SELECT']]() returns a SELECT * statement",{
   service[['SELECT']]() |>         
     expect_equal(output)
 })
+test_that("fields |> service[['SELECT']]() returns a SELECT fields statement",{
+  # Given
+  service <- 
+    DQL.Service() |>
+    DQL.Processing()
+
+  fields <- list('Id','Username','HashedPassword','Salt')
+  output <- 'SELECT Id, Username, HashedPassword, Salt '
+
+  # Then
+  fields |>
+    service[['SELECT']]() |>         
+      expect_equal(output)
+})
