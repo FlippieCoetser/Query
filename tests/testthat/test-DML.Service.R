@@ -31,3 +31,14 @@ test_that("input |> service[['INSERT']]() returns INSERT keyword prepended with 
     service[['INSERT']]() |>
       expect_equal(output)
 })
+
+# INTO KEYWORD
+test_that('services contains INTO service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['INTO']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
