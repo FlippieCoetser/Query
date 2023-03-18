@@ -19,3 +19,15 @@ test_that('services contains INSERT service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['INSERT']]() returns INSERT keyword prepended with input",{
+  # Given
+  service <- DQL.Service()
+
+  input  <- 'input '
+  output <- 'input INSERT '
+  
+  # Then
+  input |>
+    service[['INSERT']]() |>
+      expect_equal(output)
+})
