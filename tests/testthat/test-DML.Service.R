@@ -42,3 +42,15 @@ test_that('services contains INTO service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['INTO']]() returns INTO keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  output <- 'input INTO '
+  
+  # Then
+  input |>
+    service[['INTO']]() |>
+      expect_equal(output)
+})
