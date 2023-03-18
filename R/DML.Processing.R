@@ -1,3 +1,13 @@
+#' Data Manipulating Language
+#' 
+#' @description
+#' DML is a subset or SQL and used to manipulating data in SQL Database
+#' 
+#' @usage NULL
+#' @returns A `list` of DML Commands: 
+#' * `INSERT(keyValues)`
+#' * `VALUES(keyValues)`
+#' @export
 DML.Processing <- \(service) {
   processors <- list()
   processors[['INSERT']] <- \(table, keyValues) {

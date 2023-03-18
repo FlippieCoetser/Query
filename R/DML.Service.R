@@ -1,3 +1,18 @@
+#' Data Manipulating Language
+#' 
+#' @description
+#' DML is a subset or SQL and used to manipulating data in SQL Database
+#' 
+#' @usage NULL
+#' @returns A `list` of DML Services: 
+#' * `INSERT()`
+#' * `INTO()`
+#' * `SCHEMA(schema)`
+#' * `TABLE(table)`
+#' * `VALUES()`
+#' * `KEYS(keyValues)`
+#' * `NEWVALUES(keyValues)`
+#' @export
 DML.Service <- \() {
   utilities <-
     String.Utility.Service() |>
