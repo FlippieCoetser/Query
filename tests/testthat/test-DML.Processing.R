@@ -39,3 +39,14 @@ test_that("processor[['INSERT']]() returns a INSERT INTO (keys) statement",{
     processor[['INSERT']](keyValues) |>         
     expect_equal(output)
 })
+
+# VALUES SQL Statement
+test_that('processors contains VALUES processor',{
+  # Given
+  processor <- DML.Processing()
+
+  # Then
+  processor[['VALUES']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
