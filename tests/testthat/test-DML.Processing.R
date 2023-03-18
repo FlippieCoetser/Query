@@ -19,3 +19,23 @@ test_that('processors contains INSERT processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("processor[['INSERT']]() returns a INSERT INTO (keys) statement",{
+  # Given
+  processor <- 
+    DML.Service() |>
+    DML.Processing()
+
+  table <- 'User'
+  keyValues  <- list(
+    Id = '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    Username = 'test@gmail.com',
+    HashedPassword = '2d2ee7bee3ae4795ba886',
+    Salt =  '53dfd42f-5394-46d7-a917-11b7da15816d')
+
+  output <- 'INSERT INTO [dbo].[User] ([Id], [Username], [HashedPassword], [Salt]) '
+
+  # Then
+  table |>
+    processor[['INSERT']](keyValues) |>         
+    expect_equal(output)
+})
