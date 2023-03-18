@@ -117,3 +117,21 @@ test_that('services contains NEWVALUES service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['NEWVALUES']](keyValues) returns a string of values inclosed with round brackets prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input <- 'input '
+  keyValues  <- list(
+    Id = '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    Username = 'test@gmail.com',
+    HashedPassword = '2d2ee7bee3ae4795ba886',
+    Salt =  '53dfd42f-5394-46d7-a917-11b7da15816d')
+
+  output <- "input ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', '53dfd42f-5394-46d7-a917-11b7da15816d') "
+  
+  # Then
+  input |>
+    service[['NEWVALUES']](keyValues) |>
+      expect_equal(output)
+})
