@@ -19,3 +19,16 @@ test_that('services contains LOWER service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("value |> service[['LOWER']]() returns LOWER(value)",{
+  # Given
+  service <- SQL.Functions.Service()
+  output  <- 'LOWER(Id)'
+
+  # When
+  value <- 'Id'
+
+  # Then
+  value |>
+    service[['LOWER']]() |>
+      expect_equal(output)
+})
