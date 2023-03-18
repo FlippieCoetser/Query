@@ -19,8 +19,14 @@ DML.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input) 
   }
-  services[['KEYS']] <- \(input, keys) {
-    
+  services[['KEYS']] <- \(input, keyValues) {
+    keyValues |>
+      names()                         |>
+      utilities[['Inclose']]()        |>
+      utilities[['Collapse']]()       |>
+      utilities[['Inclose']]('Round') |>
+      utilities[['Append']](' ')      |>
+      utilities[['Prepend']](input) 
   }
   return(services)
 }
