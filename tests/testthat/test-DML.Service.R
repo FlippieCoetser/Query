@@ -21,7 +21,7 @@ test_that('services contains INSERT service',{
 })
 test_that("input |> service[['INSERT']]() returns INSERT keyword prepended with input",{
   # Given
-  service <- DQL.Service()
+  service <- DML.Service()
 
   input  <- 'input '
   output <- 'input INSERT '
