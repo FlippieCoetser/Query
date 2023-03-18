@@ -29,7 +29,12 @@ DML.Service <- \() {
       utilities[['Prepend']](input) 
   }
   services[['NEWVALUES']] <- \(input, keyValues) {
-    
+    keyValues |>
+      utilities[['Inclose']]('Quotes') |>
+      utilities[['Collapse']]()        |>
+      utilities[['Inclose']]('Round')  |>
+      utilities[['Append']](' ')       |>
+      utilities[['Prepend']](input) 
   }
   return(services)
 }
