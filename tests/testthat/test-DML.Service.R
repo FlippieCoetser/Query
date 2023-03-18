@@ -106,3 +106,14 @@ test_that("input |> service[['KEYS']](keyValues) returns a string of bracketed k
     service[['KEYS']](keyValues) |>
       expect_equal(output)
 })
+
+# NEWVALUES KEYWORD
+test_that('services contains NEWVALUES service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['NEWVALUES']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
