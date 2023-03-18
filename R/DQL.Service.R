@@ -1,3 +1,4 @@
+#' @export
 DQL.Service <- \() {
   utilities <-
     String.Utility.Service() |>
