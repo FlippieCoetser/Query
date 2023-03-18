@@ -65,3 +65,15 @@ test_that('services contains VALUES service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['VALUES']]() returns VALUES keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  output <- 'input VALUES '
+  
+  # Then
+  input |>
+    service[['VALUES']]() |>
+      expect_equal(output)
+})
