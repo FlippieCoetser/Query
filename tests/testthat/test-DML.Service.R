@@ -146,3 +146,28 @@ test_that('services contains SCHEMA service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['SCHEMA']](schema) returns schema prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  schema <- 'schema'
+  output <- 'input [schema].'
+
+  # Then
+  input |>
+    service[['SCHEMA']](schema) |>
+      expect_equal(output)
+})
+test_that("input |> service[['SCHEMA']]() returns dbo in brackets with dot and prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  output <- 'input [dbo].'
+
+  # Then
+  input |>
+    service[['SCHEMA']]() |>
+      expect_equal(output)
+})
