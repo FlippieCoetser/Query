@@ -19,3 +19,16 @@ test_that('services contains BRACKET service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("value |> service[['BRACKET']]() Returns [value]",{
+  # Given
+  service <- SQL.Utility.Service()
+  output  <- '[value]'
+
+  # When
+  value <- 'value'
+
+  # Then 
+  value |>
+    service[['BRACKET']]() |>
+      expect_equal(output)
+})
