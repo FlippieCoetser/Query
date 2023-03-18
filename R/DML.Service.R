@@ -20,6 +20,9 @@ DML.Service <- \() {
       utilities[['Append']]('.') |>
       utilities[['Prepend']](input)
   }
+  services[['TABLE']] <- \(input, table) {
+    
+  }
   services[['VALUES']] <- \(input) {
     'VALUES' |>
       utilities[['Append']](' ')   |>
