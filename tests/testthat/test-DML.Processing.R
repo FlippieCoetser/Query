@@ -8,3 +8,14 @@ test_that('DML.Processing() return list of processors',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+# INSERT SQL Statement
+test_that('processors contains INSERT processor',{
+  # Given
+  processor <- DML.Processing()
+
+  # Then
+  processor[['INSERT']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
