@@ -8,3 +8,14 @@ test_that('SQL.Utility.Service() return list of services',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+# BRACKET
+test_that('services contains BRACKET service',{
+  # Given
+  service <- SQL.Utility.Service()
+
+  # Then
+  service[['BRACKET']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
