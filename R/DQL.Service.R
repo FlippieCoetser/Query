@@ -22,12 +22,12 @@ DQL.Service <- \() {
     String.Utility.Processing()
 
   services <- list()
-  services[['SELECT']] <- \(input = '') {
+  services[['SELECT']]   <- \(input = '') {
     'SELECT' |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['FIELDS']] <- \(input, fields) {
+  services[['FIELDS']]   <- \(input, fields) {
     fields |>
       utilities[['Collapse']]()    |>
       utilities[['Append']](' ')   |>
