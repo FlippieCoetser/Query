@@ -14,6 +14,9 @@ DML.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input) 
   }
+  services[['SCHEMA']] <- \(input, schema = 'dbo') {
+    
+  }
   services[['VALUES']] <- \(input) {
     'VALUES' |>
       utilities[['Append']](' ')   |>
