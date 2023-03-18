@@ -8,7 +8,9 @@ DML.Processing <- \(service) {
     service[['KEYS']](keyValues)
   }
   processors[['VALUES']] <- \(input, keyValues) {
-    
+    input |>
+      service[['VALUES']]() |>
+      service[['NEWVALUES']](keyValues)
   }
   return(processors)
 }
