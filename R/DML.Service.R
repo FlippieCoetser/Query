@@ -21,7 +21,10 @@ DML.Service <- \() {
       utilities[['Prepend']](input)
   }
   services[['TABLE']] <- \(input, table) {
-    
+    table |>
+      utilities[['Inclose']]()     |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   services[['VALUES']] <- \(input) {
     'VALUES' |>
