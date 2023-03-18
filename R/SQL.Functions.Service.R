@@ -4,10 +4,11 @@ SQL.Functions.Service <- \() {
     String.Utility.Processing()
 
   services <- list()
-  services[['LOWER']] <- \(value) {
+  services[['LOWER']] <- \(value, alias) {
     value |>
       utilities[['Prepend']]('LOWER(') |>
-      utilities[['Append']](')')
+      utilities[['Append']](') as ')   |>
+      utilities[['Append']](alias)
   }
   return(services)
 }
