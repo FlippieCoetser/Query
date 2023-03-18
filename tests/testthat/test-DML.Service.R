@@ -171,3 +171,14 @@ test_that("input |> service[['SCHEMA']]() returns dbo in brackets with dot and p
     service[['SCHEMA']]() |>
       expect_equal(output)
 })
+
+# TABLE KEYWORD
+test_that('services contains TABLE service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['TABLE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
