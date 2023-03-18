@@ -182,3 +182,16 @@ test_that('services contains TABLE service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['TABLE']](table) returns table prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  table  <- 'table'
+  output <- 'input [table] '
+
+  # Then
+  input |>
+    service[['TABLE']](table) |>
+      expect_equal(output)
+})
