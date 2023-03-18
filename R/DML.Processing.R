@@ -7,5 +7,8 @@ DML.Processing <- \(service) {
     service[['TABLE']](table)  |>
     service[['KEYS']](keyValues)
   }
+  processors[['VALUES']] <- \(input, keyValues) {
+    
+  }
   return(processors)
 }
