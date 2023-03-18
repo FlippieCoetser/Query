@@ -8,3 +8,14 @@ test_that('DML.Service() return list of services',{
     is.list() |>
       expect_equal(TRUE)
 })
+
+# INSERT KEYWORD
+test_that('services contains INSERT service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['INSERT']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
