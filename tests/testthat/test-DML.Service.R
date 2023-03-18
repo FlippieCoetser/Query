@@ -135,3 +135,14 @@ test_that("input |> service[['NEWVALUES']](keyValues) returns a string of values
     service[['NEWVALUES']](keyValues) |>
       expect_equal(output)
 })
+
+# SCHEMA KEYWORD
+test_that('services contains SCHEMA service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['SCHEMA']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
