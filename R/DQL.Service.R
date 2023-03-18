@@ -1,3 +1,20 @@
+#' Data Query Language'
+#' 
+#' @description
+#' DQL is a subset or SQL and used to perform queries against tables in SQL Database
+#' 
+#' @usage NULL
+#' @returns A `list` of DQL Services: 
+#' * `SELECT()`
+#' * `FIELDS(fields)`
+#' * `*()`
+#' * `FROM()`
+#' * `SCHEMA(schema)`
+#' * `TABLE(table)`
+#' * `WHERE()`
+#' * `KEY(key)`
+#' * `OPERATOR(operator)`
+#' * `VALUE(value)`
 #' @export
 DQL.Service <- \() {
   utilities <-
