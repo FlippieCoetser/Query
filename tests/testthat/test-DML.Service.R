@@ -77,3 +77,14 @@ test_that("input |> service[['VALUES']]() returns VALUES keyword prepended with 
     service[['VALUES']]() |>
       expect_equal(output)
 })
+
+# KEYS KEYWORD
+test_that('services contains KEYS service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['KEYS']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
