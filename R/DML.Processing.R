@@ -1,7 +1,11 @@
 DML.Processing <- \(service) {
   processors <- list()
-  processors[['INSERT']] <- \(keyValues) {
-    
+  processors[['INSERT']] <- \(table, keyValues) {
+    service[['INSERT']]() |>
+    service[['INTO']]()   |>
+    service[['SCHEMA']]() |>
+    service[['TABLE']](table)  |>
+    service[['KEYS']](keyValues)
   }
   return(processors)
 }
