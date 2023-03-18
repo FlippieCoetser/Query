@@ -41,3 +41,25 @@ test_that('SELECT FROM WHERE Statements',{
     processor[['WHERE']](key, value) |>
       expect_equal(output)
 })
+
+test_that('INSERT INTO VALUES Statement',{
+  # Given
+  processor <- 
+    DML.Service() |>
+    DML.Processing()
+
+  table <- 'User'
+  keyValues  <- list(
+    Id = '4a0ec243-78ff-4461-8696-c41e7d64e108',
+    Username = 'test@gmail.com',
+    HashedPassword = '2d2ee7bee3ae4795ba886',
+    Salt =  '53dfd42f-5394-46d7-a917-11b7da15816d')
+
+  output <- "INSERT INTO [dbo].[User] ([Id], [Username], [HashedPassword], [Salt]) VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', '53dfd42f-5394-46d7-a917-11b7da15816d') "
+
+  # Then
+  table |>
+    processor[['INSERT']](keyValues) |> 
+    processor[['VALUES']](keyValues) |>         
+      expect_equal(output)
+})
