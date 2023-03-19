@@ -262,3 +262,21 @@ test_that('services contains KEYVALUES service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['SET']]() returns SET keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  keyValues <- list(
+    Username = 'test.updated@gmail.com', 
+    HashedPassword = '2d2ee7bee3ae4795ba886', 
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d'
+  )
+
+  output <- "input [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
+  
+  # Then
+  input |>
+    service[['KEYVALUES']](keyValues) |>
+      expect_equal(output)
+})
