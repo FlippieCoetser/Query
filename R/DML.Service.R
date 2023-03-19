@@ -63,7 +63,7 @@ DML.Service <- \() {
       utilities[['Append']](' ')       |>
       utilities[['Prepend']](input) 
   }
-  services[['UPDATE']] <- \(input) {
+  services[['UPDATE']] <- \(input = '') {
     'UPDATE' |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
