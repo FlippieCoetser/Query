@@ -25,7 +25,7 @@ String.Utility.Service <- \() {
     items |> paste(collapse = ', ')
   }
   services[['CreateKeyValuePairs']] <- \(keys, values) {
-    
+    keys |> paste(values, sep = ' = ')
   }
   return(services)
 }
