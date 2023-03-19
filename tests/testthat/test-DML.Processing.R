@@ -107,3 +107,26 @@ test_that('processors contains SET processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> processor[['VALUES']](keyValues) returns a VALUES (values) statement",{
+  # Given
+  processor <- 
+    DML.Service() |>
+    DML.Processing()
+
+# Given
+  service <- DML.Service()
+
+  input  <- ''
+  keyValues <- list(
+    Username = 'test.updated@gmail.com', 
+    HashedPassword = '2d2ee7bee3ae4795ba886', 
+    Salt = '53dfd42f-5394-46d7-a917-11b7da15816d'
+  )
+
+  output <- "SET [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
+  
+  # Then
+  input |>
+    processor[['SET']](keyValues) |>
+      expect_equal(output)
+})
