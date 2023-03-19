@@ -70,3 +70,14 @@ test_that("input |> processor[['VALUES']](keyValues) returns a VALUES (values) s
     processor[['VALUES']](keyValues) |>         
     expect_equal(output)
 })
+
+# UPDATE SQL Statement
+test_that('processors contains UPDATE processor',{
+  # Given
+  processor <- DML.Processing()
+
+  # Then
+  processor[['UPDATE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
