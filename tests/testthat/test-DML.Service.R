@@ -303,3 +303,13 @@ test_that("input |> service[['DELETE']]() returns DELETE keyword prepended with 
     service[['DELETE']]() |>
       expect_equal(output)
 })
+test_that("service[['DELETE']]() returns DELETE keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  output <- 'DELETE '
+  
+  # Then
+  service[['DELETE']]() |>
+    expect_equal(output)
+})
