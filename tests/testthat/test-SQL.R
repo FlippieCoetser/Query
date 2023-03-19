@@ -92,3 +92,27 @@ test_that('UPDATE SET WHERE Statement',{
     dql[['WHERE']](key, value) |>       
       expect_equal(output)
 })
+
+test_that('DELETE FROM WHERE Statement',{
+  # Given
+  dml <- 
+    DML.Service() |>
+    DML.Processing()
+
+  dql <-
+    DQL.Service() |>
+    DQL.Processing()
+
+  table <- 'User'
+  key <- 'Id'
+  value <- '4a0ec243-78ff-4461-8696-c41e7d64e108'
+
+  output <- "DELETE FROM [dbo].[User] WHERE [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108' "
+
+  # Then
+  table |>
+    dml[['DELETE']]() |> 
+    dql[['FROM']](table) |> 
+    dql[['WHERE']](key, value) |>       
+      expect_equal(output)
+})
