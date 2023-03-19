@@ -33,7 +33,7 @@ DML.Processing <- \(service) {
       service[['KEYVALUES']](keyValues)
   }
   processors[['DELETE']] <- \(...) {
-    
+    service[['DELETE']]()
   }
   return(processors)
 }
