@@ -141,3 +141,15 @@ test_that('processors contains DELETE processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("processor[['DELETE']]() returns DELETE keyword prepended with input",{
+  # Given
+  processor <- 
+    DML.Service() |>
+    DML.Processing()
+
+  output <- 'DELETE '
+  
+  # Then
+  processor[['DELETE']]() |>
+    expect_equal(output)
+})
