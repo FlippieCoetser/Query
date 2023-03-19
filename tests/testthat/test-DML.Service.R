@@ -218,3 +218,13 @@ test_that("input |> service[['UPDATE']]() returns UPDATE keyword prepended with 
     service[['UPDATE']]() |>
       expect_equal(output)
 })
+test_that("service[['UPDATE']]() returns UPDATE keyword ",{
+  # Given
+  service <- DML.Service()
+  
+  output <- 'UPDATE '
+  
+  # Then
+  service[['UPDATE']]() |>
+    expect_equal(output)
+})
