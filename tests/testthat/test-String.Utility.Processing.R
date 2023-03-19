@@ -154,3 +154,16 @@ test_that("fields |> processor[['Collapse']]() collapse items using comma separa
     processor[['Collapse']]() |>
       expect_equal(expected) 
 })
+
+# CreateKeyValuePairs Processor
+test_that('processors contain CreateKeyValuePairs processor',{
+  # Given 
+  processor <- 
+    String.Utility.Service()
+    String.Utility.Processing()
+
+  # Then
+  processor[['CreateKeyValuePairs']] |>
+    Exist()              |>
+      expect_equal(TRUE)
+})
