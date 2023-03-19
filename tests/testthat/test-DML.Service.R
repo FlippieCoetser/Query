@@ -280,3 +280,14 @@ test_that("input |> service[['SET']]() returns SET keyword prepended with input"
     service[['KEYVALUES']](keyValues) |>
       expect_equal(output)
 })
+
+# DELETE KEYWORD
+test_that('services contains DELETE service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['DELETE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
