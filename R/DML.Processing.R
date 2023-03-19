@@ -27,5 +27,8 @@ DML.Processing <- \(service) {
     service[['SCHEMA']]() |>
     service[['TABLE']](table)
   }
+  processors[['SET']] <- \(input, keyValues) {
+    
+  }
   return(processors)
 }
