@@ -18,7 +18,7 @@ String.Utility.Processing <- \(service) {
     items |> service[['Collapse']]()
   }
   processors[['CreateKeyValuePairs']] <- \(keys, values) {
-    keys |> services[['CreateKeyValuePairs']](values)
+    keys |> service[['CreateKeyValuePairs']](values)
   }
 
   return(processors)
