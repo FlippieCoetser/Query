@@ -130,3 +130,14 @@ test_that("input |> processor[['VALUES']](keyValues) returns a VALUES (values) s
     processor[['SET']](keyValues) |>
       expect_equal(output)
 })
+
+# DELETE SQL Statement
+test_that('processors contains DELETE processor',{
+  # Given
+  processor <- DML.Processing()
+
+  # Then
+  processor[['DELETE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
