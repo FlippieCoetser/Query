@@ -195,3 +195,14 @@ test_that("input |> service[['TABLE']](table) returns table prepended with input
     service[['TABLE']](table) |>
       expect_equal(output)
 })
+
+# UPDATE KEYWORD
+test_that('services contains UPDATE service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['UPDATE']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
