@@ -206,3 +206,15 @@ test_that('services contains UPDATE service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['UPDATE']]() returns UPDATE keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  output <- 'input UPDATE '
+  
+  # Then
+  input |>
+    service[['UPDATE']]() |>
+      expect_equal(output)
+})
