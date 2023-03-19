@@ -12,6 +12,10 @@
 #' * `VALUES()`
 #' * `KEYS(keyValues)`
 #' * `NEWVALUES(keyValues)`
+#' * `UPDATE()`
+#' * `SET()`
+#' * `KEYVALUES(keyValues)`
+#' * `DELETE()`
 #' @export
 DML.Service <- \() {
   utilities <-

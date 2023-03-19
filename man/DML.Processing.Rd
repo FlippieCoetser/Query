@@ -8,6 +8,9 @@ A \code{list} of DML Commands:
 \itemize{
 \item \code{INSERT(keyValues)}
 \item \code{VALUES(keyValues)}
+\item \code{UPDATE(table)}
+\item \code{SET(keyValues)}
+\item \code{DELETE(keyValues)}
 }
 }
 \description{

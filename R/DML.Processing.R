@@ -7,6 +7,9 @@
 #' @returns A `list` of DML Commands: 
 #' * `INSERT(keyValues)`
 #' * `VALUES(keyValues)`
+#' * `UPDATE(table)`
+#' * `SET(keyValues)`
+#' * `DELETE(keyValues)`
 #' @export
 DML.Processing <- \(service) {
   processors <- list()

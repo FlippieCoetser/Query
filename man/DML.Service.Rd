@@ -13,6 +13,10 @@ A \code{list} of DML Services:
 \item \code{VALUES()}
 \item \code{KEYS(keyValues)}
 \item \code{NEWVALUES(keyValues)}
+\item \code{UPDATE()}
+\item \code{SET()}
+\item \code{KEYVALUES(keyValues)}
+\item \code{DELETE()}
 }
 }
 \description{
