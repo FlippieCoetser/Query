@@ -81,3 +81,18 @@ test_that('processors contains UPDATE processor',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> processor[['VALUES']](keyValues) returns a VALUES (values) statement",{
+  # Given
+  processor <- 
+    DML.Service() |>
+    DML.Processing()
+
+  table <- 'User'
+
+  output <- "UPDATE [dbo].[User] "
+
+  # Then
+  table |>
+    processor[['UPDATE']]() |>         
+    expect_equal(output)
+})
