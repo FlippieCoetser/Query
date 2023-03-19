@@ -228,3 +228,14 @@ test_that("service[['UPDATE']]() returns UPDATE keyword ",{
   service[['UPDATE']]() |>
     expect_equal(output)
 })
+
+# SET KEYWORD
+test_that('services contains SET service',{
+  # Given
+  service <- DML.Service()
+
+  # Then
+  service[['SET']] |>
+    Exist()           |>
+      expect_equal(TRUE)
+})
