@@ -291,3 +291,15 @@ test_that('services contains DELETE service',{
     Exist()           |>
       expect_equal(TRUE)
 })
+test_that("input |> service[['DELETE']]() returns DELETE keyword prepended with input",{
+  # Given
+  service <- DML.Service()
+
+  input  <- 'input '
+  output <- 'input DELETE '
+  
+  # Then
+  input |>
+    service[['DELETE']]() |>
+      expect_equal(output)
+})
