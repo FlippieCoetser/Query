@@ -84,7 +84,9 @@ DML.Service <- \() {
       utilities[['Prepend']](input)
   }
   services[['DELETE']] <- \(input) {
-    
+    'DELETE' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   return(services)
 }
