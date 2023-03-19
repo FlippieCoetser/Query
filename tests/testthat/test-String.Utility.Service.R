@@ -266,3 +266,15 @@ test_that("fields |> service[['Collapse']]() collapse items using comma separato
     service[['Collapse']]() |>
       expect_equal(expected) 
 })
+
+# CreateKeyValuePair Service
+test_that('services instance has CreateKeyValuePairs service',{
+  # Given
+  service <- 
+    String.Utility.Service()
+
+  # Then
+  service[['CreateKeyValuePairs']] |>
+    Exist()            |>
+      expect_equal(TRUE)
+})
