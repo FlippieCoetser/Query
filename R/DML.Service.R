@@ -68,5 +68,8 @@ DML.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
+  services[['SET']] <- \(input) {
+    
+  }
   return(services)
 }
