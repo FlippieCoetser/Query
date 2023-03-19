@@ -278,3 +278,32 @@ test_that('services instance has CreateKeyValuePairs service',{
     Exist()            |>
       expect_equal(TRUE)
 })
+test_that("keys |> service[['CreateKeyValuePairs']](values) creates key value pairs",{
+  # Given
+  service <- 
+    String.Utility.Service()
+
+  keys  <- list(
+    1,
+    2,
+    3
+  )
+
+  values  <- list(
+    'one',
+    'two',
+    'three'
+  )
+
+  # When
+  expected <- c(
+    '1 = one',
+    '2 = two',
+    '3 = three'
+  )
+
+  # Then
+  keys |>
+    service[['CreateKeyValuePairs']](values) |>
+      expect_equal(expected) 
+})
