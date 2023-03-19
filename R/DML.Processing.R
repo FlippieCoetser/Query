@@ -22,5 +22,8 @@ DML.Processing <- \(service) {
       service[['VALUES']]() |>
       service[['NEWVALUES']](keyValues)
   }
+  processors[['UPDATE']] <- \(table, keyValues) {
+    
+  }
   return(processors)
 }
