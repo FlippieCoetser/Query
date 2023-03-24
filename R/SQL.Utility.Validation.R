@@ -1,1 +1,4 @@
-SQL.Utility.Validation <- \() {}
+SQL.Utility.Validation <- \() {
+  validators <- list()
+  return(validators)
+}
