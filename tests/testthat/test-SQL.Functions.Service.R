@@ -34,4 +34,15 @@ describe("When field |> service[['LOWER']](alias)",{
     # Then
     field |> service[['LOWER']](alias) |> expect_equal('LOWER(field) as Id')
   })
+  it("then an argument is null exception is thrown if field is NULL",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- NULL
+    alias <- 'Id'
+
+    # Then
+    field |> service[['LOWER']](alias) |> expect_error('argument is NULL')
+  })
 })
