@@ -1,34 +1,38 @@
-test_that('SQL.Utility.Service exist',{
-  SQL.Utility.Service   |>
-    is.null() |>
-      expect_equal(FALSE)
-})
-test_that('SQL.Utility.Service() return list of services',{
-  SQL.Utility.Service() |>
-    is.list() |>
-      expect_equal(TRUE)
+describe("Given SQL.Utility.Service",{
+  it("exist",{
+    # Given
+    SQL.Utility.Service |> is.null() |> expect_equal(FALSE)
+  })
 })
 
-# BRACKET
-test_that('services contains BRACKET service',{
-  # Given
-  service <- SQL.Utility.Service()
+describe("When services <- SQL.Utility.Service()",{
+  it("then services is a list",{
+    # Given
+    services <- SQL.Utility.Service()
 
-  # Then
-  service[['BRACKET']] |>
-    Exist()           |>
-      expect_equal(TRUE)
+    # Then
+    services |> is.list() |> expect_equal(TRUE)
+  })
+  it("then services contains BRACKET service",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # Then
+    service[['BRACKET']] |> Exist() |> expect_equal(TRUE)
+  })
 })
-test_that("value |> service[['BRACKET']]() Returns [value]",{
-  # Given
-  service <- SQL.Utility.Service()
-  output  <- '[value]'
 
-  # When
-  value <- 'value'
+describe("When value |> service[['BRACKET']]()",{
+  it("then [value] is returned",{
+    # Given
+    service <- SQL.Utility.Service()
 
-  # Then 
-  value |>
-    service[['BRACKET']]() |>
-      expect_equal(output)
+    # When
+    value <- 'value'
+
+    # Then 
+    value |>
+      service[['BRACKET']]() |>
+        expect_equal('[value]')
+  })
 })
