@@ -22,9 +22,14 @@ String.Utility.Service <- \() {
     before |> paste(field, sep = '') |> paste(after, sep = '')
   }
   services[['Collapse']] <- \(items) {
+    items |> validate[['Exist']]() 
+
     items |> paste(collapse = ', ')
   }
   services[['CreateKeyValuePairs']] <- \(keys, values) {
+    keys   |> validate[['Exist']]() 
+    values |> validate[['Exist']]()
+    
     keys |> paste(values, sep = ' = ')
   }
   return(services)
