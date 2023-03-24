@@ -16,8 +16,8 @@ SQL.Functions.Service <- \() {
 
   services <- list()
   services[['LOWER']] <- \(field, alias) {
-    field |> validate[['Exist']]()
-    
+    field |> validate[['Exist']]() |> validate[['IsCharacter']]()
+
     field |>
       utilities[['Prepend']]('LOWER(') |>
       utilities[['Append']](') as ')   |>
