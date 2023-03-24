@@ -6,7 +6,7 @@ String.Utility.Validation <- \() {
     input |> is.null() |> exception[['ArgumentNullException']]()
     return(input)
   }
-  validators[['IsString']] <- \(input) {
+  validators[['IsCharacter']] <- \(input) {
     input |> is.character() |> isFALSE() |> exception[['ArgumentNotCharacterException']]()
     return(input)
   }

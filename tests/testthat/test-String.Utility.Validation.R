@@ -58,16 +58,16 @@ test_that("input |> validate[['Exist']]() returns input if input is not NULL",{
 })
 
 # Is String Validator
-test_that('validators contains IsString validator',{
+test_that('validators contains IsCharacter validator',{
   # Given
   validators <- String.Utility.Validation()
 
   # Then
-  validators[['IsString']] |>
+  validators[['IsCharacter']] |>
     Exist()             |>
       expect_equal(TRUE)
 })
-test_that("input |> validate[['IsString']]() throws exception if input is not character",{
+test_that("input |> validate[['IsCharacter']]() throws exception if input is not character",{
   # Given
   validate <- String.Utility.Validation()
   error     <- 'argument is not a String'
@@ -77,10 +77,10 @@ test_that("input |> validate[['IsString']]() throws exception if input is not ch
 
   # Then
   input |>
-    validate[['IsString']]() |>
+    validate[['IsCharacter']]() |>
       expect_error(error)
 })
-test_that("input |> validate[['IsString']]() throw no exception if input is character",{
+test_that("input |> validate[['IsCharacter']]() throw no exception if input is character",{
   # Given
   validate <- String.Utility.Validation()
 
@@ -89,10 +89,10 @@ test_that("input |> validate[['IsString']]() throw no exception if input is char
 
   # Then
   input |>
-    validate[['IsString']]() |>
+    validate[['IsCharacter']]() |>
       expect_no_error()
 })
-test_that("input |> validate[['IsString']]() returns input if input is String",{
+test_that("input |> validate[['IsCharacter']]() returns input if input is Character",{
   # Given
   validate <- String.Utility.Validation()
 
@@ -101,7 +101,7 @@ test_that("input |> validate[['IsString']]() returns input if input is String",{
 
   # Then
   input |>
-    validate[['IsString']]() |>
+    validate[['IsCharacter']]() |>
       expect_equal(input)
 })
 
