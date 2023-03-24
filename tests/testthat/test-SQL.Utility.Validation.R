@@ -21,3 +21,26 @@ describe("When validators <- SQL.Utility.Validation()",{
     validators[['Exist']] |> Exist() |> expect_equal(TRUE)
   })
 })
+
+describe("When input |> validators[['Exist']]()",{
+  it("then no exception is thrown when input not NULL",{
+    #Given
+    validators <- SQL.Utility.Validation()
+    
+    # When 
+    input <- ''
+    
+    #Then
+    input |> validators[['Exist']]() |> expect_no_error()
+  })
+  it("then argument is null exception is thrown when input NULL",{
+    # Given
+    validators <- SQL.Utility.Validation()
+    
+    # When 
+    input <- NULL
+    
+    # Then
+    input |> validators[['Exist']]() |> expect_error('argument is NULL')
+  })
+})
