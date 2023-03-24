@@ -10,91 +10,91 @@ test_that('String.Utility.Exceptions() return list of exceptions',{
 })
 
 # Null Exception
-test_that('exceptions contains Null exception',{
+test_that('exceptions contains argument Null exception',{
   # Given
   exceptions <- String.Utility.Exceptions()
 
   # Then
-  exceptions[['NullException']] |>
+  exceptions[['ArgumentNullException']] |>
     Exist()                     |>
       expect_equal(TRUE)
 })
-test_that("FALSE |> exception[['NullExceptions']]() throws no exception",{
+test_that("FALSE |> exception[['ArgumentNullException']]() throws no exception",{
   # Given
   exception <- String.Utility.Exceptions()
 
   # Then 
   FALSE |>
-    exception[['NullException']]() |>
+    exception[['ArgumentNullException']]() |>
       expect_no_error()
 })
-test_that("TRUE |> exception[['NullExceptions']]() throws Null exception",{
+test_that("TRUE |> exception[['ArgumentNullException']]() throws Null exception",{
   # Given
   exception <- String.Utility.Exceptions()
   error     <- 'argument is NULL'
 
   # Then 
   TRUE |>
-    exception[['NullException']]() |>
+    exception[['ArgumentNullException']]() |>
       expect_error(error)
 })
 
 # String Exception
-test_that('exceptions contains String exception',{
+test_that('exceptions contains argument not Character exception',{
   # Given
   exceptions <- String.Utility.Exceptions()
 
   # Then
-  exceptions[['StringException']] |>
+  exceptions[['ArgumentNotCharacterException']] |>
     Exist()                       |>
       expect_equal(TRUE)
 })
-test_that("FALSE |> exception[['StringException']]() throws no exception",{
+test_that("FALSE |> exception[['ArgumentNotCharacterException']]() throws no exception",{
   # Given
   exception <- String.Utility.Exceptions()
 
   # Then 
   FALSE |>
-    exception[['StringException']]() |>
+    exception[['ArgumentNotCharacterException']]() |>
       expect_no_error()
 })
-test_that("TRUE |> exception[['StringException']]() throws String exception",{
+test_that("TRUE |> exception[['ArgumentNotCharacterException']]() throws String exception",{
   # Given
   exception <- String.Utility.Exceptions()
   error     <- 'argument is not a String'
 
   # Then 
   TRUE |>
-    exception[['StringException']]() |>
+    exception[['ArgumentNotCharacterException']]() |>
       expect_error(error)
 })
 
 # Vector Exception
-test_that('exceptions contains Vector exception',{
+test_that('exceptions contains argument not Vector exception',{
   # Given
   exceptions <- String.Utility.Exceptions()
 
   # Then
-  exceptions[['VectorException']] |>
+  exceptions[['ArgumentNotVectorException']] |>
     Exist()                       |>
       expect_equal(TRUE)
 })
-test_that("FALSE |> exception[['VectorException']]() throws no exception",{
+test_that("FALSE |> exception[['ArgumentNotVectorException']]() throws no exception",{
   # Given
   exception <- String.Utility.Exceptions()
 
   # Then 
   FALSE |>
-    exception[['VectorException']]() |>
+    exception[['ArgumentNotVectorException']]() |>
       expect_no_error()
 })
-test_that("TRUE |> exception[['VectorException']]() throws Vector exception",{
+test_that("TRUE |> exception[['ArgumentNotVectorException']]() throws Vector exception",{
   # Given
   exception <- String.Utility.Exceptions()
   error     <- 'argument is not a Vector'
 
   # Then 
   TRUE |>
-    exception[['VectorException']]() |>
+    exception[['ArgumentNotVectorException']]() |>
       expect_error(error)
 })
