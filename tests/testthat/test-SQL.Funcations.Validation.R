@@ -61,3 +61,26 @@ describe("When input |> validators[['Exist']]()",{
     input |> validators[['Exist']]() |> expect_error('argument is NULL')
   })
 })
+
+describe("When input |> validators[['IsCharacter']]()",{
+  it("then no exception is thrown when input is character",{
+    #Given
+    validators <- SQL.Functions.Validation()
+    
+    # When 
+    input <- ''
+    
+    #Then
+    input |> validators[['IsCharacter']]() |> expect_no_error()
+  })
+  it("then argument is not character exception is thrown when input is not character",{
+    # Given
+    validators <- SQL.Functions.Validation()
+    
+    # When 
+    input <- 1
+    
+    # Then
+    input |> validators[['IsCharacter']]() |> expect_error('argument is not of type character')
+  })
+})
