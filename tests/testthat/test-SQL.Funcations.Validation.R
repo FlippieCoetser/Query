@@ -73,6 +73,16 @@ describe("When input |> validators[['IsCharacter']]()",{
     #Then
     input |> validators[['IsCharacter']]() |> expect_no_error()
   })
+  it("then input is returned when input is character",{
+    #Given
+    validators <- SQL.Functions.Validation()
+    
+    # When 
+    input <- ''
+    
+    #Then
+    input |> validators[['IsCharacter']]() |> expect_equal(input)
+  })
   it("then argument is not character exception is thrown when input is not character",{
     # Given
     validators <- SQL.Functions.Validation()
