@@ -2,7 +2,7 @@ String.Utility.Validation <- \() {
   exception <- String.Utility.Exceptions()
 
   validators <- list()
-  validators[['Exist']]    <- \(input) {
+  validators[['Exist']]       <- \(input) {
     input |> is.null() |> exception[['ArgumentNullException']]()
     return(input)
   }
@@ -10,7 +10,7 @@ String.Utility.Validation <- \() {
     input |> is.character() |> isFALSE() |> exception[['ArgumentNotCharacterException']]()
     return(input)
   }
-  validators[['IsVector']] <- \(input) { 
+  validators[['IsVector']]    <- \(input) { 
     input |> is.vector() |> isFALSE() |> exception[['ArgumentNotVectorException']]()
     return(input)
   }
