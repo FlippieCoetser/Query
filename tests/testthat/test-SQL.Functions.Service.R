@@ -45,4 +45,15 @@ describe("When field |> service[['LOWER']](alias)",{
     # Then
     field |> service[['LOWER']](alias) |> expect_error('argument is NULL')
   })
+    it("then an argument not character exception is thrown if field is not Character",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- 1
+    alias <- 'Id'
+
+    # Then
+    field |> service[['LOWER']](alias) |> expect_error('argument is not of type character')
+  })
 })
