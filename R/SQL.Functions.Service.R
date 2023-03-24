@@ -15,8 +15,9 @@ SQL.Functions.Service <- \() {
     String.Utility.Processing()
 
   services <- list()
-  services[['LOWER']] <- \(field, alias) {
+  services[['LOWER']] <- \(field, alias = field) {
     field |> validate[['Exist']]() |> validate[['IsCharacter']]()
+    alias |> validate[['Exist']]() |> validate[['IsCharacter']]()
 
     field |>
       utilities[['Prepend']]('LOWER(') |>
