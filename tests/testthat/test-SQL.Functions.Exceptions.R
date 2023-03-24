@@ -51,3 +51,26 @@ describe("When input |> exception[['ArgumentNullException']]()",{
     input |> exception[['ArgumentNullException']]() |> expect_error('argument is NULL')
   })
 })
+
+describe("When input |> exception[['ArgumentNotCharacterException']]()",{
+  it("then no exception is thrown when input is FALSE",{
+    #Given
+    exception <- SQL.Functions.Exceptions()
+
+    # When 
+    input <- FALSE
+
+    #Then
+    input |> exception[['ArgumentNotCharacterException']]() |> expect_no_error()
+  })
+  it("then argument is not character exception is thrown when input is TRUE",{
+    # Given
+    exception <- SQL.Functions.Exceptions()
+
+    # When 
+    input <- TRUE
+
+    # Then
+    input |> exception[['ArgumentNotCharacterException']]() |> expect_error('argument is not of type character')
+  })
+})
