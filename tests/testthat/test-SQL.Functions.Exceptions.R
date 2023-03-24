@@ -12,5 +12,12 @@ describe("When exceptions <- SQL.Functions.Exceptions()",{
 
     # Then
     exceptions |> is.list() |> expect_equal(TRUE)
+  })
+  it("then exceptions contains ArgumentNullException",{
+    # Given
+    exceptions <- SQL.Functions.Exceptions()
+
+    # Then
+    exceptions[['ArgumentNullException']] |> Exist() |> expect_equal(TRUE)
   })  
 })
