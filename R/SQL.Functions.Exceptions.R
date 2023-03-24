@@ -1,1 +1,4 @@
-SQL.Functions.Exceptions <- \() {}
+SQL.Functions.Exceptions <- \() {
+  exceptions <- list()
+  return(exceptions)
+}
