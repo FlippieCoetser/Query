@@ -3,6 +3,7 @@ SQL.Functions.Validation <- \() {
   validators <- list()
   validators[['Exist']] <- \(input) {
     input |> is.null() |> exceptions[['ArgumentNullException']]()
+    return(input)
   }
   return(validators)
 }
