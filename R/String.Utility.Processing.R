@@ -1,18 +1,18 @@
 String.Utility.Processing <- \(service) {
   processors <- list()
-  processors[['Append']]  <- \(field, string) {
-    field |> service[['Append']](string)
+  processors[['Append']]   <- \(string.one, string.two) {
+    string.one |> service[['Append']](string.two)
   }
-  processors[['Prepend']] <- \(field, string) {
-    field |> service[['Prepend']](string)
+  processors[['Prepend']]  <- \(string.one, string.two) {
+    string.one |> service[['Prepend']](string.two)
   }
-  processors[['Inclose']] <- \(field, type = 'Square') { 
+  processors[['Inclose']]  <- \(value, type = 'Square') { 
     types <- list()
-    types[['Square']] <- \(field) field |> service[['Inclose']]('[',']')   
-    types[['Round']]  <- \(field) field |> service[['Inclose']]('(',')') 
-    types[['Quotes']] <- \(field) field |> service[['Inclose']]("'","'")
+    types[['Square']] <- \(value) value |> service[['Inclose']]('[',']')   
+    types[['Round']]  <- \(value) value |> service[['Inclose']]('(',')') 
+    types[['Quotes']] <- \(value) value |> service[['Inclose']]("'","'")
 
-    types[[type]](field)
+    types[[type]](value)
   }
   processors[['Collapse']] <- \(items) {
     items |> service[['Collapse']]()
@@ -20,6 +20,5 @@ String.Utility.Processing <- \(service) {
   processors[['CreateKeyValuePairs']] <- \(keys, values) {
     keys |> service[['CreateKeyValuePairs']](values)
   }
-
   return(processors)
 }
