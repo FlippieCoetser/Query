@@ -35,4 +35,14 @@ describe("When value |> service[['BRACKET']]()",{
       service[['BRACKET']]() |>
         expect_equal('[value]')
   })
+  it("then an argument is null exception is thrown when value is NULL",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    value <- NULL
+
+    # Then 
+    value |> service[['BRACKET']]() |> expect_error("argument is NULL")
+  })
 })
