@@ -11,7 +11,7 @@ String.Utility.Validation <- \() {
     return(input)
   }
   validators[['IsVector']] <- \(input) { 
-    input |> is.character() |> isFALSE() |> exception[['ArgumentNotVectorException']]()
+    input |> is.vector() |> isFALSE() |> exception[['ArgumentNotVectorException']]()
     return(input)
   }
   return(validators)
