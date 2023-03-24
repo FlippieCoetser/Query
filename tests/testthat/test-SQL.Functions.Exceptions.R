@@ -19,7 +19,14 @@ describe("When exceptions <- SQL.Functions.Exceptions()",{
 
     # Then
     exceptions[['ArgumentNullException']] |> Exist() |> expect_equal(TRUE)
-  })  
+  }) 
+  it("then exceptions contains ArgumentNotCharacterException",{
+    #Given
+    exceptions <- SQL.Functions.Exceptions()
+
+    # Then
+    exceptions[['ArgumentNotCharacterException']] |> Exist() |> expect_equal(TRUE)
+  }) 
 })
 
 describe("When input |> exception[['ArgumentNullException']]()",{
