@@ -33,6 +33,16 @@ describe("When input |> validators[['Exist']]()",{
     #Then
     input |> validators[['Exist']]() |> expect_no_error()
   })
+  it("then input is returned when input not NULL",{
+    #Given
+    validators <- SQL.Utility.Validation()
+    
+    # When 
+    input <- ''
+    
+    #Then
+    input |> validators[['Exist']]() |> expect_equal(input)
+  })
   it("then argument is null exception is thrown when input NULL",{
     # Given
     validators <- SQL.Utility.Validation()
