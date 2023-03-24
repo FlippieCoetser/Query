@@ -2,24 +2,24 @@ String.Utility.Service <- \() {
   validate <- String.Utility.Validation()
   
   services <- list()
-  services[['Append']]  <- \(field, string) {
-    field  |> validate[['Exist']]()
-    string |> validate[['Exist']]()
+  services[['Append']]   <- \(string.one, string.two) {
+    string.one |> validate[['Exist']]()
+    string.two |> validate[['Exist']]()
 
-    field |> paste(string, sep = '')
+    string.one |> paste(string.two, sep = '')
   }
-  services[['Prepend']] <- \(field, string) {
-    field  |> validate[['Exist']]()
-    string |> validate[['Exist']]()
+  services[['Prepend']]  <- \(string.one, string.two) {
+    string.one |> validate[['Exist']]()
+    string.two |> validate[['Exist']]()
 
-    string |> paste(field, sep = '')
+    string.two |> paste(string.one, sep = '')
   }
-  services[['Inclose']] <- \(field, before, after) {
-    field   |> validate[['Exist']]()
-    before  |> validate[['Exist']]() |> validate[['IsCharacter']]()
-    after   |> validate[['Exist']]() |> validate[['IsCharacter']]()
+  services[['Inclose']]  <- \(value, before, after) {
+    value  |> validate[['Exist']]()
+    before |> validate[['Exist']]() |> validate[['IsCharacter']]()
+    after  |> validate[['Exist']]() |> validate[['IsCharacter']]()
 
-    before |> paste(field, sep = '') |> paste(after, sep = '')
+    before |> paste(value, sep = '') |> paste(after, sep = '')
   }
   services[['Collapse']] <- \(items) {
     items |> validate[['Exist']]() 
