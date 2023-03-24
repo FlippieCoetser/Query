@@ -20,6 +20,13 @@ describe("When validators <- SQL.Functions.Validation()",{
     # Then
     validators[['Exist']] |> Exist() |> expect_equal(TRUE)
   })
+  it("then validators contains IsCharacter validator",{
+    # Given
+    validators <- SQL.Functions.Validation()
+    
+    # Then
+    validators[['IsCharacter']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When input |> validators[['Exist']]()",{
