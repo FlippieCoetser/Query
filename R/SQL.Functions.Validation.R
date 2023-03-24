@@ -5,5 +5,7 @@ SQL.Functions.Validation <- \() {
     input |> is.null() |> exceptions[['ArgumentNullException']]()
     return(input)
   }
+  validators[['IsCharacter']] <- \(input) {
+  }
   return(validators)
 }
