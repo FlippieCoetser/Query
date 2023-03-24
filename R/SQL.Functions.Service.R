@@ -8,12 +8,16 @@
 #' * `LOWER(value, alias)`
 #' @export
 SQL.Functions.Service <- \() {
+  validate <- SQL.Functions.Validation()
+
   utilities <-
     String.Utility.Service() |>
     String.Utility.Processing()
 
   services <- list()
   services[['LOWER']] <- \(field, alias) {
+    field |> validate[['Exist']]()
+    
     field |>
       utilities[['Prepend']]('LOWER(') |>
       utilities[['Append']](') as ')   |>
