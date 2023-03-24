@@ -3,5 +3,7 @@ SQL.Functions.Exceptions <- \() {
   exceptions[['ArgumentNullException']] <- \(input) {
     if(input) { stop('argument is NULL') }
   }
+  exceptions[['ArgumentNotCharacterException']] <- \(input) {
+  }
   return(exceptions)
 }
