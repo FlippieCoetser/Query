@@ -56,4 +56,47 @@ describe("When field |> service[['LOWER']](alias)",{
     # Then
     field |> service[['LOWER']](alias) |> expect_error('argument is not of type character')
   })
+  it("then an argument not character exceptions is thrown if alias is not Character",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- 'field'
+    alias <- 1
+
+    # Then
+    field |> service[['LOWER']](alias) |> expect_error('argument is not of type character')
+  })
+})
+describe("When field |> service[['LOWER']]()",{
+  it("then LOWER(field) as field is returned",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- 'field'
+
+    # Then
+    field |> service[['LOWER']]() |> expect_equal('LOWER(field) as field')
+  })
+    it("then an argument is null exception is thrown if field is NULL",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- NULL
+
+    # Then
+    field |> service[['LOWER']]() |> expect_error('argument is NULL')
+  })
+  it("then an argument not character exception is thrown if field is not Character",{
+    # Given
+    service <- SQL.Functions.Service()
+
+    # When
+    field <- 1
+
+    # Then
+    field |> service[['LOWER']]() |> expect_error('argument is not of type character')
+  })
 })
