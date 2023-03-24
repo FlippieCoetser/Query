@@ -1,309 +1,250 @@
-test_that('String.Utility.Service exist',{
-  String.Utility.Service   |>
-    is.null() |>
-      expect_equal(FALSE)
-})
-test_that('String.Utility.Service() return list of services',{
-  String.Utility.Service() |>
-    is.list() |>
-      expect_equal(TRUE)
+describe("Given String.Utility.Service",{
+  it("exist",{
+    # Given
+    String.Utility.Service |> is.null() |> expect_equal(FALSE)
+  })
 })
 
-test_that('services contains Append service',{
-  # Given
-  service <- 
-    String.Utility.Service()
+describe("When services <- String.Utility.Service()",{
+  it("then services is a list",{
+    # Given
+    services <- String.Utility.Service()
 
-  # Then
-  service[['Append']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("field |> service[['Append']](string) appends string to end of field",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # Then
+    services |> is.list() |> expect_equal(TRUE)
+  })
+  it("then services contains Append service",{
+    # Given
+    services <- String.Utility.Service()
 
-  # When
-  field <- 'field'
-  string <- 'string'
+    # Then
+    services[['Append']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then services contains Prepend service",{
+    # Given
+    services <- String.Utility.Service()
 
-  # Then
-  field |>
-    service[['Append']](string) |>
-      expect_equal('fieldstring')
-})
-test_that("field |> service[['Append']](string) throws error if field null",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # Then
+    services[['Prepend']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then services contains Inclose service",{
+    # Given
+    services <- String.Utility.Service()
 
-  error <- 'argument is NULL'
+    # Then
+    services[['Inclose']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then services contains Collapse service",{
+    # Given
+    services <- String.Utility.Service()
 
-  # When
-  field <- NULL
-  string <- 'string'
-
-  # Then
-  field |>
-    service[['Append']](string) |>
-      expect_error(error)
-})
-test_that("field |> service[['Append']](string) throws error if string null",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is NULL'
-
-  # When
-  field <- 'field' 
-  string <- NULL
-
-  # Then
-  field |>
-    service[['Append']](string) |>
-      expect_error(error)
+    # Then
+    services[['Collapse']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
-# Prepend Operation
-test_that('services contains Prepend service',{
-  # Given
-  service <- 
-    String.Utility.Service()
+describe("When string.one |> service[['Append']](string.two)",{
+  it("then string.one is appended to string.two",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  service[['Prepend']] |>
-    Exist()            |>
-      expect_equal(TRUE)
-})
-test_that("field |> service[['Prepend']](string) appends string to front of field",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # When
+    string.one <- 'string.one'
+    string.two <- 'string.two'
 
-  # When
-  field <- 'field'
-  string <- 'string'
+    # Then
+    string.one |> service[['Append']](string.two) |> expect_equal('string.onestring.two')
+  })
+  it("then an argument is null exception is thrown if string.one is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  field |>
-    service[['Prepend']](string) |>
-      expect_equal('stringfield')
-})
-test_that("field |> service[['Prepend']](string) throws error if field null",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # When
+    string.one <- NULL
+    string.two <- 'string.two'
 
-  error <- 'argument is NULL'
+    # Then
+    string.one |> service[['Append']](string.two) |> expect_error('argument is NULL')
+  })
+  it("then an argument is null exception is thrown if string.two is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  # When
-  field <- NULL
-  string <- 'string'
+    # When
+    string.one <- 'string.one'
+    string.two <- NULL
 
-  # Then
-  field |>
-    service[['Prepend']](string) |>
-      expect_error(error)
-})
-test_that("field |> service[['Prepend']](string) throws error if string null",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is NULL'
-
-  # When
-  field <- 'field'
-  string <- NULL
-
-  # Then
-  field |>
-    service[['Prepend']](string) |>
-      expect_error(error)
+    # Then
+    string.one |> service[['Append']](string.two) |> expect_error('argument is NULL')
+  })
 })
 
-# Inclose Service
-test_that('services instance has Inclose service',{
-  # Given
-  service <- 
-    String.Utility.Service()
+describe("When string.one |> service[['Prepend']](string.two)",{
+  it("then string.one is prepended to string.two",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  service[['Inclose']] |>
-    Exist()            |>
-      expect_equal(TRUE)
-})
-test_that("field |> service[['Inclose']](before, after) inclose field with before and after",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # When
+    string.one <- 'string.one'
+    string.two <- 'string.two'
 
-  # When
-  field  <- 'field'
-  before <- 'before'
-  after  <- 'after'
+    # Then
+    string.one |> service[['Prepend']](string.two) |> expect_equal('string.twostring.one')
+  })
+  it("then an argument is null exception is thrown if string.one is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_equal('beforefieldafter')
-})
-test_that("field |> service[['Inclose']](before, after) throws error if field null",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # When
+    string.one <- NULL
+    string.two <- 'string.two'
 
-  error <- 'argument is NULL'
+    # Then
+    string.one |> service[['Prepend']](string.two) |> expect_error('argument is NULL')
+  })
+  it("then an argument is null exception is thrown if string.two is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  # When
-  field  <- NULL
-  before <- 'before'
-  after  <- 'after'
+    # When
+    string.one <- 'string.one'
+    string.two <- NULL
 
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_error(error)
-})
-test_that("field |> service[['Inclose']](before, after) throws error if before null",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is NULL'
-
-  # When
-  field  <- 'field'
-  before <- NULL
-  after  <- 'after'
-
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_error(error)
-})
-test_that("field |> service[['Inclose']](before, after) throws error if before is not character",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is not a String'
-
-  # When
-  field  <- 'field'
-  before <- 1
-  after  <- 'after'
-
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_error(error)
-})
-test_that("field |> service[['Inclose']](before, after) throws error if after null",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is NULL'
-
-  # When
-  field  <- 'field'
-  before <- 'before'
-  after  <- NULL
-
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_error(error)
-})
-test_that("field |> service[['Inclose']](before, after) throws error if after is not character",{
-  # Given
-  service <- 
-    String.Utility.Service()
-
-  error <- 'argument is not a String'
-
-  # When
-  field  <- 'field'
-  before <- 'before'
-  after  <- 1
-
-  # Then
-  field |>
-    service[['Inclose']](before,after) |>
-      expect_error(error)
+    # Then
+    string.one |> service[['Prepend']](string.two) |> expect_error('argument is NULL')
+  })
 })
 
-# Collapse Service
-test_that('services instance has Collapse service',{
-  # Given
-  service <- 
-    String.Utility.Service()
+describe("When value |> service[['Inclose']](before, after)",{
+  it("then value is inclosed with before and after",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  service[['Collapse']] |>
-    Exist()            |>
-      expect_equal(TRUE)
+    # When
+    value  <- 'value'
+    before <- 'before'
+    after  <- 'after'
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_equal('beforevalueafter')
+  })
+  it("then an argument is null exception is thrown if value is NULL",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    value  <- NULL
+    before <- 'before'
+    after  <- 'after'
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_error('argument is NULL')
+  })
+  it("then an argument is null exception is thrown if before is NULL",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    value  <- 'value'
+    before <- NULL
+    after  <- 'after'
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_error('argument is NULL')
+  })
+  it("then an argument not character exception is thrown if before is not character",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    value  <- 'value'
+    before <- 1
+    after  <- 'after'
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_error('argument is not of type Character')
+  })
+  it("then an argument is null exception is thrown if after is NULL",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    value  <- 'value'
+    before <- 'before'
+    after  <- NULL
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_error('argument is NULL')
+  })
+  it("then an argument not character exception is thrown if after is not character",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    value  <- 'value'
+    before <- 'before'
+    after  <- 1
+
+    # Then
+    value |> service[['Inclose']](before, after) |> expect_error('argument is not of type Character')
+  })
 })
-test_that("fields |> service[['Collapse']]() collapse items using comma separator",{
-  # Given
-  service <- 
-    String.Utility.Service()
 
-  fields  <- list(
-    'one',
-    'two',
-    'three'
-  )
+describe("When items |> service[['Collapse']]()",{
+  it("then items are collapsed using comma separator",{
+    # Given
+    service <- String.Utility.Service()
 
-  # When
-  expected <- "one, two, three"
+    # When
+    items <- list('one', 'two', 'three')
 
-  # Then
-  fields |>
-    service[['Collapse']]() |>
-      expect_equal(expected) 
+    # Then
+    items |> service[['Collapse']]() |> expect_equal('one, two, three')
+  })
+  it("then an argument is null exception is thrown if items is NULL",{
+    # Given
+    service <- String.Utility.Service()
+
+    # When
+    items <- NULL
+
+    # Then
+    items |> service[['Collapse']]() |> expect_error('argument is NULL')
+  })
 })
 
-# CreateKeyValuePair Service
-test_that('services instance has CreateKeyValuePairs service',{
-  # Given
-  service <- 
-    String.Utility.Service()
+describe("When keys |> service[['CreateKeyValuePairs']](values)",{
+  it("then key value pairs are created",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  service[['CreateKeyValuePairs']] |>
-    Exist()            |>
-      expect_equal(TRUE)
-})
-test_that("keys |> service[['CreateKeyValuePairs']](values) creates key value pairs",{
-  # Given
-  service <- 
-    String.Utility.Service()
+    # When
+    keys   <- list(1, 2, 3)
+    values <- list('one', 'two', 'three')
 
-  keys  <- list(
-    1,
-    2,
-    3
-  )
+    # Then
+    keys |> service[['CreateKeyValuePairs']](values) |> expect_equal(c('1 = one', '2 = two', '3 = three'))
+  })
+  it("then an argument is null exception is thrown if keys is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  values  <- list(
-    'one',
-    'two',
-    'three'
-  )
+    # When
+    keys   <- NULL
+    values <- list('one', 'two', 'three')
 
-  # When
-  expected <- c(
-    '1 = one',
-    '2 = two',
-    '3 = three'
-  )
+    # Then
+    keys |> service[['CreateKeyValuePairs']](values) |> expect_error('argument is NULL')
+  })
+  it("then an argument is null exception is thrown if values is NULL",{
+    # Given
+    service <- String.Utility.Service()
 
-  # Then
-  keys |>
-    service[['CreateKeyValuePairs']](values) |>
-      expect_equal(expected) 
+    # When
+    keys   <- list(1, 2, 3)
+    values <- NULL
+
+    # Then
+    keys |> service[['CreateKeyValuePairs']](values) |> expect_error('argument is NULL')
+  })
 })

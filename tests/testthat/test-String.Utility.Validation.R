@@ -1,154 +1,136 @@
-test_that('String.Utility.Validation exist',{
-  String.Utility.Validation   |>
-    is.null() |>
-      expect_equal(FALSE)
-})
-test_that('String.Utility.Validation() return list of validators',{
-  String.Utility.Validation() |>
-    is.list() |>
-      expect_equal(TRUE)
+describe("Given String.Utility.Validation",{
+  it("exist",{
+    # Given
+    String.Utility.Validation |> is.null() |> expect_equal(FALSE)
+  })
 })
 
-# Exist Validator
-test_that('validators contains Exist validator',{
-  # Given
-  validators <- String.Utility.Validation()
+describe("When validators <- String.Utility.Validation()",{
+  it("then validators is a list",{
+    # Given
+    validators <- String.Utility.Exceptions()
 
-  # Then
-  validators[['Exist']] |>
-    Exist()             |>
-      expect_equal(TRUE)
-})
-test_that("input |> validate[['Exist']]() throws exception if input NULL",{
-  # Given
-  validate <- String.Utility.Validation()
-  error     <- 'argument is NULL'
+    # Then
+    validators |> is.list() |> expect_equal(TRUE)
+  })
+  it("then validators contains Exist validator",{
+    # Given
+    validators <- String.Utility.Validation()
 
-  # When
-  input <- NULL
+    # Then
+    validators[['Exist']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then validators contains IsCharacter validator",{
+    # Given
+    validators <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['Exist']]() |>
-      expect_error(error)
-})
-test_that("input |> validate[['Exist']]() throw no exception if input is not NULL",{
-  # Given
-  validate <- String.Utility.Validation()
+    # Then
+    validators[['IsCharacter']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then validators contains IsVector validator",{
+    # Given
+    validators <- String.Utility.Validation()
 
-  # When
-  input <- ''
-
-  # Then
-  input |>
-    validate[['Exist']]() |>
-      expect_no_error()
-})
-test_that("input |> validate[['Exist']]() returns input if input is not NULL",{
-  # Given
-  validate <- String.Utility.Validation()
-
-  # When
-  input <- ''
-
-  # Then
-  input |>
-    validate[['Exist']]() |>
-      expect_equal(input)
+    # Then
+    validators[['IsVector']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
-# Is String Validator
-test_that('validators contains IsCharacter validator',{
-  # Given
-  validators <- String.Utility.Validation()
+describe("When input |> validate[['Exist']]()",{
+  it("then no exception is thrown when input not NULL",{
+    # Given
+    validate <- String.Utility.Validation()
 
-  # Then
-  validators[['IsCharacter']] |>
-    Exist()             |>
-      expect_equal(TRUE)
-})
-test_that("input |> validate[['IsCharacter']]() throws exception if input is not character",{
-  # Given
-  validate <- String.Utility.Validation()
-  error     <- 'argument is not a String'
+    # When
+    input <- ''
 
-  # When
-  input <- 1
+    # Then
+    input |> validate[['Exist']]() |> expect_no_error()
+  })
+  it("then input is returned when input not NULL",{ 
+    # Given
+    validate <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['IsCharacter']]() |>
-      expect_error(error)
-})
-test_that("input |> validate[['IsCharacter']]() throw no exception if input is character",{
-  # Given
-  validate <- String.Utility.Validation()
+    # When
+    input <- ''
 
-  # When
-  input <- ''
+    # Then
+    input |> validate[['Exist']]() |> expect_equal(input)
+  })
+  it("then an argument null exception is thrown when input NULL",{
+    # Given
+    validators <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['IsCharacter']]() |>
-      expect_no_error()
-})
-test_that("input |> validate[['IsCharacter']]() returns input if input is Character",{
-  # Given
-  validate <- String.Utility.Validation()
+    # When
+    input <- NULL
 
-  # When
-  input <- ''
-
-  # Then
-  input |>
-    validate[['IsCharacter']]() |>
-      expect_equal(input)
+    # Then
+    input |> validators[['Exist']]() |> expect_error('argument is NULL')
+  })
 })
 
-# Is Vector Validator
-test_that('validators contains IsVector validator',{
-  # Given
-  validators <- String.Utility.Validation()
+describe("When input |> validate[['IsCharacter']]()",{
+  it("then no exception is thrown when input is a Character",{
+    # Given
+    validate <- String.Utility.Validation()
 
-  # Then
-  validators[['IsVector']] |>
-    Exist()             |>
-      expect_equal(TRUE)
+    # When
+    input <- ''
+
+    # Then
+    input |> validate[['IsCharacter']]() |> expect_no_error()
+  })
+  it("then input is returned when input is a Character",{ 
+    # Given
+    validate <- String.Utility.Validation()
+
+    # When
+    input <- ''
+
+    # Then
+    input |> validate[['IsCharacter']]() |> expect_equal(input)
+  })
+  it("then an argument not character exception is thrown when input not Character",{
+    # Given
+    validators <- String.Utility.Validation()
+
+    # When
+    input <- 1
+
+    # Then
+    input |> validators[['IsCharacter']]() |> expect_error('argument is not of type Character')
+  })
 })
-test_that("input |> validate[['IsVector']]() throws exception if input is not vector",{
-  # Given
-  validate <- String.Utility.Validation()
-  error     <- 'argument is not a Vector'
 
-  # When
-  input <- data.frame()
+describe("When input |> validate[['IsVector']]()",{
+  it("then no exception is thrown when input is a Vector",{
+    # Given
+    validate <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['IsVector']]() |>
-      expect_error(error)
-})
-test_that("input |> validate[['IsVector']]() throw no exception if input is vector",{
-  # Given
-  validate <- String.Utility.Validation()
+    # When
+    input <- vector()
 
-  # When
-  input <- ''
+    # Then
+    input |> validate[['IsVector']]() |> expect_no_error()
+  })
+  it("then input is returned when input is a Vector",{ 
+    # Given
+    validate <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['IsVector']]() |>
-      expect_no_error()
-})
-test_that("input |> validate[['IsVector']]() returns input if input is Vector",{
-  # Given
-  validate <- String.Utility.Validation()
+    # When
+    input <- vector()
 
-  # When
-  input <- ''
+    # Then
+    input |> validate[['IsVector']]() |> expect_equal(input)
+  })
+  it("then an argument not vector exception is thrown when input not Vector",{
+    # Given
+    validators <- String.Utility.Validation()
 
-  # Then
-  input |>
-    validate[['IsVector']]() |>
-      expect_equal(input)
+    # When
+    input <- data.frame()
+
+    # Then
+    input |> validators[['IsVector']]() |> expect_error('argument is not of type Vector')
+  })
 })
