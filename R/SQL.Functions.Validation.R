@@ -6,6 +6,7 @@ SQL.Functions.Validation <- \() {
     return(input)
   }
   validators[['IsCharacter']] <- \(input) {
+    input |> is.character() |> isFALSE() |> exceptions[['ArgumentNotCharacterException']]()
   }
   return(validators)
 }
