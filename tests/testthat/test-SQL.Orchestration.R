@@ -20,6 +20,13 @@ describe("When orchestration <- SQL.Orchestration()",{
     # Then
     orchestration[['SELECT']] |> Exist() |> expect_equal(TRUE)
   })
+  it("then orchestration contains FROM orchestration",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    # Then
+    orchestration[['FROM']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When orchestration[['SELECT']]()",{
