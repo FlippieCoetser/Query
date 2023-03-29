@@ -16,7 +16,7 @@ SQL.Orchestration <- \(args) {
   orchestrations[['FROM']] <- \(input, table) {
     input |>
       service[['FROM']]()   |>
-      service[['SCHEMA']]() |>
+      utilities[['SCHEMA']]() |>
       service[['TABLE']](table)
   }
   return(orchestrations)
