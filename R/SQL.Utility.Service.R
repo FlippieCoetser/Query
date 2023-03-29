@@ -19,5 +19,8 @@ SQL.Utility.Service <- \() {
 
     value |> utilities[['Inclose']]()
   }
+  services[['FIELDS']] <- \(fields) {
+
+  }
   return(services)
 }
