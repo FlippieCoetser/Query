@@ -20,6 +20,13 @@ describe("When services <- SQL.Utility.Service()",{
     # Then
     service[['BRACKET']] |> Exist() |> expect_equal(TRUE)
   })
+    it("then services contains FIELDS service",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # Then
+    service[['FIELDS']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When value |> service[['BRACKET']]()",{
