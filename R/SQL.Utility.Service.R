@@ -19,8 +19,11 @@ SQL.Utility.Service <- \() {
 
     value |> utilities[['Inclose']]()
   }
-  services[['FIELDS']] <- \(fields) {
-
+  services[['FIELDS']] <- \(input, fields) {
+    fields |>
+      utilities[['Collapse']]()    |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   return(services)
 }
