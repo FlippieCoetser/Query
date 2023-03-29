@@ -21,3 +21,34 @@ describe("When orchestration <- SQL.Orchestration()",{
     orchestration[['SELECT']] |> Exist() |> expect_equal(TRUE)
   })
 })
+
+describe("When orchestration[['SELECT']]()",{
+  it("then 'SELECT * ' is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    # Then 
+    orchestration[['SELECT']]() |> expect_equal('SELECT * ')
+  })
+})
+
+describe("When fields |> orchestration[['SELECT']]()",{
+  it("then fields collapse list using comma as separator and prepend 'SELECT '",{
+    # Given
+    orchestration <- SQL.Orchestration()
+    utilities <- SQL.Utility.Service()
+    functions <- SQL.Functions.Service()
+
+    # When
+    fields <- list(
+      'Id'            |> utilities[['BRACKET']]() |> functions[['LOWER']]('Id'),
+      'Username'      |> utilities[['BRACKET']](),
+      'HashedPassword'|> utilities[['BRACKET']](),
+      'Salt'          |> utilities[['BRACKET']]() |> functions[['LOWER']]('Salt')
+    )
+    output <- 'SELECT LOWER([Id]) as Id, [Username], [HashedPassword], LOWER([Salt]) as Salt '
+
+    # Then 
+    fields |> orchestration[['SELECT']]() |> expect_equal(output)
+  })
+})
