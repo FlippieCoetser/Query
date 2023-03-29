@@ -26,7 +26,9 @@ SQL.Utility.Service <- \() {
       utilities[['Prepend']](input)
   }
   services[['*']] <- \(input) {
-    
+    '*' |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input) 
   }
   return(services)
 }
