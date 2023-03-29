@@ -13,8 +13,11 @@ SQL.Orchestration <- \(args) {
 
     selections[[(fields |> is.list()) + 1]]()    
   }
-  orchestrations[['FROM']] <- \(args) {
-    
+  orchestrations[['FROM']] <- \(input, table) {
+    input |>
+      service[['FROM']]()   |>
+      service[['SCHEMA']]() |>
+      service[['TABLE']](table)
   }
   return(orchestrations)
 }
