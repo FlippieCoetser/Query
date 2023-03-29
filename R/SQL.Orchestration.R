@@ -8,10 +8,13 @@ SQL.Orchestration <- \(args) {
   orchestrations[['SELECT']] <- \(fields = '*') {
 
     selections <- list()
-    selections[[1]] <- \() service[['SELECT']]() |> service[['*']]() 
+    selections[[1]] <- \() service[['SELECT']]() |> utilities[['*']]() 
     selections[[2]] <- \() service[['SELECT']]() |> utilities[['FIELDS']](fields) 
 
     selections[[(fields |> is.list()) + 1]]()    
+  }
+  orchestrations[['FROM']] <- \(args) {
+    
   }
   return(orchestrations)
 }
