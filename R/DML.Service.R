@@ -82,7 +82,7 @@ DML.Service <- \() {
     values <- keyValues |> utilities[['Inclose']]('Quotes')
 
     keys |>  
-      utilities[['CreateKeyValuePairs']](values) |>
+      utilities[['Pair']](values) |>
       utilities[['Collapse']]() |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)

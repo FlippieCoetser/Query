@@ -26,7 +26,7 @@ String.Utility.Service <- \() {
 
     items |> paste(collapse = ', ')
   }
-  services[['CreateKeyValuePairs']] <- \(keys, values) {
+  services[['Pair']]     <- \(keys, values) {
     keys   |> validate[['Exist']]() 
     values |> validate[['Exist']]()
     

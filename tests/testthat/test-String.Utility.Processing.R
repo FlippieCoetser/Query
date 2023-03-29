@@ -137,7 +137,7 @@ describe("When items |> process[['Collapse']]()",{
   })
 })
 
-describe("When keys |> process[['CreateKeyValuePairs']](values)",{
+describe("When keys |> process[['Pair']](values)",{
   it("then keys and values are combined into key value pairs",{
     # Given
     process <- String.Utility.Service() |> String.Utility.Processing()
@@ -148,7 +148,7 @@ describe("When keys |> process[['CreateKeyValuePairs']](values)",{
 
     # Then
     keys |> 
-      process[['CreateKeyValuePairs']](values) |> 
+      process[['Pair']](values) |> 
         expect_equal(c('1 = one','2 = two','3 = three'))
   })
 })

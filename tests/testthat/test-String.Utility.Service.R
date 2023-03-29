@@ -213,7 +213,7 @@ describe("When items |> service[['Collapse']]()",{
   })
 })
 
-describe("When keys |> service[['CreateKeyValuePairs']](values)",{
+describe("When keys |> service[['Pair']](values)",{
   it("then key value pairs are created",{
     # Given
     service <- String.Utility.Service()
@@ -223,7 +223,7 @@ describe("When keys |> service[['CreateKeyValuePairs']](values)",{
     values <- list('one', 'two', 'three')
 
     # Then
-    keys |> service[['CreateKeyValuePairs']](values) |> expect_equal(c('1 = one', '2 = two', '3 = three'))
+    keys |> service[['Pair']](values) |> expect_equal(c('1 = one', '2 = two', '3 = three'))
   })
   it("then an argument is null exception is thrown if keys is NULL",{
     # Given
@@ -234,7 +234,7 @@ describe("When keys |> service[['CreateKeyValuePairs']](values)",{
     values <- list('one', 'two', 'three')
 
     # Then
-    keys |> service[['CreateKeyValuePairs']](values) |> expect_error('argument is NULL')
+    keys |> service[['Pair']](values) |> expect_error('argument is NULL')
   })
   it("then an argument is null exception is thrown if values is NULL",{
     # Given
@@ -245,6 +245,6 @@ describe("When keys |> service[['CreateKeyValuePairs']](values)",{
     values <- NULL
 
     # Then
-    keys |> service[['CreateKeyValuePairs']](values) |> expect_error('argument is NULL')
+    keys |> service[['Pair']](values) |> expect_error('argument is NULL')
   })
 })
