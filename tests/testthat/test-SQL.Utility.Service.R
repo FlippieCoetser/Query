@@ -126,3 +126,20 @@ describe("When input |> service[['SCHEMA']](schema)",{
         expect_equal(output)
   })
 })
+
+describe("When input |> service[['TABLE']](table)",{
+  it("then [table] prepend input is returned",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    table   <- 'table'
+    output  <- 'input [table] '
+
+    # Then
+    input                   |>
+      service[['TABLE']](table) |>
+        expect_equal(output)
+  })
+})
