@@ -86,3 +86,36 @@ describe("When input |> service[['FIELDS']](fields)",{
         expect_equal(output)
   })
 })
+
+describe("When input |> service[['SCHEMA']]()",{
+  it("then [dbo]. prepend input is returned",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    output  <- 'input [dbo].'
+
+    # Then
+    input                   |>
+      service[['SCHEMA']]() |>
+        expect_equal(output)
+  })
+})
+
+describe("When input |> service[['SCHEMA']](schema)",{
+  it("then [schema]. prepend input is returned",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    schema  <- 'schema'
+    output  <- 'input [schema].'
+
+    # Then
+    input                   |>
+      service[['SCHEMA']](schema) |>
+        expect_equal(output)
+  })
+})
