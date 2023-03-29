@@ -19,24 +19,24 @@ SQL.Utility.Service <- \() {
 
     value |> utilities[['Inclose']]()
   }
-  services[['FIELDS']] <- \(input, fields) {
+  services[['FIELDS']]  <- \(input, fields) {
     fields |>
       utilities[['Collapse']]()    |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['*']] <- \(input) {
+  services[['*']]       <- \(input) {
     '*' |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input) 
   }
-  services[['SCHEMA']] <- \(input, schema = 'dbo') {
+  services[['SCHEMA']]  <- \(input, schema = 'dbo') {
     schema |>
       utilities[['Inclose']]()   |>
       utilities[['Append']]('.') |>
       utilities[['Prepend']](input) 
   }
-  services[['TABLE']] <- \(input, table) {
+  services[['TABLE']]   <- \(input, table) {
     table |>
       utilities[['Inclose']]()     |>
       utilities[['Append']](' ')   |>

@@ -9,7 +9,7 @@ SQL.Orchestration <- \(args) {
     selections[[2]] <- \() service[['SELECT']]() |> utilities[['FIELDS']](fields) 
     selections[[(fields |> is.list()) + 1]]()    
   }
-  orchestrations[['FROM']] <- \(input, table) {
+  orchestrations[['FROM']]   <- \(input, table) {
     input |>
       service[['FROM']]() |> utilities[['SCHEMA']]() |> utilities[['TABLE']](table)
   }
