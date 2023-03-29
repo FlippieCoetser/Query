@@ -59,3 +59,19 @@ describe("When fields |> orchestration[['SELECT']]()",{
     fields |> orchestration[['SELECT']]() |> expect_equal(output)
   })
 })
+
+describe("When input |> orchestration[['FROM']](table)",{
+  it("then 'FROM [table] ' is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+    utilities <- SQL.Utility.Service()
+    functions <- SQL.Functions.Service()
+
+    # When
+    input <- 'SELECT * '
+    table <- 'Users'
+
+    # Then 
+    input |> orchestration[['FROM']](table) |> expect_equal("SELECT * FROM [dbo].[Users] ")
+  })
+})
