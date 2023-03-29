@@ -53,3 +53,22 @@ describe("When value |> service[['BRACKET']]()",{
     value |> service[['BRACKET']]() |> expect_error("argument is NULL")
   })
 })
+
+describe("When input |> service[['FIELDS']](fields)",{
+  it("then fields collapse list using comma as separator and prepend input",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    output  <- 'input one, two, three '
+
+    # When 
+    fields <- list('one','two','three')
+
+    # Then
+    input                         |>
+      service[['FIELDS']](fields) |>
+        expect_equal(output)
+  })
+})
