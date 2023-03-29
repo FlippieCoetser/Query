@@ -12,7 +12,7 @@ String.Utility.Processing <- \(service) {
     types[['Round']]  <- \(value) value |> service[['Inclose']]('(',')') 
     types[['Quotes']] <- \(value) value |> service[['Inclose']]("'","'")
 
-    types[[type]](value)
+    value |> types[[type]]()
   }
   processors[['Collapse']] <- \(items) {
     items |> service[['Collapse']]()
