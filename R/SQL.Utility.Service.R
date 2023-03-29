@@ -30,5 +30,8 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input) 
   }
+  services[['SCHEMA']] <- \(args) {
+    
+  }
   return(services)
 }
