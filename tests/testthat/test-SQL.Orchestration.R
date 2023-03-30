@@ -205,3 +205,15 @@ describe("When input |> orchestration[['SET']](keyValues)",{
     input |> orchestration[['SET']](keyValues) |> expect_equal(output)
   })
 })
+
+describe("When input |> orchestration[['DELETE']]()",{
+  it("then DELETE is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    output <- "DELETE "
+
+    # Then
+    orchestration[['DELETE']]() |> expect_equal(output)
+  })
+})
