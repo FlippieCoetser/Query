@@ -13,8 +13,12 @@ SQL.Orchestration <- \(args) {
     input |>
       service[['FROM']]() |> utilities[['SCHEMA']]() |> utilities[['TABLE']](table)
   }
-  orchestrations[['WHERE']] <- \(args) {
-    
+  orchestrations[['WHERE']] <- \(input, key, value) {
+    input |>
+      service[['WHERE']]()     |>
+      service[['KEY']](key)    |>
+      service[['OPERATOR']]()  |>
+      service[['VALUE']](value) 
   }
   return(orchestrations)
 }
