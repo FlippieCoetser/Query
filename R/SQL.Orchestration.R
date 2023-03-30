@@ -1,5 +1,6 @@
 SQL.Orchestration <- \(args) {
   dql   <- DQL.Service()
+  dml   <- DML.Service()
   utilities <- SQL.Utility.Service() 
 
   orchestrations <- list()
@@ -22,8 +23,12 @@ SQL.Orchestration <- \(args) {
       utilities[['OPERATOR']]() |> 
       utilities[['VALUE']](value) 
   }
-  orchestrations[['INSERT']] <- \(input) {
-    
+  orchestrations[['INSERT']] <- \(table, keyValues) {
+    dml[['INSERT']]() |>
+    dml[['INTO']]()   |>
+    dml[['SCHEMA']]() |>
+    dml[['TABLE']](table)  |>
+    dml[['KEYS']](keyValues)
   }
   return(orchestrations)
 }
