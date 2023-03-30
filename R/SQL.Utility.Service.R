@@ -47,7 +47,6 @@ SQL.Utility.Service <- \() {
       utilities[['Inclose']]()     |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
-    
   }
   return(services)
 }
