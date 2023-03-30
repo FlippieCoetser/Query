@@ -2,7 +2,7 @@ describe("When SELECT FROM",{
   it("then a SELECT fields FROM schema table should be returned",{
     utilities <- SQL.Utility.Service()
     functions <- SQL.Functions.Service()
-    orchestration <- SQL.Orchestration()
+    sql <- SQL.Orchestration()
 
     fields <- list(
       'Id'            |> utilities[['BRACKET']]() |> functions[['LOWER']]('Id'),
@@ -15,8 +15,8 @@ describe("When SELECT FROM",{
     output <- 'SELECT LOWER([Id]) as Id, [Username], [HashedPassword], LOWER([Salt]) as Salt FROM [dbo].[User] '
 
     fields |>
-      orchestration[['SELECT']]() |> 
-      orchestration[['FROM']](table) |> 
+      sql[['SELECT']]() |> 
+      sql[['FROM']](table) |> 
           expect_equal(output)
   })
 })
@@ -24,7 +24,7 @@ describe("When SELECT FROM WHERE",{
   it("then a SELECT fields FROM schema table WHERE key = value should be returned",{
     utilities <- SQL.Utility.Service()
     functions <- SQL.Functions.Service()
-    orchestration <- SQL.Orchestration()
+    sql <- SQL.Orchestration()
 
     fields <- list(
       'Id'            |> utilities[['BRACKET']]() |> functions[['LOWER']]('Id'),
@@ -38,15 +38,15 @@ describe("When SELECT FROM WHERE",{
     output <- "SELECT LOWER([Id]) as Id, [Username], [HashedPassword], LOWER([Salt]) as Salt FROM [dbo].[User] WHERE [Id] = 'b2970410-bd60-478d-baf6-46cbc14e10fc' "
 
     fields |> 
-        orchestration[['SELECT']]()          |> 
-        orchestration[['FROM']]('User')      |> 
-        orchestration[['WHERE']](key, value) |>
+        sql[['SELECT']]()          |> 
+        sql[['FROM']]('User')      |> 
+        sql[['WHERE']](key, value) |>
           expect_equal(output)
   })
 })
 describe("When INSERT INTO VALUES",{
   it("then a INSERT INTO schema table (fields) VALUES (values) should be returned",{
-    orchestration <- SQL.Orchestration()
+    sql <- SQL.Orchestration()
 
     table <- 'User'
     keyValues  <- list(
@@ -59,15 +59,15 @@ describe("When INSERT INTO VALUES",{
 
     # Then
     table |>
-      orchestration[['INSERT']](keyValues) |> 
-      orchestration[['VALUES']](keyValues) |>         
+      sql[['INSERT']](keyValues) |> 
+      sql[['VALUES']](keyValues) |>         
         expect_equal(output)
   })
 })
 describe("When UPDATE SET WHERE",{
   it("then a UPDATE schema table SET key = value WHERE key = value should be returned",{
     # Given
-    orchestration <- SQL.Orchestration()
+    sql <- SQL.Orchestration()
 
     table <- 'User'
     keyValues  <- list(
@@ -82,16 +82,16 @@ describe("When UPDATE SET WHERE",{
 
     # Then
     table |>
-      orchestration[['UPDATE']]() |> 
-      orchestration[['SET']](keyValues) |> 
-      orchestration[['WHERE']](key, value) |>       
+      sql[['UPDATE']]() |> 
+      sql[['SET']](keyValues) |> 
+      sql[['WHERE']](key, value) |>       
         expect_equal(output)
   })
 })
 describe("When DELETE FROM WHERE",{
   it("then a DELETE FROM schema table WHERE key = value should be returned",{
     # Given
-    orchestration <- SQL.Orchestration()
+    sql <- SQL.Orchestration()
 
     table <- 'User'
     key <- 'Id'
@@ -100,9 +100,9 @@ describe("When DELETE FROM WHERE",{
     output <- "DELETE FROM [dbo].[User] WHERE [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108' "
 
     # Then
-      orchestration[['DELETE']]() |> 
-      orchestration[['FROM']](table) |> 
-      orchestration[['WHERE']](key, value) |>       
+      sql[['DELETE']]() |> 
+      sql[['FROM']](table) |> 
+      sql[['WHERE']](key, value) |>       
         expect_equal(output)
   })
 })
