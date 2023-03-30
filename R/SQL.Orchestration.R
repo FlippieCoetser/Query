@@ -1,8 +1,9 @@
 SQL.Orchestration <- \(args) {
-  dql   <- DQL.Service()
-  dml   <- DML.Service()
   utilities <- SQL.Utility.Service() 
-
+  
+  dql <- DQL.Service()
+  dml <- DML.Service()
+  
   orchestrations <- list()
   orchestrations[['SELECT']] <- \(fields = '*') {
     selections <- list()
