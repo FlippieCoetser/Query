@@ -53,8 +53,17 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['VALUE']] <- \(args) {
-    
+  services[['VALUE']]    <- \(input, value) {
+    if (value |> is.character()) {
+      value |>
+        utilities[['Inclose']]('Quotes') |>
+        utilities[['Append']](' ')       |>
+        utilities[['Prepend']](input)
+    } else {
+      value |>
+        utilities[['Append']](' ')   |>
+        utilities[['Prepend']](input)
+    }
   }
   return(services)
 }
