@@ -82,5 +82,8 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')       |>
       utilities[['Prepend']](input) 
   }
+  services[['KEYVALUES']] <- \(input, keyValues) {
+    
+  }
   return(services)
 }
