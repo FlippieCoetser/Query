@@ -31,7 +31,9 @@ SQL.Orchestration <- \(args) {
     utilities[['KEYS']](keyValues)
   }
   orchestrations[['VALUES']] <- \(input, keyValues) {
-    
+    input |>
+      dml[['VALUES']]() |>
+      dml[['NEWVALUES']](keyValues)
   }
   return(orchestrations)
 }
