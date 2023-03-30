@@ -174,3 +174,37 @@ describe("When input |> service[['KEY']](key)",{
         expect_equal(output)
   })
 })
+
+describe("When input |> service[['OPERATOR']]()",{
+  it("then = prepend input is returned",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input     <- 'input '
+    operator  <- '='
+    output    <- 'input = '
+
+    # Then
+    input                     |>
+      service[['OPERATOR']]() |>
+        expect_equal(output)
+  })
+})
+
+describe("When input |> service[['OPERATOR']](operator)",{
+  it("then operator prepend input is returned",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input     <- 'input '
+    operator  <- ':'
+    output    <- 'input : '
+
+    # Then
+    input                     |>
+      service[['OPERATOR']](operator) |>
+        expect_equal(output)
+  })
+})
