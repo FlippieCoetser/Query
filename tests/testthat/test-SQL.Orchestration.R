@@ -179,3 +179,22 @@ describe("When table |> orchestration[['UPDATE']]()",{
     table |> orchestration[['UPDATE']]() |> expect_equal(output)
   })
 })
+
+describe("When input |> orchestration[['SET']](keyValues)",{
+  it("then SET with key value pairs collapsed with comma prepended with input returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    input  <- ''
+    keyValues <- list(
+      Username = 'test.updated@gmail.com', 
+      HashedPassword = '2d2ee7bee3ae4795ba886', 
+      Salt = '53dfd42f-5394-46d7-a917-11b7da15816d'
+    )
+
+    output <- "SET [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = '53dfd42f-5394-46d7-a917-11b7da15816d' "
+  
+    # Then
+    input |> orchestration[['SET']](keyValues) |> expect_equal(output)
+  })
+})
