@@ -132,3 +132,22 @@ describe("When input |> orchestration[['INSERT']]()",{
     table |> orchestration[['INSERT']](keyValues) |> expect_equal(output)
   })
 })
+
+describe("When input |> orchestration[['VALUES']](keyValues)",{
+  it("then VALUES Appended with values collapsed in round brackets is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    input <- 'input '
+    keyValues  <- list(
+      Id = '4a0ec243-78ff-4461-8696-c41e7d64e108',
+      Username = 'test@gmail.com',
+      HashedPassword = '2d2ee7bee3ae4795ba886',
+      Salt =  '53dfd42f-5394-46d7-a917-11b7da15816d')
+
+    output <- "input VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', '53dfd42f-5394-46d7-a917-11b7da15816d') "
+
+  # Then
+  input |> orchestration[['VALUES']](keyValues) |> expect_equal(output)
+  })
+})
