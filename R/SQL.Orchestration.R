@@ -45,8 +45,8 @@ SQL.Orchestration <- \(args) {
       dml[['SET']]() |>
       utilities[['KEYVALUES']](keyValues)
   }
-  orchestrations[['DELETE']] <- \(input) {
-    
+  orchestrations[['DELETE']] <- \() {
+    dml[['DELETE']]()
   }
   return(orchestrations)
 }
