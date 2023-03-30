@@ -1,6 +1,6 @@
 Package: Query
 Title: Write SQL Statements with ease
-Version: 0.0.1.000
+Version: 0.0.1.100
 Authors@R:
     person(
         given = "Philippus",
