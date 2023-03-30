@@ -16,7 +16,7 @@ SQL.Orchestration <- \(args) {
       utilities[['SCHEMA']]()    |> 
       utilities[['TABLE']](table)
   }
-  orchestrations[['WHERE']] <- \(input, key, value) {
+  orchestrations[['WHERE']]  <- \(input, key, value) {
     input |>
       dql[['WHERE']]()      |> 
       utilities[['KEY']](key)   |> 
@@ -40,7 +40,7 @@ SQL.Orchestration <- \(args) {
     utilities[['SCHEMA']]() |>
     utilities[['TABLE']](table)
   }
-  orchestrations[['SET']] <- \(input, keyValues) {
+  orchestrations[['SET']]    <- \(input, keyValues) {
     input |>
       dml[['SET']]() |>
       utilities[['KEYVALUES']](keyValues)
