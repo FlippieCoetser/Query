@@ -40,5 +40,8 @@ SQL.Orchestration <- \(args) {
     utilities[['SCHEMA']]() |>
     utilities[['TABLE']](table)
   }
+  orchestrations[['SET']] <- \(input, keyValues) {
+    
+  }
   return(orchestrations)
 }
