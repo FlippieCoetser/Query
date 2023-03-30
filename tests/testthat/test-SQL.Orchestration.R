@@ -82,3 +82,20 @@ describe("When input |> orchestration[['FROM']](table)",{
     input |> orchestration[['FROM']](table) |> expect_equal("SELECT * FROM [dbo].[Users] ")
   })
 })
+
+describe("When input |> orchestration[['WHERE']](key,value)",{
+  it("then WHERE [id] = 'value' is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    # When
+    input <- 'input '
+    key   <- 'id'
+    value <- 'value'
+
+    output <- "input WHERE [id] = 'value' "
+
+    # Then
+    input |> orchestration[['WHERE']](key, value) |>  expect_equal(output)
+  })
+})
