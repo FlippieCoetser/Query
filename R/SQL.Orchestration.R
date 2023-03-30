@@ -22,5 +22,8 @@ SQL.Orchestration <- \(args) {
       utilities[['OPERATOR']]() |> 
       utilities[['VALUE']](value) 
   }
+  orchestrations[['INSERT']] <- \(input) {
+    
+  }
   return(orchestrations)
 }
