@@ -48,8 +48,10 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['OPERATOR']] <- \(args) {
-    
+  services[['OPERATOR']] <- \(input, operator = '=' ) {
+    operator |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   return(services)
 }
