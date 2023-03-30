@@ -62,6 +62,13 @@ describe("When orchestration <- SQL.Orchestration()",{
     # Then
     orchestration[['SET']] |> Exist() |> expect_equal(TRUE)
   })
+  it("then orchestration contains DELETE orchestration",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    # Then
+    orchestration[['DELETE']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When orchestration[['SELECT']]()",{
