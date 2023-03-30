@@ -24,11 +24,11 @@ SQL.Orchestration <- \(args) {
       utilities[['VALUE']](value) 
   }
   orchestrations[['INSERT']] <- \(table, keyValues) {
-    dml[['INSERT']]() |>
-    dml[['INTO']]()   |>
-    dml[['SCHEMA']]() |>
-    dml[['TABLE']](table)  |>
-    dml[['KEYS']](keyValues)
+    dml[['INSERT']]()            |>
+    dml[['INTO']]()              |>
+    utilities[['SCHEMA']]()      |>
+    utilities[['TABLE']](table)  |>
+    utilities[['KEYS']](keyValues)
   }
   return(orchestrations)
 }
