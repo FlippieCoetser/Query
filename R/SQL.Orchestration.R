@@ -1,3 +1,19 @@
+#' SQL Orchestration Service
+#' 
+#' @description
+#' a collection of services used to construct SQL Queries during runtime
+#' 
+#' @usage NULL
+#' @returns A `list` of services: 
+#' * `SELECT(fields)`
+#' * `FROM(table)`
+#' * `WHERE(key, value)`
+#' * `INSERT(table, keyValues)`
+#' * `VALUES(keyValues)`
+#' * `UPDATE(table)`
+#' * `SET(keyValues)`
+#' * `DELETE()`
+#' @export
 SQL.Orchestration <- \(args) {
   utilities <- SQL.Utility.Service() 
   
