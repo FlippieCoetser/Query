@@ -62,6 +62,13 @@ describe("When services <- SQL.Utility.Service()",{
     # Then
     service[['OPERATOR']] |> Exist() |> expect_equal(TRUE)
   })
+  it("then services contains VALUE service",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # Then
+    service[['VALUE']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When value |> service[['BRACKET']]()",{
