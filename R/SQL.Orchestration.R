@@ -15,10 +15,10 @@ SQL.Orchestration <- \(args) {
   }
   orchestrations[['WHERE']] <- \(input, key, value) {
     input |>
-      service[['WHERE']]()     |>
-      service[['KEY']](key)    |>
-      service[['OPERATOR']]()  |>
-      service[['VALUE']](value) 
+      service[['WHERE']]()       |>
+      utilities[['KEY']](key)    |>
+      utilities[['OPERATOR']]()  |>
+      utilities[['VALUE']](value) 
   }
   return(orchestrations)
 }
