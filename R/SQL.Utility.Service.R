@@ -83,7 +83,14 @@ SQL.Utility.Service <- \() {
       utilities[['Prepend']](input) 
   }
   services[['KEYVALUES']] <- \(input, keyValues) {
-    
+    keys   <- keyValues |> names() |> utilities[['Inclose']]()
+    values <- keyValues |> utilities[['Inclose']]('Quotes')
+
+    keys |>  
+      utilities[['Pair']](values) |>
+      utilities[['Collapse']]() |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
   }
   return(services)
 }
