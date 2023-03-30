@@ -215,3 +215,34 @@ describe("When input |> service[['OPERATOR']](operator)",{
         expect_equal(output)
   })
 })
+
+describe("When input |> service[['VALUE']](value)",{
+  it("then value in quotes prepend input is returned if value character",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    value   <- 'value'
+    output  <- "input 'value' "
+
+    # Then
+    input                   |>
+      service[['VALUE']](value) |>
+        expect_equal(output)
+  })
+  it("then value prepend input is returned if value not character",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # When
+    input   <- 'input '
+    value   <- 1
+    output  <- 'input 1 '
+
+    # Then
+    input                   |>
+      service[['VALUE']](value) |>
+        expect_equal(output)
+  })
+})
