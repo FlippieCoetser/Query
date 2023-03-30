@@ -42,7 +42,11 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
-  services[['KEY']]     <- \(args) {
+  services[['KEY']]     <- \(input, key) {
+    key |>
+      utilities[['Inclose']]()     |>
+      utilities[['Append']](' ')   |>
+      utilities[['Prepend']](input)
     
   }
   return(services)
