@@ -37,8 +37,8 @@ SQL.Orchestration <- \(args) {
   }
   orchestrations[['UPDATE']] <- \(table) {
     dml[['UPDATE']]() |>
-    dml[['SCHEMA']]() |>
-    dml[['TABLE']](table)
+    utilities[['SCHEMA']]() |>
+    utilities[['TABLE']](table)
   }
   return(orchestrations)
 }
