@@ -154,7 +154,21 @@ describe("When input |> orchestration[['VALUES']](keyValues)",{
 
     output <- "input VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', '53dfd42f-5394-46d7-a917-11b7da15816d') "
 
-  # Then
-  input |> orchestration[['VALUES']](keyValues) |> expect_equal(output)
+    # Then
+    input |> orchestration[['VALUES']](keyValues) |> expect_equal(output)
+  })
+})
+
+describe("When table |> orchestration[['UPDATE']]()",{
+  it("then UPDATE [dbo].[table] is returned",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    table <- 'User'
+
+    output <- "UPDATE [dbo].[User] "
+
+    # Then
+    table |> orchestration[['UPDATE']]() |> expect_equal(output)
   })
 })
