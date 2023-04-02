@@ -16,7 +16,6 @@
 #' * `SET()`
 #' * `KEYVALUES(keyValues)`
 #' * `DELETE()`
-#' @export
 DML.Service <- \() {
   utilities <-
     String.Utility.Service() |>

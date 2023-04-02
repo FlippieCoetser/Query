@@ -15,7 +15,6 @@
 #' * `KEY(key)`
 #' * `OPERATOR(operator)`
 #' * `VALUE(value)`
-#' @export
 DQL.Service <- \() {
   utilities <-
     String.Utility.Service() |>
