@@ -1,3 +1,0 @@
-DELETE
-FROM [dbo].[User]
-WHERE [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108'
