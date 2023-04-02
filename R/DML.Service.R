@@ -32,38 +32,9 @@ DML.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input) 
   }
-  services[['SCHEMA']] <- \(input, schema = 'dbo') {
-    schema |>
-      utilities[['Inclose']]()   |>
-      utilities[['Append']]('.') |>
-      utilities[['Prepend']](input)
-  }
-  services[['TABLE']] <- \(input, table) {
-    table |>
-      utilities[['Inclose']]()     |>
-      utilities[['Append']](' ')   |>
-      utilities[['Prepend']](input)
-  }
   services[['VALUES']] <- \(input) {
     'VALUES' |>
       utilities[['Append']](' ')   |>
-      utilities[['Prepend']](input) 
-  }
-  services[['KEYS']] <- \(input, keyValues) {
-    keyValues |>
-      names()                         |>
-      utilities[['Inclose']]()        |>
-      utilities[['Collapse']]()       |>
-      utilities[['Inclose']]('Round') |>
-      utilities[['Append']](' ')      |>
-      utilities[['Prepend']](input) 
-  }
-  services[['NEWVALUES']] <- \(input, keyValues) {
-    keyValues |>
-      utilities[['Inclose']]('Quotes') |>
-      utilities[['Collapse']]()        |>
-      utilities[['Inclose']]('Round')  |>
-      utilities[['Append']](' ')       |>
       utilities[['Prepend']](input) 
   }
   services[['UPDATE']] <- \(input = '') {
@@ -73,16 +44,6 @@ DML.Service <- \() {
   }
   services[['SET']] <- \(input) {
     'SET' |>
-      utilities[['Append']](' ')   |>
-      utilities[['Prepend']](input)
-  }
-  services[['KEYVALUES']] <- \(input, keyValues) {
-    keys <- keyValues |> names() |> utilities[['Inclose']]()
-    values <- keyValues |> utilities[['Inclose']]('Quotes')
-
-    keys |>  
-      utilities[['Pair']](values) |>
-      utilities[['Collapse']]() |>
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
