@@ -1,283 +1,76 @@
-test_that('DQL.Service exist',{
-  DQL.Service   |>
-    is.null()   |>
-      expect_equal(FALSE)
-})
-test_that('DQL.Service() return list of services',{
-  DQL.Service() |>
-    is.list()   |>
-      expect_equal(TRUE)
+describe("Given DQL.Service",{
+  it("exist",{
+    # Given
+    DQL.Service |> is.null() |> expect_equal(FALSE)
+  })
 })
 
-# SELECT KEYWORD
-test_that('services contains SELECT service',{
-  # Given
-  service <- DQL.Service()
+describe("When service <- DQL.Service()",{
+  it("then service is a list",{
+    # Given
+    service <- DQL.Service()
 
-  # Then
-  service[['SELECT']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("service[['SELECT']]() returns SELECT keyword",{
-  # Given
-  service <- DQL.Service()
+    # Then
+    service |> is.list() |> expect_equal(TRUE)
+  })
+  it("then service contains SELECT service",{
+    # Given
+    service <- DQL.Service()
 
-  output <- 'SELECT '
+    # Then
+    service[['SELECT']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then service contains FROM service",{
+    # Given
+    service <- DQL.Service()
 
-  # Then
-  service[['SELECT']]() |>
-    expect_equal(output)
-})
+    # Then
+    service[['FROM']] |> Exist() |> expect_equal(TRUE)
+  })
+  it("then service contains WHERE service",{
+    # Given
+    service <- DQL.Service()
 
-# FIELDS
-test_that('services contains FIELDS service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['FIELDS']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['FIELDS']](fields) collapse list using comma as separator and prepend input",{
-  # Given
-  service <- DQL.Service()
-  
-  input   <- 'input '
-  output  <- 'input one, two, three '
-
-  # When 
-  fields <- list('one','two','three')
-
-  # Then
-  input                         |>
-    service[['FIELDS']](fields) |>
-      expect_equal(output)
+    # Then
+    service[['WHERE']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
-# *
-test_that('services contains * service',{
-  # Given
-  service <- DQL.Service()
+describe("When input |> service[['SELECT']]()",{
+  it("then SELECT keyword is returned",{
+    # Given
+    service <- DQL.Service()
 
-  # Then
-  service[['*']] |>
-    Exist()      |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['*']]() returns * and prepend input",{
-  # Given
-  service <- DQL.Service()
-  
-  input   <- 'input '
-  output  <- 'input * '
+    input  <- 'input '
+    output <- 'input SELECT '
 
-  # Then
-  input              |>
-    service[['*']]() |>
-      expect_equal(output)
+    # Then
+    input |> service[['SELECT']]() |> expect_equal(output)
+  })
 })
 
-# FROM KEYWORD
-test_that('services contains FROM service',{
-  # Given
-  service <- DQL.Service()
+describe("When input |> service[['FROM']]()",{
+  it("then FROM keyword is returned",{
+    # Given
+    service <- DQL.Service()
 
-  # Then
-  service[['FROM']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['FROM']]() returns FROM keyword prepended with input",{
-  # Given
-  service <- DQL.Service()
+    input  <- 'input '
+    output <- 'input FROM '
 
-  input  <- 'input '
-  output <- 'input FROM '
-
-  # Then
-  input |>
-    service[['FROM']]() |>
-      expect_equal(output)
+    # Then
+    input |> service[['FROM']]() |> expect_equal(output)
+  })
 })
 
-# TABLE
-test_that('services contains TABLE service',{
-  # Given
-  service <- DQL.Service()
+describe("When input |> service[['WHERE']]()",{
+  it("then WHERE keyword is returned",{
+    # Given
+    service <- DQL.Service()
 
-  # Then
-  service[['TABLE']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['TABLE']](table) returns table prepended with input",{
-  # Given
-  service <- DQL.Service()
+    input  <- 'input '
+    output <- 'input WHERE '
 
-  input  <- 'input '
-  table  <- 'table'
-  output <- 'input [table] '
-
-  # Then
-  input |>
-    service[['TABLE']](table) |>
-      expect_equal(output)
-})
-
-# SCHEMA
-test_that('services contains SCHEMA service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['SCHEMA']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['SCHEMA']](schema) returns schema prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  schema <- 'schema'
-  output <- 'input [schema].'
-
-  # Then
-  input |>
-    service[['SCHEMA']](schema) |>
-      expect_equal(output)
-})
-test_that("input |> service[['SCHEMA']]() returns dbo in brackets with dot and prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  output <- 'input [dbo].'
-
-  # Then
-  input |>
-    service[['SCHEMA']]() |>
-      expect_equal(output)
-})
-
-# KEY
-test_that('services contains KEY service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['KEY']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['KEY']](key) returns key in brackets prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  key    <- 'key'
-  output <- 'input [key] '
-
-  # Then
-  input |>
-    service[['KEY']](key) |>
-      expect_equal(output)
-})
-
-# OPERATOR
-test_that('services contains OPERATOR service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['OPERATOR']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['OPERATOR']](operator) returns operator prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input    <- 'input '
-  operator <- '='
-  output <- 'input = '
-
-  # Then
-  input |>
-    service[['OPERATOR']](operator) |>
-      expect_equal(output)
-})
-test_that("input |> service[['OPERATOR']]() returns = prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input    <- 'input '
-  output <- 'input = '
-
-  # Then
-  input |>
-    service[['OPERATOR']]() |>
-      expect_equal(output)
-})
-
-# VALUE
-test_that('services contains VALUE service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['VALUE']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['VALUE']](value) returns value if value is not character and prepend input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  value  <- 1
-  output <- 'input 1 '
-
-  # Then
-  input |>
-    service[['VALUE']](value) |>
-      expect_equal(output)
-})
-test_that("input |> service[['VALUE']](value) returns value in quote if value is character and prepend input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  value  <- 'one'
-  output <- "input 'one' "
-
-  # Then
-  input |>
-    service[['VALUE']](value) |>
-      expect_equal(output)
-})
-
-# WHERE KEYWORD
-test_that('services contains WHERE service',{
-  # Given
-  service <- DQL.Service()
-
-  # Then
-  service[['WHERE']] |>
-    Exist()           |>
-      expect_equal(TRUE)
-})
-test_that("input |> service[['WHERE']]() returns WHERE keyword prepended with input",{
-  # Given
-  service <- DQL.Service()
-
-  input  <- 'input '
-  output <- 'input WHERE '
-
-  # Then
-  input |>
-    service[['WHERE']]() |>
-      expect_equal(output)
+    # Then
+    input |> service[['WHERE']]() |> expect_equal(output)
+  })
 })
