@@ -1,10 +1,23 @@
+# Query
+Generate SQL Queries with ease in R.
 
-> note: Github workflows use Github Secrets to set environment variables 
+Query is a versatile and easy-to-use package designed to facilitate SQL generation for various database operations. By leveraging the power of R, the package allows users to create clean, efficient, and maintainable SQL code through a functional programming approach. Query supports a wide range of SQL operations, including SELECT, INSERT, UPDATE, and DELETE, allowing developers to interact with databases seamlessly.
 
-Use Case Examples
+Use Case Examples:
 
 1. Select all in a table
+2. Select specific records based on conditions
+3. Insert records into a table
+4. Update records in a table
+5. Delete records from a table
 
+Query also provides an set of utility functions and services, such as Query::SQL.Utility.Service() and Query::SQL.Functions.Service(), to help users create flexible and reusable SQL code. It also offers the ability to chain operations together, making SQL generation more streamlined.
+
+By utilizing Query, developers can easily build SQL queries, resulting in a more efficient and maintainable codebase. Whether you need to perform simple or complex database operations, Query has you covered. Start using Query today and experience the benefits of Query!
+
+## Use Case Examples
+
+1. Select all in a table:  
 ```r
   sql           <- Query::SQL.Orchestration()
   sql.utilities <- Query::SQL.Utility.Service()
@@ -22,8 +35,7 @@ Use Case Examples
     fields |> sql[['SELECT']]() |> sql[['FROM']](table)
 ```
 
-produces this sql:
-
+- sql:  
 ```sql
   SELECT 
     LOWER([Id]) as Id, 
@@ -33,8 +45,7 @@ produces this sql:
   FROM [dbo].[User]
 ```
 
-2. Select where in a table
-
+2.  Select specific records based on conditions:  
 ```r
   sql           <- Query::SQL.Orchestration()
   sql.utilities <- Query::SQL.Utility.Service()
@@ -54,8 +65,7 @@ produces this sql:
     fields |> sql[['SELECT']]() |> sql[['FROM']]('User') |> sql[['WHERE']](key, value) 
 ```
 
-produces this sql:
-
+- sql:  
 ```sql
   SELECT 
     LOWER([Id]) as Id, 
@@ -66,8 +76,7 @@ produces this sql:
   WHERE [Id] = 'b2970410-bd60-478d-baf6-46cbc14e10fc'
 ```
 
-3. Insert into table
-
+3. Insert records into a table:  
 ```r
   sql <- Query::SQL.Orchestration()
 
@@ -82,8 +91,7 @@ produces this sql:
     table |> sql[['INSERT']](keyValues) |> sql[['VALUES']](keyValues)         
 ```
 
-produces this sql:
-
+- sql:  
 ```sql
   INSERT INTO [dbo].[User] ([Id], [Username], [HashedPassword], [Salt]) 
   VALUES (
@@ -92,8 +100,7 @@ produces this sql:
     '53dfd42f-5394-46d7-a917-11b7da15816d')
 ```
 
-4. Update item in table:
-
+4. Update records in a table:  
 ```r
   sql <- Query::SQL.Orchestration()
 
@@ -110,8 +117,7 @@ produces this sql:
     table |> sql[['UPDATE']]() |> sql[['SET']](keyValues) |> sql[['WHERE']](key, value) 
 ```
 
-produces this sql:
-
+- sql:  
 ```sql
   UPDATE [dbo].[User]
   SET [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108',
@@ -121,8 +127,7 @@ produces this sql:
   WHERE [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108'
 ```
 
-4. Delete item in table:
-
+4. Delete records from a table:  
 ```r
   sql <- Query::SQL.Orchestration()
 
@@ -134,10 +139,11 @@ produces this sql:
     sql[['DELETE']]() |> sql[['FROM']](table) |> sql[['WHERE']](key, value) 
 ```
 
-produces this sql:
-
+- sql:  
 ```sql
   DELETE
   FROM [dbo].[User]
   WHERE [Id] = '4a0ec243-78ff-4461-8696-c41e7d64e108'
 ```
+
+> note: Github workflows use Github Secrets to set environment variables
