@@ -14,7 +14,7 @@
 #' * `SET(keyValues)`
 #' * `DELETE()`
 #' @export
-SQL.Orchestration <- \(args) {
+SQL.Orchestration <- \(...) {
   utilities <- SQL.Utility.Service() 
   
   dql <- DQL.Service()

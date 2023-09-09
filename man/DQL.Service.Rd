@@ -7,15 +7,8 @@
 A \code{list} of DQL Services:
 \itemize{
 \item \code{SELECT()}
-\item \code{FIELDS(fields)}
-\item \verb{*()}
 \item \code{FROM()}
-\item \code{SCHEMA(schema)}
-\item \code{TABLE(table)}
 \item \code{WHERE()}
-\item \code{KEY(key)}
-\item \code{OPERATOR(operator)}
-\item \code{VALUE(value)}
 }
 }
 \description{
