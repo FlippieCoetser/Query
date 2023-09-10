@@ -92,5 +92,6 @@ SQL.Utility.Service <- \() {
       utilities[['Append']](' ')   |>
       utilities[['Prepend']](input)
   }
+  services[['FORMATNULL']] <-\() {}
   return(services)
 }
