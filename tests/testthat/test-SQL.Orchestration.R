@@ -221,6 +221,22 @@ describe("When input |> orchestration[['SET']](keyValues)",{
     # Then
     input |> orchestration[['SET']](keyValues) |> expect_equal(output)
   })
+  it("then NULL values are not inclosed in quotes",{
+        # Given
+    orchestration <- SQL.Orchestration()
+
+    input  <- ''
+    keyValues <- list(
+      Username = 'test.updated@gmail.com', 
+      HashedPassword = '2d2ee7bee3ae4795ba886', 
+      Salt = NULL
+    )
+
+    output <- "SET [Username] = 'test.updated@gmail.com', [HashedPassword] = '2d2ee7bee3ae4795ba886', [Salt] = NULL "
+  
+    # Then
+    input |> orchestration[['SET']](keyValues) |> expect_equal(output)
+  })
 })
 
 describe("When input |> orchestration[['DELETE']]()",{
