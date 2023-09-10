@@ -86,6 +86,7 @@ SQL.Utility.Service <- \() {
   services[['KEYVALUES']] <- \(input, keyValues) {
     keys   <- keyValues |> names() |> utilities[['Inclose']]()
     values <- keyValues |> utilities[['Inclose']]('Quotes')
+    values <- values |> services[['FORMATNULL']]()
 
     keys |>  
       utilities[['Pair']](values) |>
