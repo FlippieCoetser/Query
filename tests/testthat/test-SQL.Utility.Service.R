@@ -90,6 +90,13 @@ describe("When services <- SQL.Utility.Service()",{
     # Then
     service[['KEYVALUES']] |> Exist() |> expect_equal(TRUE)
   })
+  it("then services contains FORMATNULL service",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    # Then
+    service[['FORMATNULL']] |> Exist() |> expect_equal(TRUE)
+  })
 })
 
 describe("When value |> service[['BRACKET']]()",{
