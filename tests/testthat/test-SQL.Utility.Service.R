@@ -330,3 +330,16 @@ describe("When input |> service[['VALUES']](keyValues)",{
   input |> service[['KEYVALUES']](keyValues) |> expect_equal(output)
   })
 })
+
+describe("When input |> service[['FORMATNULL']]()",{
+  it("then single quotes around NULL values are removed",{
+    # Given
+    service <- SQL.Utility.Service()
+
+    input  <- "input ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', 'NULL') "
+    output <- "input ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', NULL) "
+  
+    # Then
+    input |> service[['FORMATNULL']]() |> expect_equal(output)
+  })
+})
