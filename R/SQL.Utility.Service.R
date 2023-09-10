@@ -77,6 +77,7 @@ SQL.Utility.Service <- \() {
   services[['NEWVALUES']] <- \(input, keyValues) {
     keyValues |>
       utilities[['Inclose']]('Quotes') |>
+      services[['FORMATNULL']]()       |>
       utilities[['Collapse']]()        |>
       utilities[['Inclose']]('Round')  |>
       utilities[['Append']](' ')       |>
