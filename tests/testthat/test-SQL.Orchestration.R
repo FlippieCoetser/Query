@@ -171,6 +171,23 @@ describe("When input |> orchestration[['VALUES']](keyValues)",{
     # Then
     input |> orchestration[['VALUES']](keyValues) |> expect_equal(output)
   })
+  it("then NULL values are not inclosed in quotes",{
+    # Given
+    orchestration <- SQL.Orchestration()
+
+    input <- 'input '
+    keyValues  <- list(
+      Id = '4a0ec243-78ff-4461-8696-c41e7d64e108',
+      Username = 'test@gmail.com',
+      HashedPassword = '2d2ee7bee3ae4795ba886',
+      Salt =  NULL)
+
+    output <- "input VALUES ('4a0ec243-78ff-4461-8696-c41e7d64e108', 'test@gmail.com', '2d2ee7bee3ae4795ba886', NULL) "
+
+    # Then
+    input |> orchestration[['VALUES']](keyValues) |> expect_equal(output)
+
+  })
 })
 
 describe("When table |> orchestration[['UPDATE']]()",{
