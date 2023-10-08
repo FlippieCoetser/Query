@@ -1,9 +1,9 @@
 Package: Query
 Title: Write SQL Statements with ease
-Version: 0.0.1.200
+Version: 0.0.1.300
 Authors@R:
     person(
-        given = "Philippus",
+        given = "Flippie",
         family = "Coetser",
         role = c("aut", "cre"),
         email = "flippie.coetser@gmail.com",
@@ -15,7 +15,6 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Maintainer: Philippus Coetser <flippie.coetser@gmail.com>
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
