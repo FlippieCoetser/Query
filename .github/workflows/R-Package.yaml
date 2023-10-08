@@ -1,15 +1,13 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master]
+    branches: [main, staging]
   pull_request:
-    branches: [main, master]
+    branches: [main, staging]
 
-name: R-Package Check
+name: R-Package
 
 jobs:
-  R-CMD-check:
+  R-Package:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -18,12 +16,15 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
+          - { os: windows-latest, r: "release" }
+          - { os: macos-latest, r: "release" }
+          - { os: ubuntu-latest, r: "release" }
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       USERNAME: ${{ secrets.USERNAME}}
+      ENVIRONMENT: "ci"
 
     steps:
       - name: Checkout Code Base
@@ -42,12 +43,12 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Define Environment Variables
+      - name: Create and Populate .Renviron file
         run: |
           echo Username="$USERNAME" >> ~/.Renviron
         shell: bash
 
-      - name: Run Tests
+      - name: Run Unit Tests
         uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
