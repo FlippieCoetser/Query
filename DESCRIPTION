@@ -9,7 +9,7 @@ Authors@R:
         email = "flippie.coetser@gmail.com",
         comment = c(ORCID = "0000-0003-0549-9245")
     )
-Description: This package provides a set of utility functions to efficiently write SQL Statements.
+Description: This package provides a set of utility functions to efficiently write SQL Statements: In essence converting R to SQL.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
