@@ -1,5 +1,7 @@
 # Query
 
+![r-universe](https://flippiecoetser.r-universe.dev/badges/Query)
+
 Generate SQL Queries with ease in R.
 
 Query is a versatile and easy-to-use package designed to facilitate SQL generation for various database operations. By leveraging the power of R, the package allows users to create clean, efficient, and maintainable SQL code through a functional programming approach. Query supports a wide range of SQL operations, including SELECT, INSERT, UPDATE, and DELETE, allowing developers to interact with databases seamlessly.
